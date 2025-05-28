@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need your location to show you safe routes and nearby safety information.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>We need your location to track your journey and provide real-time safety updates.</string>
+    <key>io.flutter.embedded_views_preview</key>
+    <true/>
+    <key>GoogleMapsApiKey</key>
+    <string>AIzaSyA5NInDbok3Mu-WK8IIoylH1QpPTtYHyoY</string>
+</dict>
+</plist> 
