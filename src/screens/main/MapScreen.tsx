@@ -3,6 +3,7 @@ import { View, StyleSheet, Dimensions, Alert, TextInput, FlatList, TouchableOpac
 import MapView, { Marker, PROVIDER_GOOGLE, Polyline } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { config } from '../../config/config';
+import haversine from 'haversine-distance';
 
 const GOOGLE_PLACES_API = 'https://maps.googleapis.com/maps/api/place';
 
@@ -53,8 +54,14 @@ const MapScreen = () => {
   const [destination, setDestination] = useState(null);
   const [route, setRoute] = useState(null);
   const [routeCoords, setRouteCoords] = useState([]);
+  const [mapKey, setMapKey] = useState(0);
+  const [steps, setSteps] = useState([]); // Directions steps
+  const [navigationActive, setNavigationActive] = useState(false);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const debounceTimeout = useRef(null);
   const inputRef = useRef(null);
+  const locationSubscription = useRef(null);
+  const mapRef = useRef(null);
 
   useEffect(() => {
     (async () => {
@@ -162,7 +169,6 @@ const MapScreen = () => {
       }
       const origin = `${currentLocation.latitude},${currentLocation.longitude}`;
       const dest = `${destination.lat},${destination.lng}`;
-      Alert.alert('Directions API call', `Origin: ${origin}\nDestination: ${dest}`);
       console.log('Directions API call:', { origin, dest });
       const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${dest}&mode=walking&key=${config.googleMaps.apiKey}`;
       const res = await fetch(url);
@@ -171,21 +177,33 @@ const MapScreen = () => {
         // For now, just log the polyline
         console.log('Directions route:', json.routes[0]);
         setRoute(json.routes[0]);
-        Alert.alert('Directions loaded', `Route found with ${json.routes[0].legs[0].steps.length} steps.`);
         // Decode polyline and set routeCoords
         const polyline = json.routes[0].overview_polyline.points;
-        Alert.alert('Polyline string', polyline);
-        if (!polyline || polyline.length < 10) {
-          Alert.alert('Polyline string is very short', polyline);
-        }
         console.log('Full route object:', JSON.stringify(json.routes[0], null, 2));
         const coords = decodePolyline(polyline);
-        setRouteCoords(coords);
+        setTimeout(() => {
+          setRouteCoords(coords);
+          setMapKey(k => k + 1);
+          setSteps(json.routes[0].legs[0].steps);
+          setCurrentStepIndex(0);
+          setNavigationActive(true);
+          // Zoom to step 1
+          const step1 = json.routes[0].legs[0].steps[0];
+          if (step1 && step1.polyline && step1.polyline.points) {
+            const step1Coords = decodePolyline(step1.polyline.points);
+            setTimeout(() => {
+              if (mapRef.current && step1Coords.length > 1) {
+                mapRef.current.fitToCoordinates(step1Coords, {
+                  edgePadding: { top: 80, right: 80, bottom: 80, left: 80 },
+                  animated: true,
+                });
+              }
+            }, 100);
+          }
+        }, 100);
         if (!coords || coords.length === 0) {
-          Alert.alert('Polyline error', 'Decoded polyline is empty.');
           console.log('Polyline decode error:', polyline, coords);
         } else {
-          Alert.alert('Polyline decoded', `Points: ${coords.length}\nFirst: ${JSON.stringify(coords[0])}\nLast: ${JSON.stringify(coords[coords.length-1])}`);
           console.log('Polyline decoded:', coords);
         }
       } else {
@@ -198,45 +216,100 @@ const MapScreen = () => {
     }
   };
 
+  // Navigation: track user location and update current step
+  useEffect(() => {
+    let isMounted = true;
+    let subscription = null;
+    async function subscribe() {
+      if (!navigationActive || steps.length === 0) return;
+      subscription = await Location.watchPositionAsync(
+        { accuracy: Location.Accuracy.High, distanceInterval: 2 },
+        (location) => {
+          const { latitude, longitude } = location.coords;
+          const nextStep = steps[currentStepIndex];
+          if (!nextStep) return;
+          const target = nextStep.end_location;
+          const dist = haversine(
+            { latitude, longitude },
+            { latitude: target.lat, longitude: target.lng }
+          );
+          // If within 20 meters, advance to next step
+          if (dist < 20 && currentStepIndex < steps.length - 1) {
+            setCurrentStepIndex(idx => idx + 1);
+          }
+        }
+      );
+      if (isMounted) locationSubscription.current = subscription;
+    }
+    subscribe();
+    return () => {
+      isMounted = false;
+      if (locationSubscription.current && typeof locationSubscription.current.remove === 'function') {
+        locationSubscription.current.remove();
+        locationSubscription.current = null;
+      }
+    };
+  }, [navigationActive, steps, currentStepIndex]);
+
+  // Ensure map always zooms to fit the route when routeCoords changes
+  useEffect(() => {
+    if (mapRef.current && routeCoords.length > 1) {
+      mapRef.current.fitToCoordinates(routeCoords, {
+        edgePadding: { top: 80, right: 80, bottom: 80, left: 80 },
+        animated: true,
+      });
+    }
+  }, [routeCoords]);
+
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-        <TextInput
-          ref={inputRef}
-          style={styles.searchInput}
-          placeholder="Search for a location"
-          value={query}
-          onChangeText={text => {
-            setQuery(text);
-            setSelectionComplete(false);
-          }}
-          onFocus={() => {
-            if (!selectionComplete && suggestions.length > 0) {
-              setShowSuggestions(true);
-            } else {
-              setShowSuggestions(false);
-            }
-            console.log('onFocus', { suggestionsLength: suggestions.length, showSuggestions, selectionComplete });
-          }}
-        />
-        {loading && <ActivityIndicator style={{ position: 'absolute', right: 16, top: 12 }} size="small" color="#0000cc" />}
-        {showSuggestions && suggestions.length > 0 && !selectionComplete && (
-          <FlatList
-            style={styles.suggestionsList}
-            data={suggestions}
-            keyExtractor={item => item.place_id}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.suggestionItem}
-                onPress={() => handleSuggestionPress(item.place_id, item.description)}
-              >
-                <Text style={styles.suggestionText}>{item.description}</Text>
-              </TouchableOpacity>
+        {navigationActive && steps.length > 0 ? (
+          <View style={styles.navigationTopBox}>
+            <Text style={styles.navigationStepTitle}>Step {currentStepIndex + 1} of {steps.length}</Text>
+            <Text style={styles.navigationStepInstruction}>{steps[currentStepIndex].html_instructions.replace(/<[^>]+>/g, '')}</Text>
+            <Text style={styles.navigationStepDistance}>({steps[currentStepIndex].distance.text}, {steps[currentStepIndex].duration.text})</Text>
+          </View>
+        ) : (
+          <>
+            <TextInput
+              ref={inputRef}
+              style={styles.searchInput}
+              placeholder="Search for a location"
+              value={query}
+              onChangeText={text => {
+                setQuery(text);
+                setSelectionComplete(false);
+              }}
+              onFocus={() => {
+                if (!selectionComplete && suggestions.length > 0) {
+                  setShowSuggestions(true);
+                } else {
+                  setShowSuggestions(false);
+                }
+                console.log('onFocus', { suggestionsLength: suggestions.length, showSuggestions, selectionComplete });
+              }}
+            />
+            {loading && <ActivityIndicator style={{ position: 'absolute', right: 16, top: 12 }} size="small" color="#0000cc" />}
+            {showSuggestions && suggestions.length > 0 && !selectionComplete && (
+              <FlatList
+                style={styles.suggestionsList}
+                data={suggestions}
+                keyExtractor={item => item.place_id}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={styles.suggestionItem}
+                    onPress={() => handleSuggestionPress(item.place_id, item.description)}
+                  >
+                    <Text style={styles.suggestionText}>{item.description}</Text>
+                  </TouchableOpacity>
+                )}
+                keyboardShouldPersistTaps="handled"
+              />
             )}
-            keyboardShouldPersistTaps="handled"
-          />
+          </>
         )}
-        {destination && (
+        {destination && !routeCoords.length && (
           <TouchableOpacity style={styles.routeButton} onPress={handleGetDirections}>
             <Text style={styles.routeButtonText}>Get the Safest walking route</Text>
           </TouchableOpacity>
@@ -250,7 +323,22 @@ const MapScreen = () => {
         showsMyLocationButton
         showsCompass
         showsScale
+        ref={mapRef}
+        key={mapKey}
       >
+        {(() => {
+          console.log('Polyline render check:', {
+            routeCoordsLength: routeCoords.length,
+            navigationActive
+          });
+          return routeCoords.length > 0 && (
+            <Polyline
+              coordinates={routeCoords}
+              strokeColor="#0000cc"
+              strokeWidth={5}
+            />
+          );
+        })()}
         <Marker
           coordinate={{
             latitude: region.latitude,
@@ -259,13 +347,6 @@ const MapScreen = () => {
           title="Your Location"
           description="You are here"
         />
-        {routeCoords.length > 0 && (
-          <Polyline
-            coordinates={routeCoords}
-            strokeColor="#0000cc"
-            strokeWidth={5}
-          />
-        )}
       </MapView>
     </View>
   );
@@ -336,6 +417,33 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  navigationTopBox: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 8,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  navigationStepTitle: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#0000cc',
+    marginBottom: 2,
+  },
+  navigationStepInstruction: {
+    fontSize: 15,
+    textAlign: 'center',
+    marginBottom: 2,
+  },
+  navigationStepDistance: {
+    fontSize: 13,
+    color: '#888',
   },
 });
 
