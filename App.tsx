@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Linking from 'expo-linking';
 import * as Location from 'expo-location';
+import MapScreen from './src/screens/main/MapScreen';
+import 'react-native-get-random-values';
 // Only import fs if running in a Node.js environment (Cursor desktop)
 let fs = null;
 if (typeof require !== 'undefined' && Platform.OS === 'web') {
@@ -50,7 +52,7 @@ function withSOSFooter(Component) {
             assistantId: 'f69fd8dc-b5bc-4b04-8112-f35c083f8c29',
             phoneNumberId: '43b08cdc-e9c4-4325-b6f2-32cf2b019c5c',
             customer: {
-              number: '+16468721099'
+              number: '+19737181108'
             }
           }),
         });
@@ -94,9 +96,7 @@ function LandingScreen({ navigation }) {
 }
 
 function SafestDirectionsScreen() {
-  return (
-    <View style={styles.container}><Text style={styles.title}>Safest Directions</Text></View>
-  );
+  return <MapScreen />;
 }
 function TravelBuddyScreen() {
   return (

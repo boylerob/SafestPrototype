@@ -1,11 +1,11 @@
-// const twilio = require('twilio');
+const twilio = require('twilio');
 const speech = require('@google-cloud/speech');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-// const accountSid = process.env.TWILIO_ACCOUNT_SID;
-// const authToken = process.env.TWILIO_AUTH_TOKEN;
-// const twilioNumber = process.env.TWILIO_PHONE_NUMBER;
-// const client = twilio(accountSid, authToken);
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioNumber = process.env.TWILIO_PHONE_NUMBER;
+const client = twilio(accountSid, authToken);
 
 // Initialize Gemini
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
@@ -39,22 +39,22 @@ exports.sosCall = async (req, res) => {
     });
 
     // Create TwiML response with initial greeting and gather user input
-    // const twiml = new twilio.twiml.VoiceResponse();
-    // twiml.say({ voice: 'alice' }, 'This is your Safest AI agent. We detected an S.O.S. event. Are you okay? Please respond after the tone.');
-    // twiml.gather({
-    //   input: 'speech',
-    //   action: `/webhook?conversationId=${conversationId}`,
-    //   method: 'POST',
-    //   speechTimeout: 'auto',
-    //   language: 'en-US'
-    // });
+    const twiml = new twilio.twiml.VoiceResponse();
+    twiml.say({ voice: 'alice' }, 'This is your Safest AI agent. We detected an S.O.S. event. Are you okay? Please respond after the tone.');
+    twiml.gather({
+      input: 'speech',
+      action: `/webhook?conversationId=${conversationId}`,
+      method: 'POST',
+      speechTimeout: 'auto',
+      language: 'en-US'
+    });
 
     // Make the call
-    // await client.calls.create({
-    //   to: phoneNumber,
-    //   from: twilioNumber,
-    //   twiml: twiml.toString()
-    // });
+    await client.calls.create({
+      to: phoneNumber,
+      from: twilioNumber,
+      twiml: twiml.toString()
+    });
 
     res.status(200).send('Call initiated');
   } catch (err) {
@@ -93,22 +93,30 @@ exports.webhook = async (req, res) => {
     );
 
     // Create TwiML response
-    // const twiml = new twilio.twiml.VoiceResponse();
-    // twiml.say({ voice: 'alice' }, response);
-    // twiml.gather({
-    //   input: 'speech',
-    //   action: `/webhook?conversationId=${conversationId}`,
-    //   method: 'POST',
-    //   speechTimeout: 'auto',
-    //   language: 'en-US'
-    // });
+    const twiml = new twilio.twiml.VoiceResponse();
+    twiml.say({ voice: 'alice' }, response);
+    twiml.gather({
+      input: 'speech',
+      action: `/webhook?conversationId=${conversationId}`,
+      method: 'POST',
+      speechTimeout: 'auto',
+      language: 'en-US'
+    });
 
     res.type('text/xml');
-    res.send(response);
+    res.send(twiml.toString());
   } catch (err) {
     console.error(err);
-    const response = 'I apologize, but I encountered an error. Please try again.';
+    const twiml = new twilio.twiml.VoiceResponse();
+    twiml.say({ voice: 'alice' }, 'I apologize, but I encountered an error. Please try again.');
+    twiml.gather({
+      input: 'speech',
+      action: `/webhook?conversationId=${conversationId}`,
+      method: 'POST',
+      speechTimeout: 'auto',
+      language: 'en-US'
+    });
     res.type('text/xml');
-    res.send(response);
+    res.send(twiml.toString());
   }
 }; 

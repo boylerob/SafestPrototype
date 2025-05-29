@@ -81,3 +81,29 @@ SafestApp/
 2. Run `npm install` in root and backend directories
 3. Use `expo start` to launch the mobile preview
 4. Follow API setup instructions above
+
+## Git Rollback Instructions
+
+If you need to revert to the working SOS button state (commit hash: c21a339), use one of these commands:
+
+1. To completely reset to the working state (discards all changes):
+```bash
+git reset --hard c21a339
+```
+
+2. To create a new branch from the working state:
+```bash
+git checkout -b backup-branch c21a339
+```
+
+3. To temporarily view the working state without changing anything:
+```bash
+git checkout c21a339
+```
+
+To return to the latest version after checking out the old version:
+```bash
+git checkout main
+```
+
+Note: The commit hash `c21a339` represents the working state with the SOS button and Vapi integration. This is your "safe point" that you can always return to if needed.
