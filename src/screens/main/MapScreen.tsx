@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { View, StyleSheet, Dimensions, Alert, TextInput, FlatList, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE, Polyline } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE, Polyline, Heatmap, Polygon } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { config } from '../../config/config';
 import haversine from 'haversine-distance';
+import NYCDataService from '../../services/nycDataService';
 
 const GOOGLE_PLACES_API = 'https://maps.googleapis.com/maps/api/place';
 
@@ -40,8 +41,8 @@ function decodePolyline(encoded) {
 
 const MapScreen = () => {
   const [region, setRegion] = useState({
-    latitude: 40.7128,  // Default to NYC
-    longitude: -74.0060,
+    latitude: 40.682925,  // 251 Macon Street, Brooklyn
+    longitude: -73.944857,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });
@@ -62,6 +63,7 @@ const MapScreen = () => {
   const inputRef = useRef(null);
   const locationSubscription = useRef(null);
   const mapRef = useRef(null);
+  const [safetyIncidents, setSafetyIncidents] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -78,12 +80,12 @@ const MapScreen = () => {
           latitude: location.coords.latitude,
           longitude: location.coords.longitude
         });
-        setRegion({
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        });
+        // setRegion({
+        //   latitude: location.coords.latitude,
+        //   longitude: location.coords.longitude,
+        //   latitudeDelta: 0.0922,
+        //   longitudeDelta: 0.0421,
+        // });
       } catch (error) {
         console.error('Error getting location:', error);
         Alert.alert('Error', 'Could not get your current location.');
@@ -162,14 +164,11 @@ const MapScreen = () => {
     if (!destination) return;
     setLoading(true);
     try {
-      if (!currentLocation) {
-        Alert.alert('Error', 'Current location not available.');
-        setLoading(false);
-        return;
-      }
-      const origin = `${currentLocation.latitude},${currentLocation.longitude}`;
+      // Hard-coded origin: 251 Macon Street, Brooklyn NY 11216
+      const origin = '40.682925,-73.944857';
       const dest = `${destination.lat},${destination.lng}`;
-      console.log('Directions API call:', { origin, dest });
+      // Alert.alert('Directions API call', `Origin: ${origin}\nDestination: ${dest}`);
+      // console.log('Directions API call:', { origin, dest });
       const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${dest}&mode=walking&key=${config.googleMaps.apiKey}`;
       const res = await fetch(url);
       const json = await res.json();
@@ -261,6 +260,112 @@ const MapScreen = () => {
     }
   }, [routeCoords]);
 
+  // Fetch safety incidents for the current region, but only after destination is selected
+  useEffect(() => {
+    if (!destination) return;
+    const fetchIncidents = async () => {
+      try {
+        console.log('Fetching incidents for region:', region);
+        const data = await NYCDataService.getInstance().getSafetyIncidents(region);
+        console.log('Received incidents for map:', data.length);
+        if (data.length > 0) {
+          console.log('First incident:', data[0]);
+        }
+        setSafetyIncidents(data);
+      } catch (e) {
+        console.error('Error fetching safety incidents:', e);
+      }
+    };
+    fetchIncidents();
+  }, [region, destination]);
+
+  // Helper to get bounding box between two points
+  function getBoundingBox(origin, destination, buffer = 0.01) {
+    const minLat = Math.min(origin.latitude, destination.latitude) - buffer;
+    const maxLat = Math.max(origin.latitude, destination.latitude) + buffer;
+    const minLng = Math.min(origin.longitude, destination.longitude) - buffer;
+    const maxLng = Math.max(origin.longitude, destination.longitude) + buffer;
+    return { minLat, maxLat, minLng, maxLng };
+  }
+
+  // Helper to get distance in km between two lat/lng points
+  function getDistanceKm(a, b) {
+    return haversine(a, b) / 1000;
+  }
+
+  // Filter incidents: if routeCoords exist, use distance to polyline; else, use bounding box
+  let filteredIncidents = safetyIncidents;
+  if (routeCoords && routeCoords.length > 1) {
+    // Only include incidents within 0.5 km of any point along the route
+    const thresholdKm = 0.5;
+    filteredIncidents = safetyIncidents.filter(inc => {
+      return routeCoords.some(coord => getDistanceKm(coord, { latitude: inc.latitude, longitude: inc.longitude }) < thresholdKm);
+    });
+    console.log('Filtered incidents for route polyline:', filteredIncidents.length);
+  } else if (destination) {
+    // Fallback: bounding box between origin and destination
+    const originPoint = { latitude: region.latitude, longitude: region.longitude };
+    const destPoint = { latitude: destination.lat, longitude: destination.lng };
+    const bbox = getBoundingBox(originPoint, destPoint, 0.01); // ~1km buffer
+    filteredIncidents = safetyIncidents.filter(inc =>
+      inc.latitude >= bbox.minLat && inc.latitude <= bbox.maxLat &&
+      inc.longitude >= bbox.minLng && inc.longitude <= bbox.maxLng
+    );
+    console.log('Filtered incidents for route bbox:', filteredIncidents.length);
+  }
+
+  // Separate incidents by source for two heatmaps
+  const callsIncidents = filteredIncidents.filter(inc => inc.type && (inc.type.length === 3 || inc.type.match(/^\d/)));
+  const complaintsIncidents = filteredIncidents.filter(inc => inc.type && !(inc.type.length === 3 || inc.type.match(/^\d/)));
+
+  // Grid clustering for incident circles
+  function getGridKey(lat, lng, precision = 0.01) {
+    return `${(Math.round(lat / precision) * precision).toFixed(4)},${(Math.round(lng / precision) * precision).toFixed(4)}`;
+  }
+
+  // Group incidents by grid cell
+  const grid = {};
+  filteredIncidents.forEach(inc => {
+    const key = getGridKey(inc.latitude, inc.longitude);
+    if (!grid[key]) grid[key] = [];
+    grid[key].push(inc);
+  });
+  const gridCircles = Object.values(grid).map((cellIncidents: any[]) => {
+    // Average position for the cell
+    const lat = cellIncidents.reduce((sum, i) => sum + i.latitude, 0) / cellIncidents.length;
+    const lng = cellIncidents.reduce((sum, i) => sum + i.longitude, 0) / cellIncidents.length;
+    return {
+      latitude: lat,
+      longitude: lng,
+      count: cellIncidents.length
+    };
+  });
+
+  // Helper to get color based on count (simple red scale)
+  function getCellColor(count, maxCount) {
+    // Clamp count to [1, maxCount]
+    const norm = Math.min(1, count / maxCount);
+    // Interpolate from #fff0f0 (light) to #ff0000 (dark)
+    const r = 255;
+    const g = Math.round(240 - 240 * norm);
+    const b = Math.round(240 - 240 * norm);
+    return `rgba(${r},${g},${b},0.7)`;
+  }
+
+  // Find max count for color scaling
+  const maxCellCount = Math.max(...Object.values(grid).map((cell: any[]) => cell.length), 1);
+
+  // Render grid squares as polygons
+  function getCellPolygon(lat, lng, precision = 0.01) {
+    // Return the 4 corners of the square
+    return [
+      { latitude: lat, longitude: lng },
+      { latitude: lat + precision, longitude: lng },
+      { latitude: lat + precision, longitude: lng + precision },
+      { latitude: lat, longitude: lng + precision },
+    ];
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
@@ -326,6 +431,29 @@ const MapScreen = () => {
         ref={mapRef}
         key={mapKey}
       >
+        {/* Individual incident markers overlay (larger, more transparent) */}
+        {destination && filteredIncidents.map((inc, idx) => (
+          <Marker
+            key={`incident-${idx}`}
+            coordinate={{ latitude: inc.latitude, longitude: inc.longitude }}
+            anchor={{ x: 0.5, y: 0.5 }}
+            tracksViewChanges={false}
+            zIndex={100}
+          >
+            <View
+              style={{
+                width: 20,
+                height: 20,
+                borderRadius: 10,
+                backgroundColor: 'red',
+                borderWidth: 1,
+                borderColor: '#fff',
+                opacity: 0.45,
+              }}
+            />
+          </Marker>
+        ))}
+        {/* Markers and Polyline remain inside MapView */}
         {(() => {
           console.log('Polyline render check:', {
             routeCoordsLength: routeCoords.length,

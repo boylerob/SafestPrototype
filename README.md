@@ -107,3 +107,32 @@ git checkout main
 ```
 
 Note: The commit hash `c21a339` represents the working state with the SOS button and Vapi integration. This is your "safe point" that you can always return to if needed.
+
+---
+
+## Hot-fix for Demo/Testing: Hardcoded Map Origin
+
+- To keep the map centered on a fixed origin (e.g., 251 Macon Street, Brooklyn) for demo/testing, the following line in `src/screens/main/MapScreen.tsx` is commented out:
+
+```js
+// setRegion({
+//   latitude: location.coords.latitude,
+//   longitude: location.coords.longitude,
+//   latitudeDelta: 0.0922,
+//   longitudeDelta: 0.0421,
+// });
+```
+
+- This prevents the map from snapping to the user's current location on load.
+- When you want to return to dynamic user location, **uncomment** this block.
+
+---
+
+## Other Notes
+- The Directions API call is currently hardcoded to use 251 Macon Street, Brooklyn as the origin for consistent NYC testing.
+- Remove or update this when returning to dynamic routing.
+
+---
+
+## Setup, Features, and Usage
+(Your existing README content...)

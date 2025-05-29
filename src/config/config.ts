@@ -10,7 +10,7 @@ export const config = {
     measurementId: "G-GTZVGDZGZF"
   },
   socrata: {
-    appToken: '9hi9wlyqvojmhu9faergpix6h',
+    appToken: 'n2PZFq0XnEDLLRo0IIrw7sSHs',
     appSecret: '2cfjqd2keruw1w5yet4eai6aehlacgoj6t7gj5gbb3hqpnlo2f'
   },
   googleMaps: {
