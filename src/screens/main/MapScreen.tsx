@@ -5,6 +5,8 @@ import * as Location from 'expo-location';
 import { config } from '../../config/config';
 import haversine from 'haversine-distance';
 import NYCDataService from '../../services/nycDataService';
+// import * as FileSystem from 'expo-file-system';
+// import { Asset } from 'expo-asset';
 
 const GOOGLE_PLACES_API = 'https://maps.googleapis.com/maps/api/place';
 
@@ -64,6 +66,7 @@ const MapScreen = () => {
   const locationSubscription = useRef(null);
   const mapRef = useRef(null);
   const [safetyIncidents, setSafetyIncidents] = useState([]);
+  // const [blockPolygons, setBlockPolygons] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -475,6 +478,21 @@ const MapScreen = () => {
           title="Your Location"
           description="You are here"
         />
+        {/* Render Brooklyn block polygons */}
+        {/* {blockPolygons.map((feature, idx) => {
+          const coordsArray = feature.geometry.type === 'Polygon'
+            ? [feature.geometry.coordinates]
+            : feature.geometry.coordinates;
+          return coordsArray.map((coords, i) => (
+            <Polygon
+              key={`block-${idx}-${i}`}
+              coordinates={coords[0].map(([lng, lat]) => ({ latitude: lat, longitude: lng }))}
+              fillColor="rgba(255,0,0,0.1)"
+              strokeColor="rgba(255,0,0,0.5)"
+              strokeWidth={1}
+            />
+          ));
+        })} */}
       </MapView>
     </View>
   );
@@ -575,4 +593,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MapScreen; 
+export default MapScreen;
