@@ -149,12 +149,10 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Landing">
-        <Stack.Screen name="Landing" component={withSOSFooter(LandingScreen)} options={{ headerShown: false }} />
-        <Stack.Screen name="SafestDirections" component={withSOSFooter(SafestDirectionsScreen)} options={{ headerShown: true, title: 'Safest Directions' }} />
-        <Stack.Screen name="TravelBuddy" component={withSOSFooter(TravelBuddyScreen)} options={{ headerShown: true, title: 'Travel Buddy' }} />
-        <Stack.Screen name="SOS" component={withSOSFooter(SOSScreen)} options={{ headerShown: true, title: 'S.O.S' }} />
-        <Stack.Screen name="Reporting" component={withSOSFooter(ReportingScreen)} options={{ headerShown: true, title: 'Reporting' }} />
+      <Stack.Navigator initialRouteName="Map" screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Map" component={MapScreen} />
+        <Stack.Screen name="SOS" component={SOSScreen} />
+        <Stack.Screen name="Reporting" component={ReportingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

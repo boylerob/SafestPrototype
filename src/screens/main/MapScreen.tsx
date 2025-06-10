@@ -41,7 +41,7 @@ function decodePolyline(encoded) {
   return points;
 }
 
-const MapScreen = () => {
+const MapScreen = ({ navigation }) => {
   const [region, setRegion] = useState({
     latitude: 40.682925,  // 251 Macon Street, Brooklyn
     longitude: -73.944857,
@@ -371,6 +371,41 @@ const MapScreen = () => {
 
   return (
     <View style={styles.container}>
+      <MapView
+        ref={mapRef}
+        key={mapKey}
+        style={styles.map}
+        provider={PROVIDER_GOOGLE}
+        region={region}
+        showsUserLocation={true}
+        showsMyLocationButton={true}
+      >
+        {currentLocation && (
+          <Marker
+            coordinate={currentLocation}
+            title="You are here"
+            pinColor="blue"
+          />
+        )}
+        {destination && (
+          <Marker
+            coordinate={{
+              latitude: destination.lat,
+              longitude: destination.lng
+            }}
+            title={destination.description}
+            pinColor="red"
+          />
+        )}
+        {routeCoords.length > 0 && (
+          <Polyline
+            coordinates={routeCoords}
+            strokeWidth={4}
+            strokeColor="#0000cc"
+          />
+        )}
+      </MapView>
+
       <View style={styles.searchContainer}>
         {navigationActive && steps.length > 0 ? (
           <View style={styles.navigationTopBox}>
@@ -380,6 +415,7 @@ const MapScreen = () => {
           </View>
         ) : (
           <>
+            <Text style={styles.welcomeText}>Welcome to Safest</Text>
             <TextInput
               ref={inputRef}
               style={styles.searchInput}
@@ -395,7 +431,6 @@ const MapScreen = () => {
                 } else {
                   setShowSuggestions(false);
                 }
-                console.log('onFocus', { suggestionsLength: suggestions.length, showSuggestions, selectionComplete });
               }}
             />
             {loading && <ActivityIndicator style={{ position: 'absolute', right: 16, top: 12 }} size="small" color="#0000cc" />}
@@ -422,78 +457,31 @@ const MapScreen = () => {
             <Text style={styles.routeButtonText}>Get the Safest walking route</Text>
           </TouchableOpacity>
         )}
-      </View>
-      <MapView
-        provider={PROVIDER_GOOGLE}
-        style={styles.map}
-        region={region}
-        showsUserLocation
-        showsMyLocationButton
-        showsCompass
-        showsScale
-        ref={mapRef}
-        key={mapKey}
-      >
-        {/* Individual incident markers overlay (larger, more transparent) */}
-        {destination && filteredIncidents.map((inc, idx) => (
-          <Marker
-            key={`incident-${idx}`}
-            coordinate={{ latitude: inc.latitude, longitude: inc.longitude }}
-            anchor={{ x: 0.5, y: 0.5 }}
-            tracksViewChanges={false}
-            zIndex={100}
+
+        {/* Action Buttons */}
+        <View style={styles.actionButtonsContainer}>
+          <TouchableOpacity 
+            style={styles.actionButton}
+            onPress={() => navigation.navigate('TravelBuddy')}
           >
-            <View
-              style={{
-                width: 20,
-                height: 20,
-                borderRadius: 10,
-                backgroundColor: 'red',
-                borderWidth: 1,
-                borderColor: '#fff',
-                opacity: 0.45,
-              }}
-            />
-          </Marker>
-        ))}
-        {/* Markers and Polyline remain inside MapView */}
-        {(() => {
-          console.log('Polyline render check:', {
-            routeCoordsLength: routeCoords.length,
-            navigationActive
-          });
-          return routeCoords.length > 0 && (
-            <Polyline
-              coordinates={routeCoords}
-              strokeColor="#0000cc"
-              strokeWidth={5}
-            />
-          );
-        })()}
-        <Marker
-          coordinate={{
-            latitude: region.latitude,
-            longitude: region.longitude,
-          }}
-          title="Your Location"
-          description="You are here"
-        />
-        {/* Render Brooklyn block polygons */}
-        {/* {blockPolygons.map((feature, idx) => {
-          const coordsArray = feature.geometry.type === 'Polygon'
-            ? [feature.geometry.coordinates]
-            : feature.geometry.coordinates;
-          return coordsArray.map((coords, i) => (
-            <Polygon
-              key={`block-${idx}-${i}`}
-              coordinates={coords[0].map(([lng, lat]) => ({ latitude: lat, longitude: lng }))}
-              fillColor="rgba(255,0,0,0.1)"
-              strokeColor="rgba(255,0,0,0.5)"
-              strokeWidth={1}
-            />
-          ));
-        })} */}
-      </MapView>
+            <Text style={styles.actionButtonText}>Travel Buddy</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            style={styles.reportButton}
+            onPress={() => navigation.navigate('Reporting')}
+          >
+            <Text style={styles.actionButtonText}>Report</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            style={styles.sosButton}
+            onPress={() => navigation.navigate('SOS')}
+          >
+            <Text style={styles.actionButtonText}>SOS</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
@@ -509,9 +497,10 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     position: 'absolute',
-    top: 20,
+    top: '50%',
     left: 20,
     right: 20,
+    transform: [{ translateY: -100 }], // Center vertically
     zIndex: 2,
   },
   searchInput: {
@@ -590,6 +579,65 @@ const styles = StyleSheet.create({
   navigationStepDistance: {
     fontSize: 13,
     color: '#888',
+  },
+  welcomeText: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#0000cc',
+    marginBottom: 20,
+    textAlign: 'center',
+    fontFamily: 'Courier',
+    textShadowColor: '#fff',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
+  },
+  actionButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 10,
+    marginTop: 20,
+    flexWrap: 'wrap',
+  },
+  actionButton: {
+    backgroundColor: '#0000cc',
+    padding: 15,
+    borderRadius: 30,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    minWidth: 100,
+    alignItems: 'center',
+  },
+  reportButton: {
+    backgroundColor: '#0000cc',
+    padding: 15,
+    borderRadius: 30,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    minWidth: 100,
+    alignItems: 'center',
+  },
+  sosButton: {
+    backgroundColor: '#ff0000',
+    padding: 15,
+    borderRadius: 30,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    minWidth: 100,
+    alignItems: 'center',
+  },
+  actionButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
