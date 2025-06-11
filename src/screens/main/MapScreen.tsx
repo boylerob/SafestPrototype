@@ -5,6 +5,7 @@ import * as Location from 'expo-location';
 import { config } from '../../config/config';
 import haversine from 'haversine-distance';
 import NYCDataService from '../../services/nycDataService';
+import ReportModal from '../../components/ReportModal';
 // import * as FileSystem from 'expo-file-system';
 // import { Asset } from 'expo-asset';
 
@@ -66,6 +67,8 @@ const MapScreen = ({ navigation }) => {
   const locationSubscription = useRef(null);
   const mapRef = useRef(null);
   const [safetyIncidents, setSafetyIncidents] = useState([]);
+  const [travelBuddyMode, setTravelBuddyMode] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
   // const [blockPolygons, setBlockPolygons] = useState([]);
 
   useEffect(() => {
@@ -369,6 +372,105 @@ const MapScreen = ({ navigation }) => {
     ];
   }
 
+  const handleTravelBuddyPress = () => {
+    if (travelBuddyMode) {
+      Alert.alert(
+        "Turn Off Travel Buddy Mode",
+        "Would you like to turn off Travel Buddy Mode?",
+        [
+          {
+            text: "Cancel",
+            style: "cancel"
+          },
+          {
+            text: "Turn Off",
+            onPress: () => {
+              setTravelBuddyMode(false);
+              Alert.alert("Travel Buddy Mode Deactivated", "You're no longer in Travel Buddy Mode.");
+            }
+          }
+        ]
+      );
+    } else {
+      Alert.alert(
+        "Travel Buddy Mode",
+        "Would you like to turn on Travel Buddy Mode? This will help you connect with other users traveling in the same direction for safer journeys.",
+        [
+          {
+            text: "Not Now",
+            style: "cancel"
+          },
+          {
+            text: "Turn On",
+            onPress: () => {
+              setTravelBuddyMode(true);
+              Alert.alert(
+                "Travel Buddy Mode Activated",
+                "You're now in Travel Buddy Mode. When you search for a destination, we'll look for others heading the same way.",
+                [{ text: "OK" }]
+              );
+            }
+          }
+        ]
+      );
+    }
+  };
+
+  const handleReportSubmit = (category: string) => {
+    const report = {
+      category,
+      timestamp: Date.now(),
+      location: currentLocation,
+    };
+    console.log('Report submitted:', report);
+    // Here you would typically send the report to your backend
+  };
+
+  const handleSOSPress = async () => {
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert('Permission denied', 'Location permission is required for S.O.S.');
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      const logEntry = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        accuracy: location.coords.accuracy,
+        timestamp: location.timestamp,
+      };
+      console.log('S.O.S Location:', logEntry);
+      
+      // Call Vapi API
+      const response = await fetch('https://api.vapi.ai/call', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 09d8ee41-d507-4e39-ac64-8a878e4c7c6b',
+        },
+        body: JSON.stringify({
+          assistantId: 'f69fd8dc-b5bc-4b04-8112-f35c083f8c29',
+          phoneNumberId: '43b08cdc-e9c4-4325-b6f2-32cf2b019c5c',
+          customer: {
+            number: '+19737181108'
+          }
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Server error: ' + response.status);
+      }
+      
+      const data = await response.json();
+      console.log('Vapi API response:', data);
+      Alert.alert('S.O.S Triggered', 'Safest support is calling you now');
+    } catch (e) {
+      console.error('Error:', e);
+      Alert.alert('Error', 'Failed to trigger S.O.S call: ' + e.message);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <MapView
@@ -419,7 +521,8 @@ const MapScreen = ({ navigation }) => {
             <TextInput
               ref={inputRef}
               style={styles.searchInput}
-              placeholder="Search for a location"
+              placeholder="Where are you headed?"
+              placeholderTextColor="#666"
               value={query}
               onChangeText={text => {
                 setQuery(text);
@@ -452,36 +555,50 @@ const MapScreen = ({ navigation }) => {
             )}
           </>
         )}
-        {destination && !routeCoords.length && (
-          <TouchableOpacity style={styles.routeButton} onPress={handleGetDirections}>
-            <Text style={styles.routeButtonText}>Get the Safest walking route</Text>
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity 
+          style={[
+            styles.routeButton,
+            !destination && styles.routeButtonDisabled
+          ]} 
+          onPress={handleGetDirections}
+          disabled={!destination}
+        >
+          <Text style={[
+            styles.routeButtonText,
+            !destination && styles.routeButtonTextDisabled
+          ]}>Get the Safest Route</Text>
+        </TouchableOpacity>
 
         {/* Action Buttons */}
         <View style={styles.actionButtonsContainer}>
           <TouchableOpacity 
-            style={styles.actionButton}
-            onPress={() => navigation.navigate('TravelBuddy')}
+            style={[styles.actionButton, travelBuddyMode && styles.activeButton]}
+            onPress={handleTravelBuddyPress}
           >
             <Text style={styles.actionButtonText}>Travel Buddy</Text>
           </TouchableOpacity>
           
           <TouchableOpacity 
             style={styles.reportButton}
-            onPress={() => navigation.navigate('Reporting')}
+            onPress={() => setShowReportModal(true)}
           >
             <Text style={styles.actionButtonText}>Report</Text>
           </TouchableOpacity>
           
           <TouchableOpacity 
             style={styles.sosButton}
-            onPress={() => navigation.navigate('SOS')}
+            onPress={handleSOSPress}
           >
             <Text style={styles.actionButtonText}>SOS</Text>
           </TouchableOpacity>
         </View>
       </View>
+
+      <ReportModal
+        visible={showReportModal}
+        onClose={() => setShowReportModal(false)}
+        onSubmit={handleReportSubmit}
+      />
     </View>
   );
 };
@@ -504,18 +621,16 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   searchInput: {
-    height: 48,
-    fontSize: 16,
     backgroundColor: '#fff',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#ddd',
     paddingHorizontal: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    paddingVertical: 12,
+    borderRadius: 8,
+    fontSize: 16,
+    width: '100%',
+    textAlign: 'center',
+    fontFamily: 'Courier',
+    borderWidth: 1,
+    borderColor: '#ccc',
   },
   suggestionsList: {
     backgroundColor: '#fff',
@@ -537,21 +652,25 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   routeButton: {
-    marginTop: 8,
-    backgroundColor: '#0000cc',
-    borderRadius: 8,
+    backgroundColor: '#000',
     paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    marginTop: 16,
+    width: '100%',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+  },
+  routeButtonDisabled: {
+    backgroundColor: '#ccc',
   },
   routeButtonText: {
     color: '#fff',
-    fontWeight: 'bold',
     fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Courier',
+  },
+  routeButtonTextDisabled: {
+    color: '#fff',
   },
   navigationTopBox: {
     backgroundColor: '#fff',
@@ -638,6 +757,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  activeButton: {
+    backgroundColor: '#006400', // Green color
   },
 });
 
