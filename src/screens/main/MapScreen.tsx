@@ -471,6 +471,13 @@ const MapScreen = ({ navigation }) => {
     }
   };
 
+  const handleCancelNavigation = () => {
+    setNavigationActive(false);
+    setSteps([]);
+    setCurrentStepIndex(0);
+    setRouteCoords([]);
+  };
+
   return (
     <View style={styles.container}>
       <MapView
@@ -506,18 +513,40 @@ const MapScreen = ({ navigation }) => {
             strokeColor="#0000cc"
           />
         )}
+        {filteredIncidents.map((incident, index) => (
+          <Marker
+            key={`${incident.id}-${index}`}
+            coordinate={{
+              latitude: incident.latitude,
+              longitude: incident.longitude
+            }}
+            title={incident.type}
+            description={incident.description}
+            pinColor="#ff0000"
+            opacity={0.7}
+          />
+        ))}
       </MapView>
 
-      <View style={styles.searchContainer}>
+      <View style={[
+        styles.searchContainer,
+        destination && styles.searchContainerBottom
+      ]}>
         {navigationActive && steps.length > 0 ? (
           <View style={styles.navigationTopBox}>
+            <TouchableOpacity 
+              style={styles.closeButton}
+              onPress={handleCancelNavigation}
+            >
+              <Text style={styles.closeButtonText}>✕</Text>
+            </TouchableOpacity>
             <Text style={styles.navigationStepTitle}>Step {currentStepIndex + 1} of {steps.length}</Text>
             <Text style={styles.navigationStepInstruction}>{steps[currentStepIndex].html_instructions.replace(/<[^>]+>/g, '')}</Text>
             <Text style={styles.navigationStepDistance}>({steps[currentStepIndex].distance.text}, {steps[currentStepIndex].duration.text})</Text>
           </View>
         ) : (
           <>
-            <Text style={styles.welcomeText}>Welcome to Safest</Text>
+            {!destination && <Text style={styles.welcomeText}>Welcome to Safest</Text>}
             <TextInput
               ref={inputRef}
               style={styles.searchInput}
@@ -555,19 +584,21 @@ const MapScreen = ({ navigation }) => {
             )}
           </>
         )}
-        <TouchableOpacity 
-          style={[
-            styles.routeButton,
-            !destination && styles.routeButtonDisabled
-          ]} 
-          onPress={handleGetDirections}
-          disabled={!destination}
-        >
-          <Text style={[
-            styles.routeButtonText,
-            !destination && styles.routeButtonTextDisabled
-          ]}>Get the Safest Route</Text>
-        </TouchableOpacity>
+        {!navigationActive && (
+          <TouchableOpacity 
+            style={[
+              styles.routeButton,
+              !destination && styles.routeButtonDisabled
+            ]} 
+            onPress={handleGetDirections}
+            disabled={!destination}
+          >
+            <Text style={[
+              styles.routeButtonText,
+              !destination && styles.routeButtonTextDisabled
+            ]}>Get the Safest Route</Text>
+          </TouchableOpacity>
+        )}
 
         {/* Action Buttons */}
         <View style={styles.actionButtonsContainer}>
@@ -617,8 +648,19 @@ const styles = StyleSheet.create({
     top: '50%',
     left: 20,
     right: 20,
-    transform: [{ translateY: -100 }], // Center vertically
-    zIndex: 2,
+    transform: [{ translateY: -100 }],
+    backgroundColor: 'transparent',
+    zIndex: 1,
+  },
+  searchContainerBottom: {
+    position: 'absolute',
+    bottom: 140,
+    left: 20,
+    right: 20,
+    top: 'auto',
+    transform: [],
+    backgroundColor: 'transparent',
+    zIndex: 1,
   },
   searchInput: {
     backgroundColor: '#fff',
@@ -683,6 +725,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    position: 'relative',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: -2,
+    right: 8,
+    padding: 8,
+    zIndex: 2,
+  },
+  closeButtonText: {
+    fontSize: 20,
+    color: '#666',
+    fontWeight: 'bold',
   },
   navigationStepTitle: {
     fontWeight: 'bold',
