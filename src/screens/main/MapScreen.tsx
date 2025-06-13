@@ -70,14 +70,10 @@ const MapScreen = ({ navigation }) => {
   const [safetyIncidents, setSafetyIncidents] = useState([]);
   const [travelBuddyMode, setTravelBuddyMode] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
-<<<<<<< HEAD
-  const [filteredIncidents, setFilteredIncidents] = useState([]);
-  // const [blockPolygons, setBlockPolygons] = useState([]);
-=======
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState('');
   const [filteredIncidents, setFilteredIncidents] = useState([]);
->>>>>>> def98d0 (feat: Add loading overlay with blur effect and proper positioning)
+  // const [blockPolygons, setBlockPolygons] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -140,17 +136,6 @@ const MapScreen = ({ navigation }) => {
 
   // Fetch place details and update map
   const handleSuggestionPress = async (placeId, description) => {
-<<<<<<< HEAD
-    setLoading(true);
-=======
-    console.log('handleSuggestionPress called, setting loading state');
-    // Set loading state and message immediately
-    setIsLoadingLocation(true);
-    setLoadingMessage('Loading the safest route to this location...');
-    console.log('Loading state set:', { isLoadingLocation: true, message: 'Loading the safest route to this location...' });
-    
-    // Hide suggestions
->>>>>>> def98d0 (feat: Add loading overlay with blur effect and proper positioning)
     setTimeout(() => {
       setShowSuggestions(false);
       setSuggestions([]);
@@ -519,7 +504,6 @@ const MapScreen = ({ navigation }) => {
     setRouteCoords([]);
   };
 
-<<<<<<< HEAD
   // Add new useEffect to fetch route when destination changes
   useEffect(() => {
     if (!destination) return;
@@ -548,9 +532,7 @@ const MapScreen = ({ navigation }) => {
     fetchRoute();
   }, [destination, region]);
 
-=======
   console.log('MapScreen render - isLoadingLocation:', isLoadingLocation);
->>>>>>> def98d0 (feat: Add loading overlay with blur effect and proper positioning)
   return (
     <View style={styles.container}>
       <LoadingOverlay 
