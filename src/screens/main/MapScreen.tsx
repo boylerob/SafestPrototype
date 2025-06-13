@@ -6,6 +6,7 @@ import { config } from '../../config/config';
 import haversine from 'haversine-distance';
 import NYCDataService from '../../services/nycDataService';
 import ReportModal from '../../components/ReportModal';
+import LoadingOverlay from '../../components/LoadingOverlay';
 // import * as FileSystem from 'expo-file-system';
 // import { Asset } from 'expo-asset';
 
@@ -69,8 +70,14 @@ const MapScreen = ({ navigation }) => {
   const [safetyIncidents, setSafetyIncidents] = useState([]);
   const [travelBuddyMode, setTravelBuddyMode] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+<<<<<<< HEAD
   const [filteredIncidents, setFilteredIncidents] = useState([]);
   // const [blockPolygons, setBlockPolygons] = useState([]);
+=======
+  const [isLoadingLocation, setIsLoadingLocation] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState('');
+  const [filteredIncidents, setFilteredIncidents] = useState([]);
+>>>>>>> def98d0 (feat: Add loading overlay with blur effect and proper positioning)
 
   useEffect(() => {
     (async () => {
@@ -133,13 +140,25 @@ const MapScreen = ({ navigation }) => {
 
   // Fetch place details and update map
   const handleSuggestionPress = async (placeId, description) => {
+<<<<<<< HEAD
     setLoading(true);
+=======
+    console.log('handleSuggestionPress called, setting loading state');
+    // Set loading state and message immediately
+    setIsLoadingLocation(true);
+    setLoadingMessage('Loading the safest route to this location...');
+    console.log('Loading state set:', { isLoadingLocation: true, message: 'Loading the safest route to this location...' });
+    
+    // Hide suggestions
+>>>>>>> def98d0 (feat: Add loading overlay with blur effect and proper positioning)
     setTimeout(() => {
       setShowSuggestions(false);
       setSuggestions([]);
       setSelectionComplete(true);
     }, 50);
+    
     if (inputRef.current) inputRef.current.blur();
+    
     try {
       const url = `${GOOGLE_PLACES_API}/details/json?place_id=${placeId}&key=${config.googleMaps.apiKey}`;
       const res = await fetch(url);
@@ -205,7 +224,11 @@ const MapScreen = ({ navigation }) => {
     } catch (e) {
       Alert.alert('Error', 'Could not get location details.');
     } finally {
-      setLoading(false);
+      // Add a small delay before hiding the overlay to ensure smooth transition
+      setTimeout(() => {
+        setIsLoadingLocation(false);
+        setLoadingMessage('');
+      }, 500);
     }
   };
 
@@ -339,8 +362,8 @@ const MapScreen = ({ navigation }) => {
   }
 
   // Separate incidents by source for two heatmaps
-  const callsIncidents = filteredIncidents.filter(inc => inc.type && (inc.type.length === 3 || inc.type.match(/^\d/)));
-  const complaintsIncidents = filteredIncidents.filter(inc => inc.type && !(inc.type.length === 3 || inc.type.match(/^\d/)));
+  const callsIncidents = safetyIncidents.filter(inc => inc.type && (inc.type.length === 3 || inc.type.match(/^\d/)));
+  const complaintsIncidents = safetyIncidents.filter(inc => inc.type && !(inc.type.length === 3 || inc.type.match(/^\d/)));
 
   // Grid clustering for incident circles
   function getGridKey(lat, lng, precision = 0.01) {
@@ -349,7 +372,7 @@ const MapScreen = ({ navigation }) => {
 
   // Group incidents by grid cell
   const grid = {};
-  filteredIncidents.forEach(inc => {
+  safetyIncidents.forEach(inc => {
     const key = getGridKey(inc.latitude, inc.longitude);
     if (!grid[key]) grid[key] = [];
     grid[key].push(inc);
@@ -496,6 +519,7 @@ const MapScreen = ({ navigation }) => {
     setRouteCoords([]);
   };
 
+<<<<<<< HEAD
   // Add new useEffect to fetch route when destination changes
   useEffect(() => {
     if (!destination) return;
@@ -524,8 +548,15 @@ const MapScreen = ({ navigation }) => {
     fetchRoute();
   }, [destination, region]);
 
+=======
+  console.log('MapScreen render - isLoadingLocation:', isLoadingLocation);
+>>>>>>> def98d0 (feat: Add loading overlay with blur effect and proper positioning)
   return (
     <View style={styles.container}>
+      <LoadingOverlay 
+        visible={isLoadingLocation} 
+        message={loadingMessage}
+      />
       <MapView
         ref={mapRef}
         key={mapKey}
