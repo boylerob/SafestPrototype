@@ -69,6 +69,7 @@ const MapScreen = ({ navigation }) => {
   const [safetyIncidents, setSafetyIncidents] = useState([]);
   const [travelBuddyMode, setTravelBuddyMode] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [filteredIncidents, setFilteredIncidents] = useState([]);
   // const [blockPolygons, setBlockPolygons] = useState([]);
 
   useEffect(() => {
@@ -133,12 +134,10 @@ const MapScreen = ({ navigation }) => {
   // Fetch place details and update map
   const handleSuggestionPress = async (placeId, description) => {
     setLoading(true);
-    // Hide suggestions with a slight delay to ensure UI updates
     setTimeout(() => {
       setShowSuggestions(false);
       setSuggestions([]);
       setSelectionComplete(true);
-      console.log('handleSuggestionPress: hiding suggestions');
     }, 50);
     if (inputRef.current) inputRef.current.blur();
     try {
@@ -147,14 +146,59 @@ const MapScreen = ({ navigation }) => {
       const json = await res.json();
       if (json.status === 'OK') {
         const loc = json.result.geometry.location;
-        setRegion({
+        const newRegion = {
           latitude: loc.lat,
           longitude: loc.lng,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
-        });
+        };
+        setRegion(newRegion);
         setQuery(description);
-        setDestination({ lat: loc.lat, lng: loc.lng, description });
+        const newDestination = { lat: loc.lat, lng: loc.lng, description };
+        setDestination(newDestination);
+
+        // Fetch incidents for the region
+        const fetchRegion = {
+          ...newRegion,
+          latitudeDelta: Math.max(newRegion.latitudeDelta, 0.1),
+          longitudeDelta: Math.max(newRegion.longitudeDelta, 0.1)
+        };
+        const data = await NYCDataService.getInstance().getSafetyIncidents(fetchRegion);
+        setSafetyIncidents(data);
+
+        // Fetch route and set routeCoords immediately
+        const origin = `${region.latitude},${region.longitude}`;
+        const dest = `${loc.lat},${loc.lng}`;
+        const directionsUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${dest}&mode=walking&key=${config.googleMaps.apiKey}`;
+        const directionsRes = await fetch(directionsUrl);
+        const directionsJson = await directionsRes.json();
+        if (directionsJson.status === 'OK' && directionsJson.routes.length > 0) {
+          const polyline = directionsJson.routes[0].overview_polyline.points;
+          const coords = decodePolyline(polyline);
+          setRouteCoords(coords);
+          setRoute(directionsJson.routes[0]);
+          setSteps(directionsJson.routes[0].legs[0].steps);
+          setCurrentStepIndex(0);
+          
+          // Filter incidents based on the route polyline
+          const thresholdKm = 0.5;
+          const filtered = data.filter(inc =>
+            coords.some(coord => getDistanceKm(coord, { latitude: inc.latitude, longitude: inc.longitude }) < thresholdKm)
+          );
+          setFilteredIncidents(filtered);
+          
+          // Zoom to fit the entire route and incidents
+          if (mapRef.current && coords.length > 1) {
+            const coordinates = [
+              ...coords,
+              ...filtered.map(inc => ({ latitude: inc.latitude, longitude: inc.longitude }))
+            ];
+            mapRef.current.fitToCoordinates(coordinates, {
+              edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
+              animated: true,
+            });
+          }
+        }
       } else {
         Alert.alert('Error', 'Could not get location details.');
       }
@@ -164,6 +208,20 @@ const MapScreen = ({ navigation }) => {
       setLoading(false);
     }
   };
+
+  // Unified filtering logic - only filter based on route polyline
+  useEffect(() => {
+    if (!routeCoords || routeCoords.length <= 1) {
+      setFilteredIncidents([]);
+      return;
+    }
+
+    const thresholdKm = 0.5;
+    const filtered = safetyIncidents.filter(inc =>
+      routeCoords.some(coord => getDistanceKm(coord, { latitude: inc.latitude, longitude: inc.longitude }) < thresholdKm)
+    );
+    setFilteredIncidents(filtered);
+  }, [routeCoords, safetyIncidents]);
 
   // Fetch walking directions from current location to destination
   const handleGetDirections = async () => {
@@ -266,27 +324,8 @@ const MapScreen = ({ navigation }) => {
     }
   }, [routeCoords]);
 
-  // Fetch safety incidents for the current region, but only after destination is selected
-  useEffect(() => {
-    if (!destination) return;
-    const fetchIncidents = async () => {
-      try {
-        console.log('Fetching incidents for region:', region);
-        const data = await NYCDataService.getInstance().getSafetyIncidents(region);
-        console.log('Received incidents for map:', data.length);
-        if (data.length > 0) {
-          console.log('First incident:', data[0]);
-        }
-        setSafetyIncidents(data);
-      } catch (e) {
-        console.error('Error fetching safety incidents:', e);
-      }
-    };
-    fetchIncidents();
-  }, [region, destination]);
-
   // Helper to get bounding box between two points
-  function getBoundingBox(origin, destination, buffer = 0.01) {
+  function getBoundingBox(origin, destination, buffer = 0.02) { // Increased buffer to ~2.2km
     const minLat = Math.min(origin.latitude, destination.latitude) - buffer;
     const maxLat = Math.max(origin.latitude, destination.latitude) + buffer;
     const minLng = Math.min(origin.longitude, destination.longitude) - buffer;
@@ -297,27 +336,6 @@ const MapScreen = ({ navigation }) => {
   // Helper to get distance in km between two lat/lng points
   function getDistanceKm(a, b) {
     return haversine(a, b) / 1000;
-  }
-
-  // Filter incidents: if routeCoords exist, use distance to polyline; else, use bounding box
-  let filteredIncidents = safetyIncidents;
-  if (routeCoords && routeCoords.length > 1) {
-    // Only include incidents within 0.5 km of any point along the route
-    const thresholdKm = 0.5;
-    filteredIncidents = safetyIncidents.filter(inc => {
-      return routeCoords.some(coord => getDistanceKm(coord, { latitude: inc.latitude, longitude: inc.longitude }) < thresholdKm);
-    });
-    console.log('Filtered incidents for route polyline:', filteredIncidents.length);
-  } else if (destination) {
-    // Fallback: bounding box between origin and destination
-    const originPoint = { latitude: region.latitude, longitude: region.longitude };
-    const destPoint = { latitude: destination.lat, longitude: destination.lng };
-    const bbox = getBoundingBox(originPoint, destPoint, 0.01); // ~1km buffer
-    filteredIncidents = safetyIncidents.filter(inc =>
-      inc.latitude >= bbox.minLat && inc.latitude <= bbox.maxLat &&
-      inc.longitude >= bbox.minLng && inc.longitude <= bbox.maxLng
-    );
-    console.log('Filtered incidents for route bbox:', filteredIncidents.length);
   }
 
   // Separate incidents by source for two heatmaps
@@ -478,6 +496,34 @@ const MapScreen = ({ navigation }) => {
     setRouteCoords([]);
   };
 
+  // Add new useEffect to fetch route when destination changes
+  useEffect(() => {
+    if (!destination) return;
+
+    const fetchRoute = async () => {
+      try {
+        const origin = `${region.latitude},${region.longitude}`;
+        const dest = `${destination.lat},${destination.lng}`;
+        const directionsUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${dest}&mode=walking&key=${config.googleMaps.apiKey}`;
+        const directionsRes = await fetch(directionsUrl);
+        const directionsJson = await directionsRes.json();
+        
+        if (directionsJson.status === 'OK' && directionsJson.routes.length > 0) {
+          const polyline = directionsJson.routes[0].overview_polyline.points;
+          const coords = decodePolyline(polyline);
+          setRouteCoords(coords);
+          setRoute(directionsJson.routes[0]);
+          setSteps(directionsJson.routes[0].legs[0].steps);
+          setCurrentStepIndex(0);
+        }
+      } catch (error) {
+        console.error('Error fetching route:', error);
+      }
+    };
+
+    fetchRoute();
+  }, [destination, region]);
+
   return (
     <View style={styles.container}>
       <MapView
@@ -596,7 +642,7 @@ const MapScreen = ({ navigation }) => {
             <Text style={[
               styles.routeButtonText,
               !destination && styles.routeButtonTextDisabled
-            ]}>Get the Safest Route</Text>
+            ]}>Start Navigating</Text>
           </TouchableOpacity>
         )}
 
