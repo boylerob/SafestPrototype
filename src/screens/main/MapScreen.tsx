@@ -73,7 +73,6 @@ const MapScreen = ({ navigation }) => {
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState('');
   const [filteredIncidents, setFilteredIncidents] = useState([]);
-  // const [blockPolygons, setBlockPolygons] = useState([]);
 
   useEffect(() => {
     (async () => {
