@@ -136,6 +136,12 @@ const MapScreen = ({ navigation }) => {
 
   // Fetch place details and update map
   const handleSuggestionPress = async (placeId, description) => {
+    console.log('handleSuggestionPress called, setting loading state');
+    // Set loading state and message immediately
+    setIsLoadingLocation(true);
+    setLoadingMessage('Loading the safest route to this location...');
+    console.log('Loading state set:', { isLoadingLocation: true, message: 'Loading the safest route to this location...' });
+    
     setTimeout(() => {
       setShowSuggestions(false);
       setSuggestions([]);
