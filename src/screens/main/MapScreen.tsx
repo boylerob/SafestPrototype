@@ -107,6 +107,33 @@ const reportIcons = {
   'Other': 'alert-circle'
 };
 
+// Add function to generate random coordinates within Brooklyn
+const generateBrooklynCoordinates = () => {
+  // Brooklyn boundaries (approximate)
+  const minLat = 40.5700; // Southern Brooklyn
+  const maxLat = 40.7390; // Northern Brooklyn
+  const minLng = -74.0410; // Western Brooklyn
+  const maxLng = -73.8550; // Eastern Brooklyn
+
+  return {
+    latitude: minLat + Math.random() * (maxLat - minLat),
+    longitude: minLng + Math.random() * (maxLng - minLng)
+  };
+};
+
+const MapLegend = () => (
+  <View style={styles.mapLegend}>
+    <View style={styles.legendItem}>
+      <View style={[styles.legendDot, { backgroundColor: '#8000FF' }]} />
+      <Text style={styles.legendText}>Travel Buddies</Text>
+    </View>
+    <View style={styles.legendItem}>
+      <View style={[styles.legendDot, { backgroundColor: '#FFB800' }]} />
+      <Text style={styles.legendText}>Safety Incidents</Text>
+    </View>
+  </View>
+);
+
 const MapScreen = ({ navigation }) => {
   const [region, setRegion] = useState({
     latitude: 40.682925,  // 251 Macon Street, Brooklyn
@@ -138,20 +165,19 @@ const MapScreen = ({ navigation }) => {
   const [loadingMessage, setLoadingMessage] = useState('');
   const [filteredIncidents, setFilteredIncidents] = useState([]);
   const [reportedIncidents, setReportedIncidents] = useState([]);
-
-  // Add function to generate random coordinates within Brooklyn
-  const generateBrooklynCoordinates = () => {
-    // Brooklyn boundaries (approximate)
-    const minLat = 40.5700; // Southern Brooklyn
-    const maxLat = 40.7390; // Northern Brooklyn
-    const minLng = -74.0410; // Western Brooklyn
-    const maxLng = -73.8550; // Eastern Brooklyn
-
-    return {
-      latitude: minLat + Math.random() * (maxLat - minLat),
-      longitude: minLng + Math.random() * (maxLng - minLng)
-    };
-  };
+  const [travelBuddies, setTravelBuddies] = useState(() => {
+    // Generate 30 travel buddies spread throughout Brooklyn
+    return Array.from({ length: 30 }, (_, index) => {
+      const location = generateBrooklynCoordinates();
+      const minutesAgo = Math.floor(Math.random() * 15); // Random time in last 15 minutes
+      
+      return {
+        id: `buddy-${index + 1}`,
+        location,
+        lastUpdated: Date.now() - (minutesAgo * 60 * 1000)
+      };
+    });
+  });
 
   // Add test reports on component mount
   useEffect(() => {
@@ -679,7 +705,7 @@ const MapScreen = ({ navigation }) => {
       
       const data = await response.json();
       console.log('Vapi API response:', data);
-      Alert.alert('S.O.S Triggered', 'Safest support is calling you now');
+      Alert.alert('S.O.S: Safest is Calling You', 'Your Trusted Contacts can now track your location for 1 hour.');
     } catch (e) {
       console.error('Error:', e);
       Alert.alert('Error', 'Failed to trigger S.O.S call: ' + e.message);
@@ -790,7 +816,21 @@ const MapScreen = ({ navigation }) => {
             </View>
           </Marker>
         ))}
+        {travelBuddies.map((buddy) => (
+          <Marker
+            key={buddy.id}
+            coordinate={buddy.location}
+            title="Travel Buddy"
+            description={`Last seen ${Math.round((Date.now() - buddy.lastUpdated) / (60 * 1000))} minutes ago`}
+          >
+            <View style={[styles.markerContainer, styles.buddyMarker]}>
+              <View style={styles.buddyDot} />
+            </View>
+          </Marker>
+        ))}
       </MapView>
+
+      <MapLegend />
 
       <View style={[
         styles.searchContainer,
@@ -1032,7 +1072,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   actionButton: {
-    backgroundColor: '#0000cc',
+    backgroundColor: '#8000FF', // Purple for Travel Buddy button (inactive)
     padding: 15,
     borderRadius: 30,
     elevation: 5,
@@ -1073,7 +1113,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   activeButton: {
-    backgroundColor: '#006400', // Green color
+    backgroundColor: '#006400', // Green color when active
   },
   shimmer: {
     position: 'absolute',
@@ -1104,6 +1144,48 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  buddyMarker: {
+    borderColor: '#4CAF50',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    padding: 2,
+    borderRadius: 6,
+  },
+  buddyDot: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: '#8000FF', // Purple for Travel Buddy icons
+  },
+  mapLegend: {
+    position: 'absolute',
+    top: 80,
+    left: 20,
+    backgroundColor: '#1a1a1a',
+    padding: 6,
+    borderRadius: 8,
+    width: 140,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  legendItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 2,
+  },
+  legendDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginRight: 6,
+  },
+  legendText: {
+    fontSize: 11,
+    color: '#fff',
+    fontFamily: 'Courier',
   },
 });
 
