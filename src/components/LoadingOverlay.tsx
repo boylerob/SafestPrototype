@@ -51,7 +51,7 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ visible, message
   return (
     <Animated.View style={[styles.container, { opacity }]}>
       <BlurView intensity={40} style={styles.blurContainer}>
-        <View style={[styles.content, { backgroundColor: 'red' }]}>
+        <View style={styles.content}>
           <Animated.View style={[styles.spinner, { transform: [{ rotate: spin }] }]}>
             <View style={styles.spinnerInner} />
           </Animated.View>
@@ -80,45 +80,48 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   content: {
     position: 'absolute',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    padding: 24,
-    borderRadius: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    padding: 32,
+    borderRadius: 20,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 4,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    minWidth: 200,
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 8,
+    minWidth: 240,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   spinner: {
-    width: 50,
-    height: 50,
-    marginBottom: 16,
+    width: 40,
+    height: 40,
+    marginBottom: 20,
   },
   spinnerInner: {
     width: '100%',
     height: '100%',
-    borderRadius: 25,
-    borderWidth: 4,
-    borderColor: '#0000cc',
+    borderRadius: 20,
+    borderWidth: 3,
+    borderColor: '#007AFF',
     borderTopColor: 'transparent',
   },
   message: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#000',
+    fontSize: 17,
+    fontWeight: '500',
+    color: '#1C1C1E',
     textAlign: 'center',
-    fontFamily: 'Courier',
+    letterSpacing: -0.2,
+    lineHeight: 22,
   },
 });
 

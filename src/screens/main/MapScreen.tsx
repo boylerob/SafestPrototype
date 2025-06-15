@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, StyleSheet, Dimensions, Alert, TextInput, FlatList, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Dimensions, Alert, TextInput, FlatList, TouchableOpacity, Text, ActivityIndicator, Animated } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Polyline, Heatmap, Polygon } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { config } from '../../config/config';
@@ -7,6 +7,7 @@ import haversine from 'haversine-distance';
 import NYCDataService from '../../services/nycDataService';
 import ReportModal from '../../components/ReportModal';
 import LoadingOverlay from '../../components/LoadingOverlay';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 // import * as FileSystem from 'expo-file-system';
 // import { Asset } from 'expo-asset';
 
@@ -43,6 +44,69 @@ function decodePolyline(encoded) {
   return points;
 }
 
+const ShimmerButton = ({ onPress, disabled, children }) => {
+  const shimmerAnimation = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (!disabled) {
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(shimmerAnimation, {
+            toValue: 1,
+            duration: 1750,
+            useNativeDriver: true,
+          }),
+          Animated.timing(shimmerAnimation, {
+            toValue: 0,
+            duration: 1750,
+            useNativeDriver: true,
+          }),
+        ])
+      ).start();
+    }
+  }, [disabled]);
+
+  const translateX = shimmerAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [-200, 200],
+  });
+
+  return (
+    <TouchableOpacity 
+      style={[
+        styles.routeButton,
+        disabled && styles.routeButtonDisabled
+      ]} 
+      onPress={onPress}
+      disabled={disabled}
+    >
+      {!disabled && (
+        <Animated.View
+          style={[
+            styles.shimmer,
+            {
+              transform: [{ translateX }],
+            },
+          ]}
+        />
+      )}
+      <Text style={[
+        styles.routeButtonText,
+        disabled && styles.routeButtonTextDisabled
+      ]}>{children}</Text>
+    </TouchableOpacity>
+  );
+};
+
+// Add icon mapping for report types
+const reportIcons = {
+  'Harassment / Catcalling': 'account-alert',
+  'Broken Lights': 'lightbulb-off',
+  'Transport Issue': 'bus-alert',
+  'Unsafe Area': 'map-marker-alert',
+  'Other': 'alert-circle'
+};
+
 const MapScreen = ({ navigation }) => {
   const [region, setRegion] = useState({
     latitude: 40.682925,  // 251 Macon Street, Brooklyn
@@ -73,6 +137,108 @@ const MapScreen = ({ navigation }) => {
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState('');
   const [filteredIncidents, setFilteredIncidents] = useState([]);
+  const [reportedIncidents, setReportedIncidents] = useState([]);
+
+  // Add function to generate random coordinates within Brooklyn
+  const generateBrooklynCoordinates = () => {
+    // Brooklyn boundaries (approximate)
+    const minLat = 40.5700; // Southern Brooklyn
+    const maxLat = 40.7390; // Northern Brooklyn
+    const minLng = -74.0410; // Western Brooklyn
+    const maxLng = -73.8550; // Eastern Brooklyn
+
+    return {
+      latitude: minLat + Math.random() * (maxLat - minLat),
+      longitude: minLng + Math.random() * (maxLng - minLng)
+    };
+  };
+
+  // Add test reports on component mount
+  useEffect(() => {
+    const testReports = [
+      {
+        id: '1',
+        category: 'Harassment / Catcalling',
+        timestamp: Date.now() - (2 * 60 * 60 * 1000), // 2 hours ago
+        location: {
+          latitude: 40.682925 + 0.002,
+          longitude: -73.944857 + 0.002
+        },
+        expiresAt: Date.now() + (22 * 60 * 60 * 1000) // 22 hours from now
+      },
+      {
+        id: '2',
+        category: 'Broken Lights',
+        timestamp: Date.now() - (4 * 60 * 60 * 1000), // 4 hours ago
+        location: {
+          latitude: 40.682925 - 0.002,
+          longitude: -73.944857 - 0.002
+        },
+        expiresAt: Date.now() + (20 * 60 * 60 * 1000) // 20 hours from now
+      },
+      {
+        id: '3',
+        category: 'Transport Issue',
+        timestamp: Date.now() - (6 * 60 * 60 * 1000), // 6 hours ago
+        location: {
+          latitude: 40.682925 + 0.003,
+          longitude: -73.944857 - 0.003
+        },
+        expiresAt: Date.now() + (18 * 60 * 60 * 1000) // 18 hours from now
+      },
+      {
+        id: '4',
+        category: 'Unsafe Area',
+        timestamp: Date.now() - (8 * 60 * 60 * 1000), // 8 hours ago
+        location: {
+          latitude: 40.682925 - 0.003,
+          longitude: -73.944857 + 0.003
+        },
+        expiresAt: Date.now() + (16 * 60 * 60 * 1000) // 16 hours from now
+      },
+      {
+        id: '5',
+        category: 'Other',
+        timestamp: Date.now() - (10 * 60 * 60 * 1000), // 10 hours ago
+        location: {
+          latitude: 40.682925 + 0.004,
+          longitude: -73.944857 + 0.004
+        },
+        expiresAt: Date.now() + (14 * 60 * 60 * 1000) // 14 hours from now
+      }
+    ];
+
+    const categories = [
+      'Harassment / Catcalling',
+      'Broken Lights',
+      'Transport Issue',
+      'Unsafe Area',
+      'Other'
+    ];
+
+    // Generate 50 additional reports
+    const additionalReports = Array.from({ length: 50 }, (_, index) => {
+      const category = categories[Math.floor(Math.random() * categories.length)];
+      const hoursAgo = Math.floor(Math.random() * 24); // Random time in last 24 hours
+      const location = generateBrooklynCoordinates();
+      
+      return {
+        id: `additional-${index + 1}`,
+        category,
+        timestamp: Date.now() - (hoursAgo * 60 * 60 * 1000),
+        location,
+        expiresAt: Date.now() + ((24 - hoursAgo) * 60 * 60 * 1000)
+      };
+    });
+
+    // Combine with original test reports
+    const allReports = [
+      ...testReports,
+      ...additionalReports
+    ];
+
+    setReportedIncidents(allReports);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -448,14 +614,32 @@ const MapScreen = ({ navigation }) => {
   };
 
   const handleReportSubmit = (category: string) => {
+    if (!currentLocation) {
+      Alert.alert('Error', 'Unable to get your current location. Please try again.');
+      return;
+    }
+
     const report = {
+      id: Date.now().toString(),
       category,
       timestamp: Date.now(),
       location: currentLocation,
+      expiresAt: Date.now() + (24 * 60 * 60 * 1000), // 24 hours from now
     };
+
+    setReportedIncidents(prev => [...prev, report]);
     console.log('Report submitted:', report);
-    // Here you would typically send the report to your backend
   };
+
+  // Add cleanup effect for expired reports
+  useEffect(() => {
+    const cleanupInterval = setInterval(() => {
+      const now = Date.now();
+      setReportedIncidents(prev => prev.filter(report => report.expiresAt > now));
+    }, 3600000); // Check every hour
+
+    return () => clearInterval(cleanupInterval);
+  }, []);
 
   const handleSOSPress = async () => {
     try {
@@ -590,6 +774,22 @@ const MapScreen = ({ navigation }) => {
             opacity={0.7}
           />
         ))}
+        {reportedIncidents.map((report) => (
+          <Marker
+            key={report.id}
+            coordinate={report.location}
+            title={report.category}
+            description={`Reported ${Math.round((Date.now() - report.timestamp) / (60 * 60 * 1000))} hours ago`}
+          >
+            <View style={styles.markerContainer}>
+              <MaterialCommunityIcons 
+                name={reportIcons[report.category]} 
+                size={18} 
+                color="#FFB800" 
+              />
+            </View>
+          </Marker>
+        ))}
       </MapView>
 
       <View style={[
@@ -649,19 +849,12 @@ const MapScreen = ({ navigation }) => {
           </>
         )}
         {!navigationActive && (
-          <TouchableOpacity 
-            style={[
-              styles.routeButton,
-              !destination && styles.routeButtonDisabled
-            ]} 
+          <ShimmerButton 
             onPress={handleGetDirections}
             disabled={!destination}
           >
-            <Text style={[
-              styles.routeButtonText,
-              !destination && styles.routeButtonTextDisabled
-            ]}>Start Navigating</Text>
-          </TouchableOpacity>
+            Start Navigating
+          </ShimmerButton>
         )}
 
         {/* Action Buttons */}
@@ -765,6 +958,8 @@ const styles = StyleSheet.create({
     marginTop: 16,
     width: '100%',
     alignItems: 'center',
+    overflow: 'hidden',
+    position: 'relative',
   },
   routeButtonDisabled: {
     backgroundColor: '#ccc',
@@ -879,6 +1074,36 @@ const styles = StyleSheet.create({
   },
   activeButton: {
     backgroundColor: '#006400', // Green color
+  },
+  shimmer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: 150,
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    transform: [{ skewX: '-20deg' }],
+    opacity: 0.5,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.25)',
+    shadowColor: '#fff',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.4,
+    shadowRadius: 7.5,
+    elevation: 4,
+  },
+  markerContainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    padding: 6,
+    borderRadius: 16,
+    borderWidth: 2,
+    borderColor: '#FFB800',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 });
 

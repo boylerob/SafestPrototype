@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 interface ReportModalProps {
   visible: boolean;
@@ -10,11 +11,11 @@ interface ReportModalProps {
 const ReportModal: React.FC<ReportModalProps> = ({ visible, onClose, onSubmit }) => {
   const [thankYou, setThankYou] = useState(false);
   const categories = [
-    'Harassment / Catcalling',
-    'Broken Lights',
-    'Transport Issue',
-    'Unsafe Area',
-    'Other',
+    { name: 'Harassment / Catcalling', icon: 'account-alert' },
+    { name: 'Broken Lights', icon: 'lightbulb-off' },
+    { name: 'Transport Issue', icon: 'bus-alert' },
+    { name: 'Unsafe Area', icon: 'map-marker-alert' },
+    { name: 'Other', icon: 'alert-circle' },
   ];
 
   const handleReport = (category: string) => {
@@ -45,8 +46,15 @@ const ReportModal: React.FC<ReportModalProps> = ({ visible, onClose, onSubmit })
               <Text style={styles.title}>Community Safety</Text>
               <Text style={styles.prompt}>Select a category to report and help the community stay safe:</Text>
               {categories.map((cat) => (
-                <TouchableOpacity key={cat} style={styles.reportButton} onPress={() => handleReport(cat)}>
-                  <Text style={styles.reportButtonText}>{cat}</Text>
+                <TouchableOpacity 
+                  key={cat.name} 
+                  style={styles.reportButton} 
+                  onPress={() => handleReport(cat.name)}
+                >
+                  <View style={styles.buttonContent}>
+                    <MaterialCommunityIcons name={cat.icon} size={24} color="#FFB800" style={styles.icon} />
+                    <Text style={styles.reportButtonText}>{cat.name}</Text>
+                  </View>
                 </TouchableOpacity>
               ))}
               <TouchableOpacity style={styles.closeButton} onPress={onClose}>
@@ -138,6 +146,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Courier',
     marginTop: 10,
     paddingHorizontal: 20,
+  },
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  icon: {
+    marginRight: 10,
   },
 });
 
