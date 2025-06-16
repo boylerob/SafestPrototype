@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, StyleSheet, Dimensions, Alert, TextInput, FlatList, TouchableOpacity, Text, ActivityIndicator, Animated } from 'react-native';
+import { View, StyleSheet, Dimensions, Alert, TextInput, FlatList, TouchableOpacity, Text, ActivityIndicator, Animated, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Polyline, Heatmap, Polygon } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { config } from '../../config/config';
@@ -178,6 +178,31 @@ const MapScreen = ({ navigation }) => {
       };
     });
   });
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+
+  // Add keyboard listeners
+  useEffect(() => {
+    const keyboardWillShow = Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
+      (e) => {
+        setKeyboardHeight(e.endCoordinates.height);
+        setIsKeyboardVisible(true);
+      }
+    );
+    const keyboardWillHide = Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
+      () => {
+        setKeyboardHeight(0);
+        setIsKeyboardVisible(false);
+      }
+    );
+
+    return () => {
+      keyboardWillShow.remove();
+      keyboardWillHide.remove();
+    };
+  }, []);
 
   // Add test reports on component mount
   useEffect(() => {
@@ -749,7 +774,11 @@ const MapScreen = ({ navigation }) => {
 
   console.log('MapScreen render - isLoadingLocation:', isLoadingLocation);
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView 
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+    >
       <LoadingOverlay 
         visible={isLoadingLocation} 
         message={loadingMessage}
@@ -834,7 +863,10 @@ const MapScreen = ({ navigation }) => {
 
       <View style={[
         styles.searchContainer,
-        destination && styles.searchContainerBottom
+        destination && styles.searchContainerBottom,
+        isKeyboardVisible && destination && {
+          bottom: keyboardHeight + 20,
+        }
       ]}>
         {navigationActive && steps.length > 0 ? (
           <View style={styles.navigationTopBox}>
@@ -851,24 +883,38 @@ const MapScreen = ({ navigation }) => {
         ) : (
           <>
             {!destination && <Text style={styles.welcomeText}>Welcome to Safest</Text>}
-            <TextInput
-              ref={inputRef}
-              style={styles.searchInput}
-              placeholder="Where are you headed?"
-              placeholderTextColor="#666"
-              value={query}
-              onChangeText={text => {
-                setQuery(text);
-                setSelectionComplete(false);
-              }}
-              onFocus={() => {
-                if (!selectionComplete && suggestions.length > 0) {
-                  setShowSuggestions(true);
-                } else {
-                  setShowSuggestions(false);
-                }
-              }}
-            />
+            <View style={styles.searchInputContainer}>
+              <TextInput
+                ref={inputRef}
+                style={styles.searchInput}
+                placeholder="Where are you headed?"
+                placeholderTextColor="#666"
+                value={query}
+                onChangeText={text => {
+                  setQuery(text);
+                  setSelectionComplete(false);
+                }}
+                onFocus={() => {
+                  if (!selectionComplete && suggestions.length > 0) {
+                    setShowSuggestions(true);
+                  } else {
+                    setShowSuggestions(false);
+                  }
+                }}
+              />
+              {query.length > 0 && (
+                <TouchableOpacity 
+                  style={styles.clearButton}
+                  onPress={() => {
+                    setQuery('');
+                    setSelectionComplete(false);
+                    setShowSuggestions(false);
+                  }}
+                >
+                  <Text style={styles.clearButtonText}>✕</Text>
+                </TouchableOpacity>
+              )}
+            </View>
             {loading && <ActivityIndicator style={{ position: 'absolute', right: 16, top: 12 }} size="small" color="#0000cc" />}
             {showSuggestions && suggestions.length > 0 && !selectionComplete && (
               <FlatList
@@ -927,7 +973,7 @@ const MapScreen = ({ navigation }) => {
         onClose={() => setShowReportModal(false)}
         onSubmit={handleReportSubmit}
       />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -958,6 +1004,10 @@ const styles = StyleSheet.create({
     transform: [],
     backgroundColor: 'transparent',
     zIndex: 1,
+  },
+  searchInputContainer: {
+    position: 'relative',
+    width: '100%',
   },
   searchInput: {
     backgroundColor: '#fff',
@@ -1186,6 +1236,22 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: '#fff',
     fontFamily: 'Courier',
+  },
+  clearButton: {
+    position: 'absolute',
+    right: 12,
+    top: '50%',
+    transform: [{ translateY: -10 }],
+    width: 20,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 2,
+  },
+  clearButtonText: {
+    fontSize: 16,
+    color: '#666',
+    fontWeight: 'bold',
   },
 });
 
