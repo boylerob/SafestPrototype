@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Linking from 'expo-linking';
 import * as Location from 'expo-location';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import MapScreen from './src/screens/main/MapScreen';
+import WelcomeSlides from './src/components/WelcomeSlides';
 import 'react-native-get-random-values';
 // Only import fs if running in a Node.js environment (Cursor desktop)
 let fs = null;
@@ -147,6 +149,46 @@ function ReportingScreen() {
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [hasSeenWelcome, setHasSeenWelcome] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    // For testing: Clear AsyncStorage to show welcome screens
+    const clearStorage = async () => {
+      try {
+        await AsyncStorage.removeItem('hasSeenWelcome');
+        console.log('AsyncStorage cleared for testing');
+      } catch (error) {
+        console.error('Error clearing AsyncStorage:', error);
+      }
+    };
+    clearStorage();
+    
+    checkIfFirstLaunch();
+  }, []);
+
+  const checkIfFirstLaunch = async () => {
+    try {
+      const value = await AsyncStorage.getItem('hasSeenWelcome');
+      setHasSeenWelcome(value === 'true');
+    } catch (error) {
+      console.error('Error checking first launch:', error);
+      setHasSeenWelcome(false);
+    }
+  };
+
+  const handleWelcomeComplete = () => {
+    setHasSeenWelcome(true);
+  };
+
+  if (hasSeenWelcome === null) {
+    // Still checking if it's first launch
+    return null;
+  }
+
+  if (!hasSeenWelcome) {
+    return <WelcomeSlides onComplete={handleWelcomeComplete} />;
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Map" screenOptions={{ headerShown: false }}>
