@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
+import { View, Text, StyleSheet, Animated } from 'react-native';
 import { BlurView } from 'expo-blur';
 
 interface LoadingOverlayProps {
@@ -7,55 +7,52 @@ interface LoadingOverlayProps {
   message?: string;
 }
 
-export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ visible, message = 'Loading...' }) => {
-  console.log('LoadingOverlay render - visible:', visible, 'message:', message);
-  
-  const opacity = useRef(new Animated.Value(0)).current;
-  const spinValue = useRef(new Animated.Value(0)).current;
+const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ visible, message = '' }) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const spinAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    console.log('LoadingOverlay useEffect - visible changed to:', visible);
-    Animated.timing(opacity, {
-      toValue: visible ? 1 : 0,
-      duration: 200,
-      useNativeDriver: true,
-    }).start(() => {
-      console.log('LoadingOverlay animation completed - visible:', visible);
-    });
-  }, [visible, opacity]);
-
-  useEffect(() => {
-    console.log('LoadingOverlay starting spin animation');
-    Animated.loop(
-      Animated.timing(spinValue, {
-        toValue: 1,
-        duration: 1000,
-        easing: Easing.linear,
+    if (visible) {
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.loop(
+          Animated.timing(spinAnim, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true,
+          })
+        ),
+      ]).start();
+    } else {
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 300,
         useNativeDriver: true,
-      })
-    ).start();
-  }, [spinValue]);
+      }).start();
+    }
+  }, [visible, fadeAnim, spinAnim]);
 
-  const spin = spinValue.interpolate({
+  const spin = spinAnim.interpolate({
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
   });
 
   if (!visible) {
-    console.log('LoadingOverlay not visible, returning null');
     return null;
   }
 
-  console.log('LoadingOverlay rendering with visible:', visible);
-
   return (
-    <Animated.View style={[styles.container, { opacity }]}>
+    <Animated.View style={[styles.overlay, { opacity: fadeAnim }]}>
       <BlurView intensity={40} style={styles.blurContainer}>
         <View style={styles.content}>
           <Animated.View style={[styles.spinner, { transform: [{ rotate: spin }] }]}>
             <View style={styles.spinnerInner} />
           </Animated.View>
-          <Text style={styles.message}>{message}</Text>
+          {message ? <Text style={styles.message}>{message}</Text> : null}
         </View>
       </BlurView>
     </Animated.View>
@@ -63,7 +60,7 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ visible, message
 };
 
 const styles = StyleSheet.create({
-  container: {
+  overlay: {
     position: 'absolute',
     top: 0,
     left: 0,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, StyleSheet, Dimensions, Alert, TextInput, FlatList, TouchableOpacity, Text, ActivityIndicator, Animated, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, StyleSheet, Dimensions, Alert, TextInput, FlatList, TouchableOpacity, Text, ActivityIndicator, Animated, Keyboard, KeyboardAvoidingView, Platform, findNodeHandle, Modal } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Polyline, Heatmap, Polygon } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { config } from '../../config/config';
@@ -8,6 +8,8 @@ import NYCDataService from '../../services/nycDataService';
 import ReportModal from '../../components/ReportModal';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import SpotlightTour from '../../components/SpotlightTour';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // import * as FileSystem from 'expo-file-system';
 // import { Asset } from 'expo-asset';
 
@@ -180,6 +182,45 @@ const MapScreen = ({ navigation }) => {
   });
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  const [showTour, setShowTour] = useState(false);
+  const [tourStepIndex, setTourStepIndex] = useState(0); // Track current tour step
+
+  // Refs for spotlight targets
+  const travelBuddyRef = useRef(null);
+  const reportRef = useRef(null);
+  const sosRef = useRef(null);
+
+  const tourSteps = [
+    {
+      target: travelBuddyRef,
+      title: 'Using Safest: Travel Buddy',
+      description: 'Travel Buddy mode lets other users know you are open to Safety in numbers as you navigate, connecting a community.',
+    },
+    {
+      target: reportRef,
+      title: 'Using Safest: Report',
+      description: 'Report any issues in real-time that impact safety - from catcalling to broken street lights - to make everyone safer.',
+    },
+    {
+      target: sosRef,
+      title: 'Using Safest: S.O.S',
+      description: 'Safest will call you 24/7 to make sure you aren\'t alone during moments that feel off: We can dispatch the police to your location, let friends know where you are, or just talk -- either way, we\'ll stay on the line.',
+    },
+  ];
+
+  useEffect(() => {
+    (async () => {
+      const hasSeenTour = await AsyncStorage.getItem('hasSeenSpotlightTour');
+      if (!hasSeenTour) {
+        setShowTour(true);
+      }
+    })();
+  }, []);
+
+  const handleTourComplete = async () => {
+    setShowTour(false);
+    await AsyncStorage.setItem('hasSeenSpotlightTour', 'true');
+  };
 
   // Add keyboard listeners
   useEffect(() => {
@@ -352,11 +393,9 @@ const MapScreen = ({ navigation }) => {
 
   // Fetch place details and update map
   const handleSuggestionPress = async (placeId, description) => {
-    console.log('handleSuggestionPress called, setting loading state');
     // Set loading state and message immediately
     setIsLoadingLocation(true);
     setLoadingMessage('Loading the safest route to this location...');
-    console.log('Loading state set:', { isLoadingLocation: true, message: 'Loading the safest route to this location...' });
     
     setTimeout(() => {
       setShowSuggestions(false);
@@ -399,30 +438,34 @@ const MapScreen = ({ navigation }) => {
         const directionsRes = await fetch(directionsUrl);
         const directionsJson = await directionsRes.json();
         if (directionsJson.status === 'OK' && directionsJson.routes.length > 0) {
-          const polyline = directionsJson.routes[0].overview_polyline.points;
+          const route = directionsJson.routes[0];
+          const polyline = route.overview_polyline.points;
           const coords = decodePolyline(polyline);
-          setRouteCoords(coords);
-          setRoute(directionsJson.routes[0]);
-          setSteps(directionsJson.routes[0].legs[0].steps);
-          setCurrentStepIndex(0);
           
-          // Filter incidents based on the route polyline
-          const thresholdKm = 0.5;
-          const filtered = data.filter(inc =>
-            coords.some(coord => getDistanceKm(coord, { latitude: inc.latitude, longitude: inc.longitude }) < thresholdKm)
-          );
-          setFilteredIncidents(filtered);
-          
-          // Zoom to fit the entire route and incidents
-          if (mapRef.current && coords.length > 1) {
-            const coordinates = [
-              ...coords,
-              ...filtered.map(inc => ({ latitude: inc.latitude, longitude: inc.longitude }))
-            ];
-            mapRef.current.fitToCoordinates(coordinates, {
-              edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
-              animated: true,
-            });
+          if (coords.length > 0) {
+            setRouteCoords(coords);
+            setRoute(route);
+            setSteps(route.legs[0].steps);
+            setCurrentStepIndex(0);
+            
+            // Filter incidents based on the route polyline
+            const thresholdKm = 0.5;
+            const filtered = data.filter(inc =>
+              coords.some(coord => getDistanceKm(coord, { latitude: inc.latitude, longitude: inc.longitude }) < thresholdKm)
+            );
+            setFilteredIncidents(filtered);
+            
+            // Zoom to fit the entire route and incidents
+            if (mapRef.current && coords.length > 1) {
+              const coordinates = [
+                ...coords,
+                ...filtered.map(inc => ({ latitude: inc.latitude, longitude: inc.longitude }))
+              ];
+              mapRef.current.fitToCoordinates(coordinates, {
+                edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
+                animated: true,
+              });
+            }
           }
         }
       } else {
@@ -467,12 +510,9 @@ const MapScreen = ({ navigation }) => {
       const res = await fetch(url);
       const json = await res.json();
       if (json.status === 'OK' && json.routes.length > 0) {
-        // For now, just log the polyline
-        console.log('Directions route:', json.routes[0]);
         setRoute(json.routes[0]);
         // Decode polyline and set routeCoords
         const polyline = json.routes[0].overview_polyline.points;
-        console.log('Full route object:', JSON.stringify(json.routes[0], null, 2));
         const coords = decodePolyline(polyline);
         setTimeout(() => {
           setRouteCoords(coords);
@@ -494,11 +534,6 @@ const MapScreen = ({ navigation }) => {
             }, 100);
           }
         }, 100);
-        if (!coords || coords.length === 0) {
-          console.log('Polyline decode error:', polyline, coords);
-        } else {
-          console.log('Polyline decoded:', coords);
-        }
       } else {
         Alert.alert('No route found', 'Could not find a walking route.');
       }
@@ -679,7 +714,6 @@ const MapScreen = ({ navigation }) => {
     };
 
     setReportedIncidents(prev => [...prev, report]);
-    console.log('Report submitted:', report);
   };
 
   // Add cleanup effect for expired reports
@@ -706,7 +740,6 @@ const MapScreen = ({ navigation }) => {
         accuracy: location.coords.accuracy,
         timestamp: location.timestamp,
       };
-      console.log('S.O.S Location:', logEntry);
       
       // Call Vapi API
       const response = await fetch('https://api.vapi.ai/call', {
@@ -729,7 +762,6 @@ const MapScreen = ({ navigation }) => {
       }
       
       const data = await response.json();
-      console.log('Vapi API response:', data);
       Alert.alert('S.O.S: Safest is Calling You', 'Your Trusted Contacts can now track your location for 1 hour.');
     } catch (e) {
       console.error('Error:', e);
@@ -772,7 +804,10 @@ const MapScreen = ({ navigation }) => {
     fetchRoute();
   }, [destination, region]);
 
-  console.log('MapScreen render - isLoadingLocation:', isLoadingLocation);
+  const handleTourStepChange = (stepIdx) => {
+    setTourStepIndex(stepIdx);
+  };
+
   return (
     <KeyboardAvoidingView 
       style={styles.container}
@@ -945,22 +980,34 @@ const MapScreen = ({ navigation }) => {
 
         {/* Action Buttons */}
         <View style={styles.actionButtonsContainer}>
-          <TouchableOpacity 
-            style={[styles.actionButton, travelBuddyMode && styles.activeButton]}
+          <TouchableOpacity
+            ref={travelBuddyRef}
+            style={[
+              styles.actionButton,
+              showTour && tourStepIndex === 0 && styles.tourHighlight,
+            ]}
             onPress={handleTravelBuddyPress}
           >
             <Text style={styles.actionButtonText}>Travel Buddy</Text>
           </TouchableOpacity>
-          
-          <TouchableOpacity 
-            style={styles.reportButton}
+          <TouchableOpacity
+            ref={reportRef}
+            style={[
+              styles.actionButton,
+              styles.reportButton,
+              showTour && tourStepIndex === 1 && styles.tourHighlight,
+            ]}
             onPress={() => setShowReportModal(true)}
           >
             <Text style={styles.actionButtonText}>Report</Text>
           </TouchableOpacity>
-          
-          <TouchableOpacity 
-            style={styles.sosButton}
+          <TouchableOpacity
+            ref={sosRef}
+            style={[
+              styles.actionButton,
+              styles.sosButton,
+              showTour && tourStepIndex === 2 && styles.tourHighlight,
+            ]}
             onPress={handleSOSPress}
           >
             <Text style={styles.actionButtonText}>SOS</Text>
@@ -972,6 +1019,13 @@ const MapScreen = ({ navigation }) => {
         visible={showReportModal}
         onClose={() => setShowReportModal(false)}
         onSubmit={handleReportSubmit}
+      />
+
+      <SpotlightTour
+        steps={tourSteps}
+        visible={showTour}
+        onClose={handleTourComplete}
+        onStepChange={handleTourStepChange}
       />
     </KeyboardAvoidingView>
   );
@@ -1122,8 +1176,8 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   actionButton: {
-    backgroundColor: '#8000FF', // Purple for Travel Buddy button (inactive)
-    padding: 15,
+    backgroundColor: '#8000FF',
+    padding: 12,
     borderRadius: 30,
     elevation: 5,
     shadowColor: '#000',
@@ -1135,27 +1189,9 @@ const styles = StyleSheet.create({
   },
   reportButton: {
     backgroundColor: '#0000cc',
-    padding: 15,
-    borderRadius: 30,
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    minWidth: 100,
-    alignItems: 'center',
   },
   sosButton: {
     backgroundColor: '#ff0000',
-    padding: 15,
-    borderRadius: 30,
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    minWidth: 100,
-    alignItems: 'center',
   },
   actionButtonText: {
     color: '#fff',
@@ -1252,6 +1288,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#666',
     fontWeight: 'bold',
+  },
+  tourHighlight: {
+    borderWidth: 3, // Reduced from 10 to 3
+    borderColor: '#FFD600',
+    borderRadius: 30,
+    zIndex: 2,
   },
 });
 

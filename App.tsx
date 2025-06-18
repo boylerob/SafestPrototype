@@ -41,7 +41,6 @@ function withSOSFooter(Component) {
           accuracy: location.coords.accuracy,
           timestamp: location.timestamp,
         };
-        console.log('S.O.S Location:', logEntry);
         
         // Call Vapi API
         const response = await fetch('https://api.vapi.ai/call', {
@@ -64,7 +63,6 @@ function withSOSFooter(Component) {
         }
         
         const data = await response.json();
-        console.log('Vapi API response:', data);
         Alert.alert('S.O.S Triggered', 'An AI agent is calling you now.');
       } catch (e) {
         console.error('Error:', e);
@@ -124,7 +122,6 @@ function ReportingScreen() {
       category,
       timestamp: Date.now(),
     };
-    console.log('Report submitted:', report);
     setThankYou(true);
   };
   return (
@@ -156,6 +153,7 @@ export default function App() {
     const clearStorage = async () => {
       try {
         await AsyncStorage.removeItem('hasSeenWelcome');
+        await AsyncStorage.removeItem('hasSeenSpotlightTour');
         console.log('AsyncStorage cleared for testing');
       } catch (error) {
         console.error('Error clearing AsyncStorage:', error);

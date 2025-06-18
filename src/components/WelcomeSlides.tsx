@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Animated,
   Platform,
+  ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -27,7 +28,9 @@ const slides = [
   },
   {
     id: 3,
-    text: "This is our NYC walking prototype.\n\nIt uses AI and real-time data to design the safest walking routes, provides live risk alerts to communities, and gives women discreet but powerful tools tailored to how they naturally navigate and travel already; turning data into predictive safety guidance and arming women with life-saving technology.",
+    text: "This is our ",
+    boldText: "NYC walking",
+    textAfter: " prototype.\n\nIt uses AI and real-time data to design the safest walking routes, provides live risk alerts to communities, and gives women discreet but powerful tools tailored to how they naturally navigate and travel already; turning data into predictive safety guidance and arming women with life-saving technology.",
   },
 ];
 
@@ -38,10 +41,16 @@ interface WelcomeSlidesProps {
 const WelcomeSlides: React.FC<WelcomeSlidesProps> = ({ onComplete }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = new Animated.Value(0);
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const handleNext = async () => {
     if (currentIndex < slides.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+      const nextIndex = currentIndex + 1;
+      setCurrentIndex(nextIndex);
+      scrollViewRef.current?.scrollTo({
+        x: nextIndex * width,
+        animated: true,
+      });
     } else {
       await AsyncStorage.setItem('hasSeenWelcome', 'true');
       onComplete();
@@ -73,9 +82,21 @@ const WelcomeSlides: React.FC<WelcomeSlidesProps> = ({ onComplete }) => {
         )}
         {slide.boldText ? (
           <View style={styles.textContainer}>
-            <Text style={styles.text}>{slide.text}</Text>
-            <Text style={styles.boldText}>{slide.boldText}</Text>
-            <Text style={styles.text}>{slide.textAfter}</Text>
+            {slide.id === 3 ? (
+              <Text style={styles.text}>
+                This is our <Text style={styles.boldText}>NYC walking</Text> prototype.
+                {'\n\n'}
+                It uses AI and real-time data to design the safest walking routes, provides live risk alerts to communities, and gives women discreet but powerful tools tailored to how they naturally navigate and travel already; turning data into predictive safety guidance and arming women with life-saving technology.
+              </Text>
+            ) : (
+              <>
+                <Text style={styles.text}>{slide.text}</Text>
+                <Text style={styles.boldText}>{slide.boldText}</Text>
+                {slide.textAfter && (
+                  <Text style={styles.text}>{slide.textAfter}</Text>
+                )}
+              </>
+            )}
           </View>
         ) : (
           <View style={styles.textContainer}>
@@ -104,6 +125,7 @@ const WelcomeSlides: React.FC<WelcomeSlidesProps> = ({ onComplete }) => {
           const newIndex = Math.round(event.nativeEvent.contentOffset.x / width);
           setCurrentIndex(newIndex);
         }}
+        ref={scrollViewRef}
       >
         {slides.map((slide, index) => renderSlide(slide, index))}
       </Animated.ScrollView>
