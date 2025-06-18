@@ -8,6 +8,7 @@ import {
   Modal,
   Animated,
 } from 'react-native';
+import SetupModal from './SetupModal';
 
 const { width, height } = Dimensions.get('window');
 
@@ -27,6 +28,7 @@ interface SpotlightTourProps {
 const SpotlightTour: React.FC<SpotlightTourProps> = ({ steps, visible, onClose, onStepChange }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [targetLayout, setTargetLayout] = useState<{ x: number; y: number; width: number; height: number } | null>(null);
+  const [showSetupModal, setShowSetupModal] = useState(false);
   const fadeAnim = new Animated.Value(0);
 
   useEffect(() => {
@@ -57,47 +59,65 @@ const SpotlightTour: React.FC<SpotlightTourProps> = ({ steps, visible, onClose, 
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      onClose();
+      // After the last step (SOS button), show setup modal
+      console.log('Setting up SOS - showing setup modal');
+      setShowSetupModal(true);
     }
   };
 
+  const handleSetupComplete = () => {
+    console.log('Setup complete - closing modals');
+    setShowSetupModal(false);
+    onClose();
+  };
+
+  // Don't render the main tour modal if setup modal is showing
   if (!visible || !targetLayout) return null;
 
   return (
-    <Modal transparent visible={visible} animationType="fade">
-      <View style={styles.container}>
-        <Animated.View style={[styles.overlay, { opacity: fadeAnim }]} />
-        
-        {/* Spotlight outline */}
-        <View
-          style={[
-            styles.spotlightContainer,
-            {
-              top: targetLayout.y - 10,
-              left: targetLayout.x - 10,
-              width: targetLayout.width + 20,
-              height: targetLayout.height + 20,
-            },
-          ]}
-        >
-          <View style={styles.spotlightInner} />
-        </View>
+    <>
+      {!showSetupModal && (
+        <Modal transparent visible={visible} animationType="fade">
+          <View style={styles.container}>
+            <Animated.View style={[styles.overlay, { opacity: fadeAnim }]} />
+            
+            {/* Spotlight outline */}
+            <View
+              style={[
+                styles.spotlightContainer,
+                {
+                  top: targetLayout.y - 10,
+                  left: targetLayout.x - 10,
+                  width: targetLayout.width + 20,
+                  height: targetLayout.height + 20,
+                },
+              ]}
+            >
+              <View style={styles.spotlightInner} />
+            </View>
 
-        {/* Content */}
-        <View style={styles.content}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.titlePrefix}>Using Safest: </Text>
-            <Text style={styles.titleSuffix}>{steps[currentStep].title.replace('Using Safest: ', '')}</Text>
+            {/* Content */}
+            <View style={styles.content}>
+              <View style={styles.titleContainer}>
+                <Text style={styles.titlePrefix}>Using Safest: </Text>
+                <Text style={styles.titleSuffix}>{steps[currentStep].title.replace('Using Safest: ', '')}</Text>
+              </View>
+              <Text style={styles.description}>{steps[currentStep].description}</Text>
+              <TouchableOpacity style={styles.button} onPress={handleNext}>
+                <Text style={styles.buttonText}>
+                  {currentStep < steps.length - 1 ? 'Next' : 'Setup SOS'}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <Text style={styles.description}>{steps[currentStep].description}</Text>
-          <TouchableOpacity style={styles.button} onPress={handleNext}>
-            <Text style={styles.buttonText}>
-              {currentStep < steps.length - 1 ? 'Next' : 'Got it!'}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </Modal>
+        </Modal>
+      )}
+
+      <SetupModal 
+        visible={showSetupModal} 
+        onComplete={handleSetupComplete}
+      />
+    </>
   );
 };
 

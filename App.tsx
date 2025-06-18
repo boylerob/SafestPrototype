@@ -29,6 +29,20 @@ function withSOSFooter(Component) {
     // Handler to log location and append to sos_log.json
     const handleSOS = async () => {
       try {
+        // Check if user has completed setup
+        const userPhoneNumber = await AsyncStorage.getItem('userPhoneNumber');
+        
+        if (!userPhoneNumber) {
+          Alert.alert(
+            'Setup Required',
+            'Please complete the SOS setup first. Go through the spotlight tour to configure your phone number.',
+            [
+              { text: 'OK', style: 'default' }
+            ]
+          );
+          return;
+        }
+
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== 'granted') {
           Alert.alert('Permission denied', 'Location permission is required for S.O.S.');
@@ -42,7 +56,7 @@ function withSOSFooter(Component) {
           timestamp: location.timestamp,
         };
         
-        // Call Vapi API
+        // Call Vapi API with user's phone number
         const response = await fetch('https://api.vapi.ai/call', {
           method: 'POST',
           headers: {
@@ -53,7 +67,7 @@ function withSOSFooter(Component) {
             assistantId: 'f69fd8dc-b5bc-4b04-8112-f35c083f8c29',
             phoneNumberId: '43b08cdc-e9c4-4325-b6f2-32cf2b019c5c',
             customer: {
-              number: '+19737181108'
+              number: userPhoneNumber
             }
           }),
         });
@@ -63,7 +77,7 @@ function withSOSFooter(Component) {
         }
         
         const data = await response.json();
-        Alert.alert('S.O.S Triggered', 'An AI agent is calling you now.');
+        Alert.alert('S.O.S: Safest is Calling You', 'An AI agent is calling you now to ensure your safety.');
       } catch (e) {
         console.error('Error:', e);
         Alert.alert('Error', 'Failed to trigger S.O.S call: ' + e.message);

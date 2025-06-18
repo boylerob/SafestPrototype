@@ -184,6 +184,7 @@ const MapScreen = ({ navigation }) => {
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const [showTour, setShowTour] = useState(false);
   const [tourStepIndex, setTourStepIndex] = useState(0); // Track current tour step
+  const [userPhoneNumber, setUserPhoneNumber] = useState('');
 
   // Refs for spotlight targets
   const travelBuddyRef = useRef(null);
@@ -726,13 +727,56 @@ const MapScreen = ({ navigation }) => {
     return () => clearInterval(cleanupInterval);
   }, []);
 
+  const toE164 = (text) => {
+    const digits = text.replace(/\D/g, '');
+    if (digits.length === 10) {
+      return `+1${digits}`;
+    }
+    if (digits.length === 11 && digits.startsWith('1')) {
+      return `+${digits}`;
+    }
+    if (digits.startsWith('+' )) {
+      return digits;
+    }
+    return '';
+  };
+
   const handleSOSPress = async () => {
     try {
+      // Check if user has completed setup
+      let userPhoneNumber = await AsyncStorage.getItem('userPhoneNumber');
+      if (!userPhoneNumber) {
+        Alert.alert(
+          'Setup Required',
+          'Please complete the SOS setup first. Go through the spotlight tour to configure your phone number.',
+          [
+            { text: 'OK', style: 'default' },
+            { 
+              text: 'Setup Now', 
+              onPress: () => {
+                setShowTour(true);
+                setTourStepIndex(0);
+              }
+            }
+          ]
+        );
+        return;
+      }
+      // Always ensure E.164
+      userPhoneNumber = toE164(userPhoneNumber);
+      if (!userPhoneNumber) {
+        Alert.alert('Invalid', 'Your phone number is not valid. Please re-enter it in setup.');
+        setShowTour(true);
+        setTourStepIndex(0);
+        return;
+      }
+
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert('Permission denied', 'Location permission is required for S.O.S.');
         return;
       }
+      
       let location = await Location.getCurrentPositionAsync({});
       const logEntry = {
         latitude: location.coords.latitude,
@@ -741,28 +785,35 @@ const MapScreen = ({ navigation }) => {
         timestamp: location.timestamp,
       };
       
-      // Call Vapi API
+      // Prepare payload
+      const payload = {
+        assistantId: 'f69fd8dc-b5bc-4b04-8112-f35c083f8c29',
+        phoneNumberId: '43b08cdc-e9c4-4325-b6f2-32cf2b019c5c',
+        customer: {
+          number: userPhoneNumber
+        }
+      };
+      console.log('SOS API payload:', payload);
+      
+      // Call Vapi API with user's phone number
       const response = await fetch('https://api.vapi.ai/call', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer 09d8ee41-d507-4e39-ac64-8a878e4c7c6b',
         },
-        body: JSON.stringify({
-          assistantId: 'f69fd8dc-b5bc-4b04-8112-f35c083f8c29',
-          phoneNumberId: '43b08cdc-e9c4-4325-b6f2-32cf2b019c5c',
-          customer: {
-            number: '+19737181108'
-          }
-        }),
+        body: JSON.stringify(payload),
       });
       
+      const responseText = await response.text();
+      console.log('SOS API response status:', response.status);
+      console.log('SOS API response body:', responseText);
+      
       if (!response.ok) {
-        throw new Error('Server error: ' + response.status);
+        throw new Error('Server error: ' + response.status + '\n' + responseText);
       }
       
-      const data = await response.json();
-      Alert.alert('S.O.S: Safest is Calling You', 'Your Trusted Contacts can now track your location for 1 hour.');
+      Alert.alert('S.O.S: Safest is Calling You', 'An AI agent is calling you now to ensure your safety.');
     } catch (e) {
       console.error('Error:', e);
       Alert.alert('Error', 'Failed to trigger S.O.S call: ' + e.message);
@@ -807,6 +858,21 @@ const MapScreen = ({ navigation }) => {
   const handleTourStepChange = (stepIdx) => {
     setTourStepIndex(stepIdx);
   };
+
+  // Load user's phone number from AsyncStorage
+  useEffect(() => {
+    const loadUserPhoneNumber = async () => {
+      try {
+        const phoneNumber = await AsyncStorage.getItem('userPhoneNumber');
+        if (phoneNumber) {
+          setUserPhoneNumber(phoneNumber);
+        }
+      } catch (error) {
+        console.error('Error loading phone number:', error);
+      }
+    };
+    loadUserPhoneNumber();
+  }, []);
 
   return (
     <KeyboardAvoidingView 
