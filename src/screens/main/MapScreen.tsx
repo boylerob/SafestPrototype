@@ -137,7 +137,13 @@ const MapLegend = () => (
 );
 
 const MapScreen = ({ navigation }) => {
-  const [region, setRegion] = useState(null); // Start as null
+  // Default to Brooklyn if user location not available yet
+  const [region, setRegion] = useState({
+    latitude: 40.682925,
+    longitude: -73.944857,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
   const [currentLocation, setCurrentLocation] = useState(null); // { latitude, longitude }
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);

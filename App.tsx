@@ -163,18 +163,7 @@ export default function App() {
   const [hasSeenWelcome, setHasSeenWelcome] = useState<boolean | null>(null);
 
   useEffect(() => {
-    // For testing: Clear AsyncStorage to show welcome screens
-    const clearStorage = async () => {
-      try {
-        await AsyncStorage.removeItem('hasSeenWelcome');
-        await AsyncStorage.removeItem('hasSeenSpotlightTour');
-        console.log('AsyncStorage cleared for testing');
-      } catch (error) {
-        console.error('Error clearing AsyncStorage:', error);
-      }
-    };
-    clearStorage();
-    
+    // Remove the AsyncStorage clearing code that was causing app to reset
     checkIfFirstLaunch();
   }, []);
 
