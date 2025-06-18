@@ -137,12 +137,7 @@ const MapLegend = () => (
 );
 
 const MapScreen = ({ navigation }) => {
-  const [region, setRegion] = useState({
-    latitude: 40.682925,  // 251 Macon Street, Brooklyn
-    longitude: -73.944857,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  });
+  const [region, setRegion] = useState(null); // Start as null
   const [currentLocation, setCurrentLocation] = useState(null); // { latitude, longitude }
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -337,23 +332,25 @@ const MapScreen = ({ navigation }) => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
-        Alert.alert('Permission Denied', 'Location permission is required for the map to work properly.');
+        Alert.alert(
+          'Location Permission Required',
+          'Location permission is required for the map to work. Please enable it in Settings > Privacy > Location Services.'
+        );
         return;
       }
       try {
-        let location = await Location.getCurrentPositionAsync({
-          accuracy: Location.Accuracy.High
-        });
+        let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
+        const userRegion = {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        };
         setCurrentLocation({
           latitude: location.coords.latitude,
           longitude: location.coords.longitude
         });
-        // setRegion({
-        //   latitude: location.coords.latitude,
-        //   longitude: location.coords.longitude,
-        //   latitudeDelta: 0.0922,
-        //   longitudeDelta: 0.0421,
-        // });
+        setRegion(userRegion); // Set region to user's location
       } catch (error) {
         console.error('Error getting location:', error);
         Alert.alert('Error', 'Could not get your current location.');
