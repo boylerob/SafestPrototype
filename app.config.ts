@@ -15,23 +15,43 @@ const config: ExpoConfig = {
   assetBundlePatterns: [
     '**/*'
   ],
+  extra: {
+    eas: {
+      projectId: '3f0e0cdf-81a2-4b65-a182-bf883ac599ad'
+    }
+  },
   ios: {
     supportsTablet: true,
-    bundleIdentifier: 'com.safest.app'
+    bundleIdentifier: 'com.safest.app',
+    buildNumber: '2',
+    infoPlist: {
+      NSLocationWhenInUseUsageDescription: 'This app needs access to your location to provide safety navigation and emergency services.',
+      NSLocationAlwaysAndWhenInUseUsageDescription: 'This app needs access to your location to provide safety navigation and emergency services.',
+      UIBackgroundModes: ['location', 'fetch'],
+      ITSAppUsesNonExemptEncryption: false
+    }
   },
   android: {
     adaptiveIcon: {
-      foregroundImage: './assets/adaptive-icon.png',
+      foregroundImage: './assets/icon.png',
       backgroundColor: '#ffffff'
     },
-    package: 'com.safest.app'
+    package: 'com.safest.app',
+    permissions: [
+      'ACCESS_COARSE_LOCATION',
+      'ACCESS_FINE_LOCATION'
+    ]
   },
   web: {
     favicon: './assets/favicon.png'
   },
   plugins: [
-    'expo-location',
-    '@react-native-firebase/app'
+    [
+      'expo-location',
+      {
+        locationAlwaysAndWhenInUsePermission: 'Allow Safest to use your location for safety navigation and emergency services.'
+      }
+    ]
   ]
 };
 
