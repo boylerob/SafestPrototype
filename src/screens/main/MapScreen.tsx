@@ -10,6 +10,7 @@ import LoadingOverlay from '../../components/LoadingOverlay';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SpotlightTour from '../../components/SpotlightTour';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState as useStateReact } from 'react';
 // import * as FileSystem from 'expo-file-system';
 // import { Asset } from 'expo-asset';
 
@@ -876,6 +877,16 @@ const MapScreen = ({ navigation }) => {
     };
     loadUserPhoneNumber();
   }, []);
+
+  if (!region) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ color: 'red', fontSize: 18, textAlign: 'center' }}>
+          Map could not be loaded. Please check your location permissions in Settings.
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <KeyboardAvoidingView 

@@ -159,23 +159,31 @@ function ReportingScreen() {
 
 const Stack = createNativeStackNavigator();
 
+const APP_VERSION = '1.0.0-2';
+
 export default function App() {
   const [hasSeenWelcome, setHasSeenWelcome] = useState<boolean | null>(null);
 
   useEffect(() => {
-    // Remove the AsyncStorage clearing code that was causing app to reset
-    checkIfFirstLaunch();
+    const checkVersionAndFirstLaunch = async () => {
+      try {
+        const storedVersion = await AsyncStorage.getItem('appVersion');
+        if (storedVersion !== APP_VERSION) {
+          // New version, force onboarding
+          await AsyncStorage.clear();
+          await AsyncStorage.setItem('appVersion', APP_VERSION);
+          setHasSeenWelcome(false);
+          return;
+        }
+        const value = await AsyncStorage.getItem('hasSeenWelcome');
+        setHasSeenWelcome(value === 'true');
+      } catch (error) {
+        console.error('Error checking first launch/version:', error);
+        setHasSeenWelcome(false);
+      }
+    };
+    checkVersionAndFirstLaunch();
   }, []);
-
-  const checkIfFirstLaunch = async () => {
-    try {
-      const value = await AsyncStorage.getItem('hasSeenWelcome');
-      setHasSeenWelcome(value === 'true');
-    } catch (error) {
-      console.error('Error checking first launch:', error);
-      setHasSeenWelcome(false);
-    }
-  };
 
   const handleWelcomeComplete = () => {
     setHasSeenWelcome(true);

@@ -23,7 +23,7 @@ const config: ExpoConfig = {
   ios: {
     supportsTablet: true,
     bundleIdentifier: 'com.safest.app',
-    buildNumber: '2',
+    buildNumber: '3',
     infoPlist: {
       NSLocationWhenInUseUsageDescription: 'This app needs access to your location to provide safety navigation and emergency services.',
       NSLocationAlwaysAndWhenInUseUsageDescription: 'This app needs access to your location to provide safety navigation and emergency services.',
