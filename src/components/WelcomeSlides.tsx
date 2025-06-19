@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Location from 'expo-location';
 
 const { width, height } = Dimensions.get('window');
 
@@ -42,6 +43,27 @@ const WelcomeSlides: React.FC<WelcomeSlidesProps> = ({ onComplete }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = new Animated.Value(0);
   const scrollViewRef = useRef<ScrollView>(null);
+
+  // Request location permissions on first slide
+  useEffect(() => {
+    const requestLocationPermission = async () => {
+      try {
+        console.log('🔍 WelcomeSlides: Requesting location permission...');
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        console.log('📍 WelcomeSlides: Location permission status:', status);
+        
+        if (status === 'granted') {
+          console.log('✅ WelcomeSlides: Location permission granted');
+        } else {
+          console.log('❌ WelcomeSlides: Location permission denied');
+        }
+      } catch (error) {
+        console.log('❌ WelcomeSlides: Error requesting location permission:', error);
+      }
+    };
+
+    requestLocationPermission();
+  }, []);
 
   const handleNext = async () => {
     if (currentIndex < slides.length - 1) {

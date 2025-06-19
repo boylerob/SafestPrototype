@@ -23,12 +23,15 @@ const config: ExpoConfig = {
   ios: {
     supportsTablet: true,
     bundleIdentifier: 'com.safest.app',
-    buildNumber: '3',
+    buildNumber: '8',
     infoPlist: {
       NSLocationWhenInUseUsageDescription: 'This app needs access to your location to provide safety navigation and emergency services.',
       NSLocationAlwaysAndWhenInUseUsageDescription: 'This app needs access to your location to provide safety navigation and emergency services.',
       UIBackgroundModes: ['location', 'fetch'],
       ITSAppUsesNonExemptEncryption: false
+    },
+    config: {
+      googleMapsApiKey: "AIzaSyA5NInDbok3Mu-WK8IIoylH1QpPTtYHyoY"
     }
   },
   android: {

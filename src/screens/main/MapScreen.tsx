@@ -187,6 +187,12 @@ const MapScreen = ({ navigation }) => {
   const [showTour, setShowTour] = useState(false);
   const [tourStepIndex, setTourStepIndex] = useState(0); // Track current tour step
   const [userPhoneNumber, setUserPhoneNumber] = useState('');
+  const [onboardingState, setOnboardingState] = useState('unknown');
+
+  // NEW: Debug states for map rendering
+  const [mapError, setMapError] = useState(null);
+  const [mapReady, setMapReady] = useState(false);
+  const [locationPermissionStatus, setLocationPermissionStatus] = useState('unknown');
 
   // Refs for spotlight targets
   const travelBuddyRef = useRef(null);
@@ -337,29 +343,88 @@ const MapScreen = ({ navigation }) => {
 
   useEffect(() => {
     (async () => {
+      console.log('🔍 MapScreen: Starting location setup...');
+      
+      // First, check if we have a cached location from early initialization
+      try {
+        const cachedLocationStr = await AsyncStorage.getItem('cachedLocation');
+        if (cachedLocationStr) {
+          const cachedLocation = JSON.parse(cachedLocationStr);
+          const cacheAge = Date.now() - cachedLocation.timestamp;
+          
+          // Use cached location if it's less than 5 minutes old
+          if (cacheAge < 5 * 60 * 1000) {
+            console.log('✅ MapScreen: Using cached location:', cachedLocation);
+            
+            const userRegion = {
+              latitude: cachedLocation.latitude,
+              longitude: cachedLocation.longitude,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            };
+            
+            setCurrentLocation({
+              latitude: cachedLocation.latitude,
+              longitude: cachedLocation.longitude
+            });
+            setRegion(userRegion);
+            console.log('✅ MapScreen: Region set from cached location');
+            return; // Exit early, no need to request new location
+          } else {
+            console.log('⏰ MapScreen: Cached location too old, requesting fresh location');
+          }
+        }
+      } catch (error) {
+        console.log('❌ MapScreen: Error reading cached location:', error);
+      }
+      
       let { status } = await Location.requestForegroundPermissionsAsync();
+      console.log('🔍 MapScreen: Location permission status:', status);
+      setLocationPermissionStatus(status);
+      
       if (status !== 'granted') {
+        console.log('❌ MapScreen: Location permission denied');
         Alert.alert(
           'Location Permission Required',
           'Location permission is required for the map to work. Please enable it in Settings > Privacy > Location Services.'
         );
         return;
       }
+      
       try {
+        console.log('🔍 MapScreen: Getting current position...');
         let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
+        console.log('✅ MapScreen: Got location:', {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          accuracy: location.coords.accuracy
+        });
+        
         const userRegion = {
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         };
+        
+        console.log('🔍 MapScreen: Setting region to user location:', userRegion);
         setCurrentLocation({
           latitude: location.coords.latitude,
           longitude: location.coords.longitude
         });
         setRegion(userRegion); // Set region to user's location
+        console.log('✅ MapScreen: Region and current location set successfully');
+        
+        // Update cached location
+        await AsyncStorage.setItem('cachedLocation', JSON.stringify({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          timestamp: Date.now()
+        }));
+        
       } catch (error) {
-        console.error('Error getting location:', error);
+        console.error('❌ MapScreen: Error getting location:', error);
+        setMapError(`Location error: ${error.message}`);
         Alert.alert('Error', 'Could not get your current location.');
       }
     })();
@@ -437,8 +502,19 @@ const MapScreen = ({ navigation }) => {
         setSafetyIncidents(data);
 
         // Fetch route and set routeCoords immediately
-        const origin = `${region.latitude},${region.longitude}`;
+        let origin;
+        if (currentLocation) {
+          origin = `${currentLocation.latitude},${currentLocation.longitude}`;
+          console.log('🔍 MapScreen: Using user location for suggestion route:', origin);
+        } else {
+          // Fallback to region center if no current location
+          origin = `${region.latitude},${region.longitude}`;
+          console.log('🔍 MapScreen: Using region center as fallback for suggestion route:', origin);
+        }
+        
         const dest = `${loc.lat},${loc.lng}`;
+        console.log('🔍 MapScreen: Suggestion route API call:', { origin, dest });
+        
         const directionsUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${dest}&mode=walking&key=${config.googleMaps.apiKey}`;
         const directionsRes = await fetch(directionsUrl);
         const directionsJson = await directionsRes.json();
@@ -506,11 +582,20 @@ const MapScreen = ({ navigation }) => {
     if (!destination) return;
     setLoading(true);
     try {
-      // Hard-coded origin: 251 Macon Street, Brooklyn NY 11216
-      const origin = '40.682925,-73.944857';
+      // Use user's current location instead of hardcoded address
+      let origin;
+      if (currentLocation) {
+        origin = `${currentLocation.latitude},${currentLocation.longitude}`;
+        console.log('🔍 MapScreen: Using user location for directions:', origin);
+      } else {
+        // Fallback to region center if no current location
+        origin = `${region.latitude},${region.longitude}`;
+        console.log('🔍 MapScreen: Using region center as fallback for directions:', origin);
+      }
+      
       const dest = `${destination.lat},${destination.lng}`;
-      // Alert.alert('Directions API call', `Origin: ${origin}\nDestination: ${dest}`);
-      // console.log('Directions API call:', { origin, dest });
+      console.log('🔍 MapScreen: Directions API call:', { origin, dest });
+      
       const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${dest}&mode=walking&key=${config.googleMaps.apiKey}`;
       const res = await fetch(url);
       const json = await res.json();
@@ -837,8 +922,19 @@ const MapScreen = ({ navigation }) => {
 
     const fetchRoute = async () => {
       try {
-        const origin = `${region.latitude},${region.longitude}`;
+        let origin;
+        if (currentLocation) {
+          origin = `${currentLocation.latitude},${currentLocation.longitude}`;
+          console.log('🔍 MapScreen: Using user location for auto route:', origin);
+        } else {
+          // Fallback to region center if no current location
+          origin = `${region.latitude},${region.longitude}`;
+          console.log('🔍 MapScreen: Using region center as fallback for auto route:', origin);
+        }
+        
         const dest = `${destination.lat},${destination.lng}`;
+        console.log('🔍 MapScreen: Auto route API call:', { origin, dest });
+        
         const directionsUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${dest}&mode=walking&key=${config.googleMaps.apiKey}`;
         const directionsRes = await fetch(directionsUrl);
         const directionsJson = await directionsRes.json();
@@ -857,7 +953,7 @@ const MapScreen = ({ navigation }) => {
     };
 
     fetchRoute();
-  }, [destination, region]);
+  }, [destination, region, currentLocation]);
 
   const handleTourStepChange = (stepIdx) => {
     setTourStepIndex(stepIdx);
@@ -878,15 +974,58 @@ const MapScreen = ({ navigation }) => {
     loadUserPhoneNumber();
   }, []);
 
-  if (!region) {
+  // Load onboarding state
+  useEffect(() => {
+    const loadOnboardingState = async () => {
+      try {
+        const version = await AsyncStorage.getItem('appVersion');
+        const hasSeenWelcome = await AsyncStorage.getItem('hasSeenWelcome');
+        setOnboardingState(`version: ${version}, hasSeenWelcome: ${hasSeenWelcome}`);
+      } catch (e) {
+        setOnboardingState('error');
+      }
+    };
+    loadOnboardingState();
+  }, []);
+
+  // NEW: Bulletproof fallback UI logic
+  useEffect(() => {
+    if (!mapReady && !mapError) {
+      const timeout = setTimeout(() => {
+        if (!mapReady) {
+          setMapError('Map failed to load within 10 seconds. Please check your location permissions and internet connection.');
+        }
+      }, 10000);
+      return () => clearTimeout(timeout);
+    }
+  }, [mapReady, mapError]);
+
+  // NEW: Log region changes
+  useEffect(() => {
+    console.log('🔍 MapScreen: Region state changed:', region);
+  }, [region]);
+
+  // NEW: Log current location changes
+  useEffect(() => {
+    console.log('🔍 MapScreen: Current location changed:', currentLocation);
+  }, [currentLocation]);
+
+  if (mapError || !region || !currentLocation) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ color: 'red', fontSize: 18, textAlign: 'center' }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f0f0f0' }}>
+        <Text style={{ color: 'red', fontSize: 18, textAlign: 'center', marginBottom: 20 }}>
           Map could not be loaded. Please check your location permissions in Settings.
+        </Text>
+        <Text style={{ color: '#666', fontSize: 14, textAlign: 'center' }}>
+          Location Permission Status: {locationPermissionStatus}
         </Text>
       </View>
     );
   }
+
+  console.log('🔍 MapScreen: Rendering with region:', region);
+  console.log('🔍 MapScreen: Current location:', currentLocation);
+  console.log('🔍 MapScreen: Map error state:', mapError);
 
   return (
     <KeyboardAvoidingView 
@@ -898,6 +1037,37 @@ const MapScreen = ({ navigation }) => {
         visible={isLoadingLocation} 
         message={loadingMessage}
       />
+      
+      {/* Debug overlay for development */}
+      {__DEV__ && (
+        <View style={styles.debugOverlay}>
+          <Text style={styles.debugText}>Region: {JSON.stringify(region)}</Text>
+          <Text style={styles.debugText}>Location: {currentLocation ? JSON.stringify(currentLocation) : 'null'}</Text>
+          <Text style={styles.debugText}>Permission: {locationPermissionStatus}</Text>
+          <Text style={styles.debugText}>Map Ready: {mapReady ? 'Yes' : 'No'}</Text>
+          {mapError && <Text style={[styles.debugText, { color: 'red' }]}>Error: {mapError}</Text>}
+        </View>
+      )}
+      
+      {/* Fallback UI if map fails to load */}
+      {mapError && !mapReady && (
+        <View style={styles.mapFallback}>
+          <Text style={styles.fallbackTitle}>Map Loading Issue</Text>
+          <Text style={styles.fallbackText}>{mapError}</Text>
+          <TouchableOpacity 
+            style={styles.retryButton}
+            onPress={() => {
+              console.log('🔄 MapScreen: Retrying map load...');
+              setMapError(null);
+              setMapReady(false);
+              setMapKey(prev => prev + 1);
+            }}
+          >
+            <Text style={styles.retryButtonText}>Retry</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+      
       <MapView
         ref={mapRef}
         key={mapKey}
@@ -906,6 +1076,14 @@ const MapScreen = ({ navigation }) => {
         region={region}
         showsUserLocation={true}
         showsMyLocationButton={true}
+        onMapReady={() => {
+          console.log('✅ MapScreen: Map is ready');
+          setMapReady(true);
+          setMapError(null);
+        }}
+        onRegionChangeComplete={(newRegion) => {
+          console.log('🔍 MapScreen: Region changed to:', newRegion);
+        }}
       >
         {currentLocation && (
           <Marker
@@ -1374,6 +1552,52 @@ const styles = StyleSheet.create({
     borderColor: '#FFD600',
     borderRadius: 30,
     zIndex: 2,
+  },
+  debugOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  debugText: {
+    color: '#fff',
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  mapFallback: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  fallbackTitle: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  fallbackText: {
+    color: '#fff',
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  retryButton: {
+    backgroundColor: '#0000cc',
+    padding: 12,
+    borderRadius: 8,
+  },
+  retryButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

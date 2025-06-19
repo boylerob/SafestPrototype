@@ -16,6 +16,47 @@ if (typeof require !== 'undefined' && Platform.OS === 'web') {
   } catch {}
 }
 
+// Early location initialization - start GPS immediately when app launches
+const initializeLocation = async () => {
+  try {
+    console.log('🔍 Starting early location initialization...');
+    
+    // Request permissions immediately
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    console.log('📍 Location permission status:', status);
+    
+    if (status === 'granted') {
+      // Start getting location immediately (don't wait for timeout)
+      console.log('📍 Starting location request...');
+      const location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.High,
+      });
+      
+      console.log('📍 Location obtained:', {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        accuracy: location.coords.accuracy
+      });
+      
+      // Store location for later use
+      await AsyncStorage.setItem('cachedLocation', JSON.stringify({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        timestamp: Date.now()
+      }));
+      
+      console.log('📍 Location cached successfully');
+    } else {
+      console.log('❌ Location permission denied');
+    }
+  } catch (error) {
+    console.log('❌ Early location initialization failed:', error.message);
+  }
+};
+
+// Start location initialization immediately
+initializeLocation();
+
 function SOSFooterButton({ onPress }) {
   return (
     <TouchableOpacity style={styles.sosFooterButton} onPress={onPress} accessibilityLabel="Discreet SOS emergency">
@@ -159,7 +200,7 @@ function ReportingScreen() {
 
 const Stack = createNativeStackNavigator();
 
-const APP_VERSION = '1.0.0-2';
+const APP_VERSION = '1.0.0-3';
 
 export default function App() {
   const [hasSeenWelcome, setHasSeenWelcome] = useState<boolean | null>(null);
