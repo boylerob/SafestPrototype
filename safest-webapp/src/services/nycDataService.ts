@@ -13,6 +13,21 @@ export interface SafetyIncident {
   timestamp: string;
 }
 
+interface SocrataIncident {
+  latitude?: string;
+  longitude?: string;
+  cad_number?: string;
+  incident_number?: string;
+  final_call_type?: string;
+  radio_code?: string;
+  entry_date_time?: string;
+  dispatch_date_time?: string;
+  cmplnt_num?: string;
+  ofns_desc?: string;
+  pd_desc?: string;
+  cmplnt_fr_dt?: string;
+}
+
 export interface LocationSearchResult {
   features: Array<{
     properties: {
@@ -39,12 +54,7 @@ class NYCDataService {
     return NYCDataService.instance;
   }
 
-  async getSafetyIncidents(region?: {
-    latitude: number;
-    longitude: number;
-    latitudeDelta: number;
-    longitudeDelta: number;
-  }): Promise<SafetyIncident[]> {
+  async getSafetyIncidents(): Promise<SafetyIncident[]> {
     try {
       const oneYearAgo = new Date();
       oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
@@ -72,35 +82,35 @@ class NYCDataService {
       ]);
 
       // Map 911 calls
-      const calls = callsResp.data.map((incident: any) => {
-        const lat = parseFloat(incident.latitude);
-        const lng = parseFloat(incident.longitude);
+      const calls = callsResp.data.map((incident: SocrataIncident) => {
+        const lat = parseFloat(incident.latitude || '');
+        const lng = parseFloat(incident.longitude || '');
         if (isNaN(lat) || isNaN(lng)) return null;
         return {
           id: incident.cad_number || incident.incident_number || Math.random().toString(),
           latitude: lat,
           longitude: lng,
-          type: incident.final_call_type || incident.radio_code,
+          type: incident.final_call_type || incident.radio_code || '',
           description: incident.radio_code || '',
           timestamp: incident.entry_date_time || incident.dispatch_date_time || '',
         };
-      }).filter(Boolean);
+      }).filter(Boolean) as SafetyIncident[];
       console.log('911 calls count:', calls.length);
 
       // Map NYPD complaints
-      const complaints = complaintsResp.data.map((incident: any) => {
-        const lat = parseFloat(incident.latitude);
-        const lng = parseFloat(incident.longitude);
+      const complaints = complaintsResp.data.map((incident: SocrataIncident) => {
+        const lat = parseFloat(incident.latitude || '');
+        const lng = parseFloat(incident.longitude || '');
         if (isNaN(lat) || isNaN(lng)) return null;
         return {
-          id: incident.cmplnt_num,
+          id: incident.cmplnt_num || '',
           latitude: lat,
           longitude: lng,
-          type: incident.ofns_desc,
-          description: incident.pd_desc,
-          timestamp: incident.cmplnt_fr_dt,
+          type: incident.ofns_desc || '',
+          description: incident.pd_desc || '',
+          timestamp: incident.cmplnt_fr_dt || '',
         };
-      }).filter(Boolean);
+      }).filter(Boolean) as SafetyIncident[];
       console.log('NYPD complaints count:', complaints.length);
 
       // Combine both sources
@@ -114,7 +124,7 @@ class NYCDataService {
     } catch (error: unknown) {
       console.error('Error fetching safety incidents:', error);
       if (error && typeof error === 'object' && 'response' in error) {
-        console.error('Error response:', (error as any).response?.data);
+        console.error('Error response:', (error as { response?: { data?: unknown } }).response?.data);
       }
       return [];
     }
@@ -135,7 +145,7 @@ class NYCDataService {
   }
 
   // Get static GeoJSON data for NYC blocks
-  async getNYCBlocks(): Promise<any> {
+  async getNYCBlocks(): Promise<GeoJSON.FeatureCollection> {
     try {
       // For now, return a basic NYC boundary
       // In production, you'd load the actual GeoJSON files
