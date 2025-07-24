@@ -17,6 +17,6 @@ export const config = {
     apiKey: 'AIzaSyA5NInDbok3Mu-WK8IIoylH1QpPTtYHyoY'
   },
   mapbox: {
-    accessToken: 'pk.eyJ1Ijoic2FmZXN0LWFwcCIsImEiOiJjbXh4eHh4eHh4eHh4In0.example' // You'll need to replace this with your actual Mapbox token
+    accessToken: 'pk.eyJ1IjoiYm95bGVyb2IiLCJhIjoiY21kaGxsNDI2MDMwbTJpb2E2cHQwYWRkcSJ9.XrEwJ0Y1hXdxCRthmcbAgg'
   }
 }; 
