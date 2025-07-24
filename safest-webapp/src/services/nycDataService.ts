@@ -59,7 +59,8 @@ class NYCDataService {
       const daysAgo = 180;
       const startDate = new Date();
       startDate.setDate(startDate.getDate() - daysAgo);
-      const socrataDate = startDate.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+      // Socrata expects full ISO format for datetime fields
+      const socrataDate = startDate.toISOString().split('T')[0] + 'T00:00:00.000';
 
       console.log('Fetching NYPD Calls for Service (Last 180 Days) from date:', socrataDate);
       console.log('Using APP_TOKEN:', APP_TOKEN);
@@ -72,10 +73,20 @@ class NYCDataService {
             $limit: 5000,
           },
           headers: { 'X-App-Token': APP_TOKEN },
+        }).catch((err) => {
+          // If the date filter fails, fallback to just lat/lon filter
+          console.warn('911 calls date filter failed, falling back to no date filter');
+          return axios.get(`${SOCRATA_BASE_URL}/n2zq-pubd.json`, {
+            params: {
+              $where: `latitude IS NOT NULL AND longitude IS NOT NULL`,
+              $limit: 5000,
+            },
+            headers: { 'X-App-Token': APP_TOKEN },
+          });
         }),
         axios.get(`${SOCRATA_BASE_URL}/5uac-w243.json`, {
           params: {
-            $where: `cmplnt_fr_dt >= '${socrataDate}' AND latitude IS NOT NULL AND longitude IS NOT NULL`,
+            $where: `cmplnt_fr_dt >= '${socrataDate.split('T')[0]}' AND latitude IS NOT NULL AND longitude IS NOT NULL`,
             $limit: 5000,
           },
           headers: { 'X-App-Token': APP_TOKEN },
