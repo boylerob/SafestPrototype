@@ -4,6 +4,26 @@ Safest is an AI-powered safety navigation app designed for women to navigate pub
 
 ---
 
+## New: WebApp for Investors
+
+- As of commit `cecb4f6`, this repo now includes a modern, investor-facing webapp in the `safest-webapp/` directory.
+- The original mobile prototype and backend remain fully accessible and unchanged.
+- Both projects can be developed and deployed in parallel.
+
+---
+
+## Rollback Instructions
+
+If you need to revert to this stable state (webapp and mobile prototype both working):
+
+```bash
+git reset --hard cecb4f6
+git checkout -b backup-branch cecb4f6 # to create a branch from this point
+git checkout main # to return to latest
+```
+
+---
+
 ## Features
 
 - Real-time smart safety maps
@@ -11,15 +31,41 @@ Safest is an AI-powered safety navigation app designed for women to navigate pub
 - Discreet SOS emergency triggers
 - Trusted contact notifications
 - Community-based reporting system
+- **Investor WebApp:** Real-time safety map, analytics, and demo UI (see `safest-webapp/`)
 
 ---
 
 ## Platform Overview
 
-- Built using **React Native + Expo**
+- Built using **React Native + Expo** (mobile)
+- **Next.js + Mapbox** (webapp)
 - Backend powered by **Firebase**
 - Data ingested via **Node.js** using Google Cloud Functions
 - Safety logic & routing powered by **Gemini AI**
+
+---
+
+## Folder Structure
+
+```
+SafestPrototype/
+├── safest-webapp/         # Investor-facing webapp (Next.js)
+├── src/                   # Mobile app source
+├── sosCall/               # Backend/serverless functions
+├── assets/                # Data and images
+├── docs/                  # Documentation
+├── ...                    # Other project files
+```
+
+---
+
+## Getting Started
+
+1. Clone the repo
+2. Run `npm install` in root and backend directories
+3. Use `expo start` to launch the mobile preview
+4. See `safest-webapp/README.md` for webapp setup
+5. Follow API setup instructions below
 
 ---
 
@@ -57,56 +103,6 @@ npm install @google/generative-ai
 ```env
 GEMINI_API_KEY=your_api_key_here
 ```
-
----
-
-## Folder Structure
-```
-SafestApp/
-├── ios/                         
-├── backend/                     
-├── data_pipeline/               
-├── ai/                          
-├── assets/                      
-├── tests/                       
-├── docs/                        
-└── README.md
-```
-
----
-
-## Getting Started
-
-1. Clone the repo
-2. Run `npm install` in root and backend directories
-3. Use `expo start` to launch the mobile preview
-4. Follow API setup instructions above
-
-## Git Rollback Instructions
-
-If you need to revert to the working SOS button state (commit hash: c21a339), use one of these commands:
-
-1. To completely reset to the working state (discards all changes):
-```bash
-git reset --hard c21a339
-```
-
-2. To create a new branch from the working state:
-```bash
-git checkout -b backup-branch c21a339
-```
-
-3. To temporarily view the working state without changing anything:
-```bash
-git checkout c21a339
-```
-
-To return to the latest version after checking out the old version:
-```bash
-git checkout main
-```
-
-Note: The commit hash `c21a339` represents the working state with the SOS button and Vapi integration. This is your "safe point" that you can always return to if needed.
 
 ---
 

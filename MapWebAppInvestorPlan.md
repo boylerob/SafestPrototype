@@ -19,6 +19,24 @@ Transform the existing React Native map functionality into a compelling web appl
 - ✅ Working webapp with NYC map
 - ✅ Basic data fetching from existing APIs
 - ✅ Development environment ready for iteration
+- ✅ Successfully integrated and committed to [GitHub repo](https://github.com/boylerob/SafestPrototype) at commit `cecb4f6` (rollback safe point)
+
+---
+
+### Rollback Instructions
+
+If you need to revert to this stable state (webapp and mobile prototype both working):
+
+```bash
+git reset --hard cecb4f6
+git checkout -b backup-branch cecb4f6 # to create a branch from this point
+git checkout main # to return to latest
+```
+
+---
+
+## Next: Phase 2 - Data Integration & Visualization
+(See plan above for details)
 
 ---
 
