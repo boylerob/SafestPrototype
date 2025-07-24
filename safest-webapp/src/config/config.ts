@@ -1,0 +1,22 @@
+// Configuration for Safest WebApp
+export const config = {
+  firebase: {
+    apiKey: "AIzaSyDLmlUY8q-p_n_hR_mPmEiUmgpQwIBUv8Q",
+    authDomain: "safest-prototype.firebaseapp.com",
+    projectId: "safest-prototype",
+    storageBucket: "safest-prototype.firebasestorage.app",
+    messagingSenderId: "227485982521",
+    appId: "1:227485982521:web:527de4217ea416edf652e8",
+    measurementId: "G-GTZVGDZGZF"
+  },
+  socrata: {
+    appToken: 'n2PZFq0XnEDLLRo0IIrw7sSHs',
+    appSecret: '2cfjqd2keruw1w5yet4eai6aehlacgoj6t7gj5gbb3hqpnlo2f'
+  },
+  googleMaps: {
+    apiKey: 'AIzaSyA5NInDbok3Mu-WK8IIoylH1QpPTtYHyoY'
+  },
+  mapbox: {
+    accessToken: 'pk.eyJ1Ijoic2FmZXN0LWFwcCIsImEiOiJjbXh4eHh4eHh4eHh4In0.example' // You'll need to replace this with your actual Mapbox token
+  }
+}; 
