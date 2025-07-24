@@ -56,34 +56,23 @@ class NYCDataService {
 
   async getSafetyIncidents(): Promise<SafetyIncident[]> {
     try {
-      const daysAgo = 180;
+      const daysAgo = 365;
       const startDate = new Date();
       startDate.setDate(startDate.getDate() - daysAgo);
-      // Format: YYYY-MM-DDT00:00:00 (no milliseconds)
       const datePart = startDate.toISOString().split('T')[0];
       const socrataDate = `${datePart}T00:00:00`;
 
-      console.log('Fetching NYPD Calls for Service (Last 180 Days) from date:', socrataDate);
+      console.log('Fetching NYPD Calls for Service (Last 1 Year) from date:', socrataDate);
       console.log('Using APP_TOKEN:', APP_TOKEN);
       
       // Fetch both datasets in parallel
       const [callsResp, complaintsResp] = await Promise.all([
         axios.get(`${SOCRATA_BASE_URL}/n2zq-pubd.json`, {
           params: {
-            $where: `latitude IS NOT NULL AND longitude IS NOT NULL AND entry_date_time >= '${socrataDate}'`,
+            $where: `latitude IS NOT NULL AND longitude IS NOT NULL`,
             $limit: 5000,
           },
           headers: { 'X-App-Token': APP_TOKEN },
-        }).catch((err) => {
-          // If the date filter fails, fallback to just lat/lon filter
-          console.warn('911 calls date filter failed, falling back to no date filter');
-          return axios.get(`${SOCRATA_BASE_URL}/n2zq-pubd.json`, {
-            params: {
-              $where: `latitude IS NOT NULL AND longitude IS NOT NULL`,
-              $limit: 5000,
-            },
-            headers: { 'X-App-Token': APP_TOKEN },
-          });
         }),
         axios.get(`${SOCRATA_BASE_URL}/5uac-w243.json`, {
           params: {
