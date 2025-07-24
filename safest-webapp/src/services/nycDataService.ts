@@ -56,18 +56,19 @@ class NYCDataService {
 
   async getSafetyIncidents(): Promise<SafetyIncident[]> {
     try {
-      const oneYearAgo = new Date();
-      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-      const socrataDate = oneYearAgo.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+      const daysAgo = 180;
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - daysAgo);
+      const socrataDate = startDate.toISOString().split('T')[0]; // Format: YYYY-MM-DD
 
-      console.log('Fetching NYPD Calls for Service (Year to Date) from date:', socrataDate);
+      console.log('Fetching NYPD Calls for Service (Last 180 Days) from date:', socrataDate);
       console.log('Using APP_TOKEN:', APP_TOKEN);
       
       // Fetch both datasets in parallel
       const [callsResp, complaintsResp] = await Promise.all([
         axios.get(`${SOCRATA_BASE_URL}/n2zq-pubd.json`, {
           params: {
-            $where: `latitude IS NOT NULL AND longitude IS NOT NULL`,
+            $where: `latitude IS NOT NULL AND longitude IS NOT NULL AND entry_date_time >= '${socrataDate}'`,
             $limit: 5000,
           },
           headers: { 'X-App-Token': APP_TOKEN },
