@@ -7,7 +7,7 @@ import { config } from '../config/config';
 import NYCDataService, { SafetyIncident } from '../services/nycDataService';
 
 // Set Mapbox access token
-mapboxgl.accessToken = config.mapbox.accessToken;
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || config.mapbox.accessToken;
 
 interface SafetyMapProps {
   className?: string;
