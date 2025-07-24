@@ -60,6 +60,25 @@ class NYCDataService {
       oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
       const socrataDate = oneYearAgo.toISOString().split('T')[0]; // Format: YYYY-MM-DD
 
+      // Key safety categories to include
+      const KEY_CATEGORIES = [
+        'ASSAULT 3 & RELATED OFFENSES',
+        'FELONY ASSAULT',
+        'ROBBERY',
+        'BURGLARY',
+        'GRAND LARCENY',
+        'GRAND LARCENY OF MOTOR VEHICLE',
+        'SEX CRIMES',
+        'RAPE',
+        'MURDER & NON-NEGL. MANSLAUGHTER',
+        'DANGEROUS WEAPONS',
+        'DANGEROUS DRUGS',
+        'HARRASSMENT 2',
+        'CRIMINAL TRESPASS',
+        'KIDNAPPING & RELATED OFFENSES',
+        'ARSON',
+      ];
+
       console.log('Fetching NYPD Calls for Service (Year to Date) from date:', socrataDate);
       console.log('Using APP_TOKEN:', APP_TOKEN);
       
@@ -81,7 +100,7 @@ class NYCDataService {
         })
       ]);
 
-      // Map 911 calls
+      // Map 911 calls (no filtering for now)
       const calls = callsResp.data.map((incident: SocrataIncident) => {
         const lat = parseFloat(incident.latitude || '');
         const lng = parseFloat(incident.longitude || '');
@@ -97,21 +116,26 @@ class NYCDataService {
       }).filter(Boolean) as SafetyIncident[];
       console.log('911 calls count:', calls.length);
 
-      // Map NYPD complaints
-      const complaints = complaintsResp.data.map((incident: SocrataIncident) => {
-        const lat = parseFloat(incident.latitude || '');
-        const lng = parseFloat(incident.longitude || '');
-        if (isNaN(lat) || isNaN(lng)) return null;
-        return {
-          id: incident.cmplnt_num || '',
-          latitude: lat,
-          longitude: lng,
-          type: incident.ofns_desc || '',
-          description: incident.pd_desc || '',
-          timestamp: incident.cmplnt_fr_dt || '',
-        };
-      }).filter(Boolean) as SafetyIncident[];
-      console.log('NYPD complaints count:', complaints.length);
+      // Map and filter NYPD complaints by key categories
+      const complaints = complaintsResp.data
+        .filter((incident: SocrataIncident) =>
+          incident.ofns_desc && KEY_CATEGORIES.includes(incident.ofns_desc)
+        )
+        .map((incident: SocrataIncident) => {
+          const lat = parseFloat(incident.latitude || '');
+          const lng = parseFloat(incident.longitude || '');
+          if (isNaN(lat) || isNaN(lng)) return null;
+          return {
+            id: incident.cmplnt_num || '',
+            latitude: lat,
+            longitude: lng,
+            type: incident.ofns_desc || '',
+            description: incident.pd_desc || '',
+            timestamp: incident.cmplnt_fr_dt || '',
+          };
+        })
+        .filter(Boolean) as SafetyIncident[];
+      console.log('Filtered NYPD complaints count:', complaints.length);
 
       // Combine both sources
       const incidents = [...calls, ...complaints];
