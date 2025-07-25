@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import SafetyMap from '../components/SafetyMap';
-import ClusteringService from '../services/clusteringService';
+import ClusteringService, { ClusteringData } from '../services/clusteringService';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [clusteringData, setClusteringData] = useState<any>(null);
+  const [clusteringData, setClusteringData] = useState<ClusteringData | null>(null);
 
   useEffect(() => {
     const loadClusteringData = async () => {

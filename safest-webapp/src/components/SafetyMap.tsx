@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { config } from '../config/config';
-import ClusteringService, { Cluster, ClusteringData } from '../services/clusteringService';
+import ClusteringService, { ClusteringData } from '../services/clusteringService';
 
 // Set Mapbox access token
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || config.mapbox.accessToken;

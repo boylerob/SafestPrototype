@@ -1,4 +1,4 @@
-import { config } from '../config/config';
+// Removed unused import
 
 export interface Cluster {
   cluster_id: number;
@@ -19,7 +19,7 @@ export interface ClusteringData {
     total_clusters: number;
     noise_points: number;
     generated_at: string;
-    parameters: Record<string, any>;
+    parameters: Record<string, unknown>;
   };
 }
 
