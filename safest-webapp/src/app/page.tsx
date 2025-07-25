@@ -1,10 +1,26 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SafetyMap from '../components/SafetyMap';
+import ClusteringService from '../services/clusteringService';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [clusteringData, setClusteringData] = useState<any>(null);
+
+  useEffect(() => {
+    const loadClusteringData = async () => {
+      try {
+        const clusteringService = ClusteringService.getInstance();
+        const data = await clusteringService.getClusteringData();
+        setClusteringData(data);
+      } catch (error) {
+        console.error('Error loading clustering data:', error);
+      }
+    };
+
+    loadClusteringData();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -54,7 +70,9 @@ export default function Home() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-500">Active Incidents</p>
-                <p className="text-2xl font-semibold text-gray-900">1,247</p>
+                <p className="text-2xl font-semibold text-gray-900">
+                  {clusteringData ? clusteringData.metadata.total_incidents.toLocaleString() : '7,196'}
+                </p>
               </div>
             </div>
           </div>
@@ -69,8 +87,10 @@ export default function Home() {
                 </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Safe Zones</p>
-                <p className="text-2xl font-semibold text-gray-900">89%</p>
+                <p className="text-sm font-medium text-gray-500">Safety Clusters</p>
+                <p className="text-2xl font-semibold text-gray-900">
+                  {clusteringData ? clusteringData.metadata.total_clusters : '46'}
+                </p>
               </div>
             </div>
           </div>

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { config } from '../config/config';
-import NYCDataService, { SafetyIncident } from '../services/nycDataService';
+import ClusteringService, { Cluster, ClusteringData } from '../services/clusteringService';
 
 // Set Mapbox access token
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || config.mapbox.accessToken;
@@ -16,7 +16,7 @@ interface SafetyMapProps {
 const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
-  const [incidents, setIncidents] = useState<SafetyIncident[]>([]);
+  const [clusteringData, setClusteringData] = useState<ClusteringData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -38,40 +38,50 @@ const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
     // Add fullscreen control
     map.current.addControl(new mapboxgl.FullscreenControl(), 'top-right');
 
-    // Load safety data when map is ready
+    // Load clustering data when map is ready
     map.current.on('load', async () => {
       try {
         setLoading(true);
-        const dataService = NYCDataService.getInstance();
-        const safetyIncidents = await dataService.getSafetyIncidents();
-        setIncidents(safetyIncidents);
+        const clusteringService = ClusteringService.getInstance();
+        const data = await clusteringService.getClusteringData();
+        setClusteringData(data);
         
-        // Add safety incidents as markers
-        if (safetyIncidents.length > 0) {
-          safetyIncidents.forEach((incident) => {
+        // Add cluster markers
+        if (data.clusters.length > 0) {
+          data.clusters.forEach((cluster) => {
             // Create marker element
             const markerEl = document.createElement('div');
-            markerEl.className = 'safety-marker';
-            markerEl.style.width = '12px';
-            markerEl.style.height = '12px';
+            markerEl.className = 'cluster-marker';
+            markerEl.style.width = `${clusteringService.getClusterSize(cluster.size)}px`;
+            markerEl.style.height = `${clusteringService.getClusterSize(cluster.size)}px`;
             markerEl.style.borderRadius = '50%';
-            markerEl.style.backgroundColor = getIncidentColor(incident.type);
-            markerEl.style.border = '2px solid white';
-            markerEl.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+            markerEl.style.backgroundColor = clusteringService.getClusterColor(cluster.severity_score);
+            markerEl.style.border = '3px solid white';
+            markerEl.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
             markerEl.style.cursor = 'pointer';
+            markerEl.style.opacity = '0.8';
 
-            // Create popup
+            // Create popup content
+            const incidentTypesList = Object.entries(cluster.incident_types)
+              .map(([type, count]) => `${type}: ${count}`)
+              .join('<br>');
+
             const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
-              <div class="p-3">
-                <h3 class="font-bold text-sm mb-1">${incident.type}</h3>
-                <p class="text-xs text-gray-600 mb-2">${incident.description}</p>
-                <p class="text-xs text-gray-500">${new Date(incident.timestamp).toLocaleDateString()}</p>
+              <div class="p-4 max-w-sm">
+                <h3 class="font-bold text-lg mb-2">Safety Cluster #${cluster.cluster_id}</h3>
+                <div class="space-y-2 text-sm">
+                  <p><strong>Size:</strong> ${cluster.size} incidents</p>
+                  <p><strong>Severity:</strong> ${cluster.severity_score.toFixed(1)}/10</p>
+                  <p><strong>Incident Types:</strong></p>
+                  <div class="text-xs text-gray-600 ml-2">${incidentTypesList}</div>
+                  ${cluster.date_range.start ? `<p><strong>Date Range:</strong> ${cluster.date_range.start} to ${cluster.date_range.end}</p>` : ''}
+                </div>
               </div>
             `);
 
             // Add marker to map
             new mapboxgl.Marker(markerEl)
-              .setLngLat([incident.longitude, incident.latitude])
+              .setLngLat([cluster.centroid[1], cluster.centroid[0]]) // Note: centroid is [lat, lng] but Mapbox expects [lng, lat]
               .setPopup(popup)
               .addTo(map.current!);
           });
@@ -79,8 +89,8 @@ const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
 
         setLoading(false);
       } catch (err) {
-        console.error('Error loading safety data:', err);
-        setError('Failed to load safety data');
+        console.error('Error loading clustering data:', err);
+        setError('Failed to load clustering data');
         setLoading(false);
       }
     });
@@ -93,26 +103,13 @@ const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
     };
   }, []);
 
-  const getIncidentColor = (type: string): string => {
-    const typeLower = type.toLowerCase();
-    if (typeLower.includes('assault') || typeLower.includes('robbery')) {
-      return '#dc2626'; // Red
-    } else if (typeLower.includes('theft') || typeLower.includes('larceny')) {
-      return '#ea580c'; // Orange
-    } else if (typeLower.includes('harassment') || typeLower.includes('stalking')) {
-      return '#d97706'; // Amber
-    } else {
-      return '#6b7280'; // Gray
-    }
-  };
-
   return (
     <div className={`relative ${className}`}>
       {loading && (
         <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-10">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2"></div>
-            <p className="text-sm text-gray-600">Loading safety data...</p>
+            <p className="text-sm text-gray-600">Loading safety clusters...</p>
           </div>
         </div>
       )}
@@ -124,20 +121,26 @@ const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
       )}
 
       <div className="absolute top-4 left-4 bg-white rounded-lg shadow-lg p-3 z-10">
-        <h3 className="font-semibold text-sm mb-2">Safety Incidents</h3>
-        <p className="text-xs text-gray-600">{incidents.length} incidents loaded</p>
+        <h3 className="font-semibold text-sm mb-2">Safety Clusters</h3>
+        <p className="text-xs text-gray-600">
+          {clusteringData ? `${clusteringData.metadata.total_clusters} clusters from ${clusteringData.metadata.total_incidents} incidents` : 'Loading...'}
+        </p>
         <div className="mt-2 space-y-1">
           <div className="flex items-center text-xs">
             <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
-            <span>Assault/Robbery</span>
+            <span>High Severity (8-10)</span>
           </div>
           <div className="flex items-center text-xs">
             <div className="w-3 h-3 rounded-full bg-orange-500 mr-2"></div>
-            <span>Theft/Larceny</span>
+            <span>Medium-High (6-7)</span>
           </div>
           <div className="flex items-center text-xs">
             <div className="w-3 h-3 rounded-full bg-amber-500 mr-2"></div>
-            <span>Harassment</span>
+            <span>Medium (4-5)</span>
+          </div>
+          <div className="flex items-center text-xs">
+            <div className="w-3 h-3 rounded-full bg-gray-500 mr-2"></div>
+            <span>Low (1-3)</span>
           </div>
         </div>
       </div>
