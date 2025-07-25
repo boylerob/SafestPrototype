@@ -1,0 +1,981 @@
+{
+  "clusters": [
+    {
+      "cluster_id": 0,
+      "centroid": [
+        40.60327190437086,
+        -74.06747042069114
+      ],
+      "size": 5,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 5
+      },
+      "date_range": {
+        "start": "2024-08-11",
+        "end": "2024-09-08"
+      }
+    },
+    {
+      "cluster_id": 1,
+      "centroid": [
+        40.58309908066666,
+        -74.161089972
+      ],
+      "size": 45,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 37,
+        "BURGLARY": 8
+      },
+      "date_range": {
+        "start": "2025-06-01",
+        "end": "2025-06-29"
+      }
+    },
+    {
+      "cluster_id": 2,
+      "centroid": [
+        40.576177983164555,
+        -74.16058986848103
+      ],
+      "size": 79,
+      "severity_score": 3.0,
+      "incident_types": {
+        "HARRASSMENT 2": 65,
+        "CRIMINAL TRESPASS": 14
+      },
+      "date_range": {
+        "start": "2025-06-01",
+        "end": "2025-06-30"
+      }
+    },
+    {
+      "cluster_id": 3,
+      "centroid": [
+        40.668139745,
+        -74.04453011160714
+      ],
+      "size": 56,
+      "severity_score": 7.0,
+      "incident_types": {
+        "ROBBERY": 29,
+        "DANGEROUS WEAPONS": 27
+      },
+      "date_range": {
+        "start": "2025-06-01",
+        "end": "2025-06-29"
+      }
+    },
+    {
+      "cluster_id": 4,
+      "centroid": [
+        40.6416717811015,
+        -74.08292536893208
+      ],
+      "size": 65,
+      "severity_score": 8.061538461538461,
+      "incident_types": {
+        "FELONY ASSAULT": 39,
+        "SEX CRIMES": 22,
+        "RAPE": 4
+      },
+      "date_range": {
+        "start": "2025-06-01",
+        "end": "2025-06-30"
+      }
+    },
+    {
+      "cluster_id": 5,
+      "centroid": [
+        40.63997109095238,
+        -74.07648785285714
+      ],
+      "size": 21,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 21
+      },
+      "date_range": {
+        "start": "2025-06-01",
+        "end": "2025-06-26"
+      }
+    },
+    {
+      "cluster_id": 6,
+      "centroid": [
+        40.642782246091954,
+        -74.06104197080458
+      ],
+      "size": 87,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 62,
+        "GRAND LARCENY OF MOTOR VEHICLE": 25
+      },
+      "date_range": {
+        "start": "2025-06-01",
+        "end": "2025-06-30"
+      }
+    },
+    {
+      "cluster_id": 7,
+      "centroid": [
+        40.670423530739434,
+        -74.02309915778366
+      ],
+      "size": 37,
+      "severity_score": 7.0,
+      "incident_types": {
+        "DANGEROUS WEAPONS": 22,
+        "ROBBERY": 15
+      },
+      "date_range": {
+        "start": "2025-01-01",
+        "end": "2025-01-30"
+      }
+    },
+    {
+      "cluster_id": 8,
+      "centroid": [
+        40.651967397211685,
+        -74.0725038646014
+      ],
+      "size": 60,
+      "severity_score": 8.066666666666666,
+      "incident_types": {
+        "SEX CRIMES": 32,
+        "FELONY ASSAULT": 23,
+        "RAPE": 3,
+        "KIDNAPPING & RELATED OFFENSES": 1,
+        "ARSON": 1
+      },
+      "date_range": {
+        "start": "2025-01-01",
+        "end": "2025-01-31"
+      }
+    },
+    {
+      "cluster_id": 9,
+      "centroid": [
+        40.592878528539885,
+        -74.1543982154451
+      ],
+      "size": 47,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 34,
+        "BURGLARY": 13
+      },
+      "date_range": {
+        "start": "2025-01-01",
+        "end": "2025-01-31"
+      }
+    },
+    {
+      "cluster_id": 10,
+      "centroid": [
+        40.65182159322316,
+        -74.06025253528978
+      ],
+      "size": 5,
+      "severity_score": 8.0,
+      "incident_types": {
+        "SEX CRIMES": 4,
+        "FELONY ASSAULT": 1
+      },
+      "date_range": {
+        "start": "2024-11-11",
+        "end": "2024-11-21"
+      }
+    },
+    {
+      "cluster_id": 11,
+      "centroid": [
+        40.62661070078692,
+        -74.08919031943125
+      ],
+      "size": 91,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 70,
+        "GRAND LARCENY OF MOTOR VEHICLE": 21
+      },
+      "date_range": {
+        "start": "2025-01-01",
+        "end": "2025-01-31"
+      }
+    },
+    {
+      "cluster_id": 12,
+      "centroid": [
+        40.59653265536525,
+        -74.1448766067584
+      ],
+      "size": 64,
+      "severity_score": 3.0,
+      "incident_types": {
+        "HARRASSMENT 2": 49,
+        "CRIMINAL TRESPASS": 15
+      },
+      "date_range": {
+        "start": "2025-02-01",
+        "end": "2025-02-28"
+      }
+    },
+    {
+      "cluster_id": 13,
+      "centroid": [
+        40.65203686416951,
+        -74.08466709643487
+      ],
+      "size": 46,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 24,
+        "SEX CRIMES": 22
+      },
+      "date_range": {
+        "start": "2025-02-01",
+        "end": "2025-02-28"
+      }
+    },
+    {
+      "cluster_id": 14,
+      "centroid": [
+        40.67860726444205,
+        -74.03034917336184
+      ],
+      "size": 60,
+      "severity_score": 7.0,
+      "incident_types": {
+        "DANGEROUS WEAPONS": 38,
+        "ROBBERY": 22
+      },
+      "date_range": {
+        "start": "2025-02-01",
+        "end": "2025-02-28"
+      }
+    },
+    {
+      "cluster_id": 15,
+      "centroid": [
+        40.652275468060374,
+        -74.08762415143507
+      ],
+      "size": 38,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 38
+      },
+      "date_range": {
+        "start": "2025-01-02",
+        "end": "2025-01-30"
+      }
+    },
+    {
+      "cluster_id": 16,
+      "centroid": [
+        40.598084277627805,
+        -74.14045798043765
+      ],
+      "size": 64,
+      "severity_score": 3.0,
+      "incident_types": {
+        "HARRASSMENT 2": 50,
+        "CRIMINAL TRESPASS": 14
+      },
+      "date_range": {
+        "start": "2025-01-01",
+        "end": "2025-01-31"
+      }
+    },
+    {
+      "cluster_id": 17,
+      "centroid": [
+        40.58496226280418,
+        -74.15907813069998
+      ],
+      "size": 36,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 28,
+        "BURGLARY": 8
+      },
+      "date_range": {
+        "start": "2025-02-02",
+        "end": "2025-02-28"
+      }
+    },
+    {
+      "cluster_id": 18,
+      "centroid": [
+        40.59291671236843,
+        -74.15007237236843
+      ],
+      "size": 38,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 32,
+        "BURGLARY": 6
+      },
+      "date_range": {
+        "start": "2025-05-02",
+        "end": "2025-05-30"
+      }
+    },
+    {
+      "cluster_id": 19,
+      "centroid": [
+        40.65940183878695,
+        -74.05589664816638
+      ],
+      "size": 30,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 30
+      },
+      "date_range": {
+        "start": "2025-02-03",
+        "end": "2025-02-28"
+      }
+    },
+    {
+      "cluster_id": 20,
+      "centroid": [
+        40.63434484858671,
+        -74.08299169754045
+      ],
+      "size": 82,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 63,
+        "GRAND LARCENY OF MOTOR VEHICLE": 19
+      },
+      "date_range": {
+        "start": "2025-02-01",
+        "end": "2025-02-26"
+      }
+    },
+    {
+      "cluster_id": 21,
+      "centroid": [
+        40.669902583650774,
+        -74.04186007777777
+      ],
+      "size": 63,
+      "severity_score": 7.0,
+      "incident_types": {
+        "DANGEROUS WEAPONS": 32,
+        "ROBBERY": 31
+      },
+      "date_range": {
+        "start": "2025-05-01",
+        "end": "2025-05-31"
+      }
+    },
+    {
+      "cluster_id": 22,
+      "centroid": [
+        40.649493431666116,
+        -74.08080821072787
+      ],
+      "size": 79,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 47,
+        "SEX CRIMES": 32
+      },
+      "date_range": {
+        "start": "2025-05-01",
+        "end": "2025-05-31"
+      }
+    },
+    {
+      "cluster_id": 23,
+      "centroid": [
+        40.586421439450554,
+        -74.14841375076922
+      ],
+      "size": 91,
+      "severity_score": 3.0,
+      "incident_types": {
+        "HARRASSMENT 2": 73,
+        "CRIMINAL TRESPASS": 18
+      },
+      "date_range": {
+        "start": "2025-05-01",
+        "end": "2025-05-31"
+      }
+    },
+    {
+      "cluster_id": 24,
+      "centroid": [
+        40.583690316921896,
+        -74.15082103607745
+      ],
+      "size": 76,
+      "severity_score": 3.0,
+      "incident_types": {
+        "HARRASSMENT 2": 62,
+        "CRIMINAL TRESPASS": 14
+      },
+      "date_range": {
+        "start": "2025-03-01",
+        "end": "2025-03-31"
+      }
+    },
+    {
+      "cluster_id": 25,
+      "centroid": [
+        40.642470250694736,
+        -74.07804954034603
+      ],
+      "size": 39,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 39
+      },
+      "date_range": {
+        "start": "2025-03-03",
+        "end": "2025-03-31"
+      }
+    },
+    {
+      "cluster_id": 26,
+      "centroid": [
+        40.64975648705069,
+        -74.07035635886434
+      ],
+      "size": 59,
+      "severity_score": 8.067796610169491,
+      "incident_types": {
+        "FELONY ASSAULT": 28,
+        "SEX CRIMES": 26,
+        "RAPE": 3,
+        "ARSON": 1,
+        "KIDNAPPING & RELATED OFFENSES": 1
+      },
+      "date_range": {
+        "start": "2025-03-01",
+        "end": "2025-03-31"
+      }
+    },
+    {
+      "cluster_id": 27,
+      "centroid": [
+        40.663769796666664,
+        -74.03791931444444
+      ],
+      "size": 27,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 27
+      },
+      "date_range": {
+        "start": "2025-05-01",
+        "end": "2025-05-30"
+      }
+    },
+    {
+      "cluster_id": 28,
+      "centroid": [
+        40.63613198318182,
+        -74.07891668
+      ],
+      "size": 88,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 68,
+        "GRAND LARCENY OF MOTOR VEHICLE": 20
+      },
+      "date_range": {
+        "start": "2025-05-01",
+        "end": "2025-05-31"
+      }
+    },
+    {
+      "cluster_id": 29,
+      "centroid": [
+        40.65851308189295,
+        -74.03810041260485
+      ],
+      "size": 55,
+      "severity_score": 7.0,
+      "incident_types": {
+        "DANGEROUS WEAPONS": 33,
+        "ROBBERY": 22
+      },
+      "date_range": {
+        "start": "2025-03-01",
+        "end": "2025-03-31"
+      }
+    },
+    {
+      "cluster_id": 30,
+      "centroid": [
+        40.59353768540541,
+        -74.14459486121622
+      ],
+      "size": 74,
+      "severity_score": 3.0,
+      "incident_types": {
+        "HARRASSMENT 2": 61,
+        "CRIMINAL TRESPASS": 13
+      },
+      "date_range": {
+        "start": "2025-04-01",
+        "end": "2025-04-30"
+      }
+    },
+    {
+      "cluster_id": 31,
+      "centroid": [
+        40.729940711771455,
+        -73.93126166131036
+      ],
+      "size": 5000,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 709,
+        "75D": 622,
+        "75S": 484,
+        "75M": 183,
+        "10V2": 130,
+        "11C4": 125,
+        "10Y3": 124,
+        "75I": 113,
+        "10H1": 111,
+        "54E1": 107,
+        "75T": 103,
+        "54S1": 102,
+        "52D6": 93,
+        "68Q2": 92,
+        "75O": 87,
+        "10P2": 73,
+        "10H2": 73,
+        "52D1": 70,
+        "53S": 66,
+        "54U1": 61,
+        "54U2": 61,
+        "54S2": 60,
+        "10S4": 59,
+        "75Z": 59,
+        "54S9": 56,
+        "39H1": 48,
+        "75H": 44,
+        "52D2": 41,
+        "50P1": 37,
+        "54E2": 35,
+        "34Q2": 34,
+        "50G2": 33,
+        "54C1": 30,
+        "34Q1": 28,
+        "50P9": 28,
+        "34Q6": 28,
+        "56S9": 25,
+        "59R4": 23,
+        "22Q1": 23,
+        "39H2": 23,
+        "11R4": 23,
+        "24Q1": 23,
+        "53X": 18,
+        "10S2": 18,
+        "56S": 18,
+        "53I": 17,
+        "50P2": 15,
+        "39T1": 14,
+        "53H": 14,
+        "53I8": 14,
+        "54E9": 14,
+        "54C3": 14,
+        "22Q2": 13,
+        "39Q9": 12,
+        "53S8": 12,
+        "22V2": 12,
+        "54H1": 10,
+        "68Q9": 10,
+        "24Q2": 10,
+        "10P9": 10,
+        "13U2": 10,
+        "34K1": 9,
+        "68U2": 9,
+        "31R": 9,
+        "50G9": 8,
+        "54U9": 8,
+        "67S8": 8,
+        "59W": 7,
+        "75C": 7,
+        "44H1": 7,
+        "39H9": 7,
+        "13X": 7,
+        "29C": 7,
+        "21R": 7,
+        "53D": 7,
+        "39C2": 7,
+        "29H1": 7,
+        "54R1": 6,
+        "54I1": 6,
+        "13X2": 6,
+        "34Q9": 6,
+        "68U1": 6,
+        "52K2": 6,
+        "29H2": 6,
+        "10Y9": 5,
+        "10N9": 5,
+        "54C2": 5,
+        "24K1": 5,
+        "20Q1": 5,
+        "10P1": 5,
+        "34W1": 5,
+        "50G1": 5,
+        "54E8": 5,
+        "30Q2": 5,
+        "52K6": 5,
+        "22Q9": 4,
+        "39V6": 4,
+        "39Q1": 4,
+        "30Q1": 4,
+        "75L": 4,
+        "34W6": 4,
+        "34K2": 4,
+        "54H2": 4,
+        "52K1": 4,
+        "52F1": 4,
+        "34S2": 3,
+        "24W1": 3,
+        "39T2": 3,
+        "10S1": 3,
+        "54I2": 3,
+        "59C": 3,
+        "59R3": 3,
+        "13U8": 3,
+        "52D9": 3,
+        "68U9": 3,
+        "10V8": 3,
+        "24Q6": 3,
+        "60I": 3,
+        "39Q2": 3,
+        "32Q1": 3,
+        "54Q1": 3,
+        "22V1": 3,
+        "11C3": 3,
+        "10Y8": 3,
+        "13U9": 2,
+        "39C1": 2,
+        "44P9": 2,
+        "53D8": 2,
+        "11A9": 2,
+        "10F2": 2,
+        "32Q2": 2,
+        "34Q7": 2,
+        "13X1": 2,
+        "53X8": 2,
+        "52F6": 2,
+        "10N2": 2,
+        "20Q2": 2,
+        "10Y7": 2,
+        "59V": 2,
+        "54R2": 2,
+        "34W2": 2,
+        "10F1": 2,
+        "54R9": 2,
+        "24Q9": 2,
+        "39P6": 1,
+        "22P9": 1,
+        "11R3": 1,
+        "54I8": 1,
+        "69S": 1,
+        "59Q2": 1,
+        "51": 1,
+        "54Q9": 1,
+        "22P2": 1,
+        "52V6": 1,
+        "54Q2": 1,
+        "10M2": 1,
+        "39G": 1,
+        "29Q1": 1,
+        "10H9": 1,
+        "11A2": 1,
+        "59Q1": 1,
+        "10K9": 1,
+        "22P1": 1,
+        "67S": 1,
+        "31Q": 1,
+        "54I9": 1,
+        "34K9": 1,
+        "34K6": 1,
+        "12Z2": 1,
+        "10M1": 1,
+        "39G9": 1,
+        "32V1": 1,
+        "24W2": 1,
+        "32Q9": 1,
+        "39V1": 1,
+        "32V2": 1,
+        "24W6": 1,
+        "32P9": 1,
+        "40V": 1,
+        "30R": 1,
+        "24S1": 1,
+        "60H8": 1,
+        "11B4": 1,
+        "65S": 1,
+        "75F": 1
+      },
+      "date_range": {
+        "start": null,
+        "end": null
+      }
+    },
+    {
+      "cluster_id": 32,
+      "centroid": [
+        40.635732000000004,
+        -74.07759183333334
+      ],
+      "size": 6,
+      "severity_score": 5.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 2,
+        "DANGEROUS DRUGS": 2,
+        "GRAND LARCENY": 2
+      },
+      "date_range": {
+        "start": "2024-09-01",
+        "end": "2024-09-26"
+      }
+    },
+    {
+      "cluster_id": 33,
+      "centroid": [
+        40.647398770350506,
+        -74.06747835240694
+      ],
+      "size": 86,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 69,
+        "GRAND LARCENY OF MOTOR VEHICLE": 17
+      },
+      "date_range": {
+        "start": "2025-03-01",
+        "end": "2025-03-31"
+      }
+    },
+    {
+      "cluster_id": 34,
+      "centroid": [
+        40.58925874688477,
+        -74.16471680193241
+      ],
+      "size": 45,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 36,
+        "BURGLARY": 9
+      },
+      "date_range": {
+        "start": "2025-03-01",
+        "end": "2025-03-30"
+      }
+    },
+    {
+      "cluster_id": 35,
+      "centroid": [
+        40.58848168615384,
+        -74.15582738538461
+      ],
+      "size": 52,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 41,
+        "BURGLARY": 11
+      },
+      "date_range": {
+        "start": "2025-04-01",
+        "end": "2025-04-30"
+      }
+    },
+    {
+      "cluster_id": 36,
+      "centroid": [
+        40.684216431372555,
+        -74.03598576196077
+      ],
+      "size": 51,
+      "severity_score": 7.0,
+      "incident_types": {
+        "DANGEROUS WEAPONS": 37,
+        "ROBBERY": 14
+      },
+      "date_range": {
+        "start": "2025-04-01",
+        "end": "2025-04-30"
+      }
+    },
+    {
+      "cluster_id": 37,
+      "centroid": [
+        40.644766875,
+        -74.09320775
+      ],
+      "size": 8,
+      "severity_score": 4.875,
+      "incident_types": {
+        "GRAND LARCENY": 7,
+        "DANGEROUS DRUGS": 1
+      },
+      "date_range": {
+        "start": "2024-10-01",
+        "end": "2024-10-28"
+      }
+    },
+    {
+      "cluster_id": 38,
+      "centroid": [
+        40.656495201851854,
+        -74.07627016629628
+      ],
+      "size": 27,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 27
+      },
+      "date_range": {
+        "start": "2025-04-01",
+        "end": "2025-04-30"
+      }
+    },
+    {
+      "cluster_id": 39,
+      "centroid": [
+        40.647055395108694,
+        -74.06184664391306
+      ],
+      "size": 92,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 69,
+        "GRAND LARCENY OF MOTOR VEHICLE": 23
+      },
+      "date_range": {
+        "start": "2025-04-01",
+        "end": "2025-04-30"
+      }
+    },
+    {
+      "cluster_id": 40,
+      "centroid": [
+        40.66321057747941,
+        -74.06513616149388
+      ],
+      "size": 7,
+      "severity_score": 9.0,
+      "incident_types": {
+        "RAPE": 6,
+        "KIDNAPPING & RELATED OFFENSES": 1
+      },
+      "date_range": {
+        "start": "2025-04-03",
+        "end": "2025-04-23"
+      }
+    },
+    {
+      "cluster_id": 41,
+      "centroid": [
+        40.6494151891316,
+        -74.07538988642679
+      ],
+      "size": 52,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 33,
+        "SEX CRIMES": 19
+      },
+      "date_range": {
+        "start": "2025-04-02",
+        "end": "2025-04-30"
+      }
+    },
+    {
+      "cluster_id": 42,
+      "centroid": [
+        40.639081923076915,
+        -74.07179446153845
+      ],
+      "size": 13,
+      "severity_score": 5.076923076923077,
+      "incident_types": {
+        "GRAND LARCENY": 10,
+        "GRAND LARCENY OF MOTOR VEHICLE": 2,
+        "ASSAULT 3 & RELATED OFFENSES": 1
+      },
+      "date_range": {
+        "start": "2024-11-01",
+        "end": "2024-11-30"
+      }
+    },
+    {
+      "cluster_id": 43,
+      "centroid": [
+        40.62171636363636,
+        -74.0934995
+      ],
+      "size": 22,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 19,
+        "GRAND LARCENY OF MOTOR VEHICLE": 3
+      },
+      "date_range": {
+        "start": "2024-12-01",
+        "end": "2024-12-31"
+      }
+    },
+    {
+      "cluster_id": 44,
+      "centroid": [
+        40.74456439797125,
+        -73.99538874937032
+      ],
+      "size": 6,
+      "severity_score": 8.0,
+      "incident_types": {
+        "SEX CRIMES": 6
+      },
+      "date_range": {
+        "start": "2024-12-01",
+        "end": "2024-12-29"
+      }
+    },
+    {
+      "cluster_id": 45,
+      "centroid": [
+        40.61202748867882,
+        -74.11643855891717
+      ],
+      "size": 5,
+      "severity_score": 8.0,
+      "incident_types": {
+        "SEX CRIMES": 3,
+        "FELONY ASSAULT": 2
+      },
+      "date_range": {
+        "start": "2024-12-09",
+        "end": "2024-12-23"
+      }
+    }
+  ],
+  "metadata": {
+    "total_incidents": 7196,
+    "total_clusters": 46,
+    "noise_points": 17,
+    "generated_at": "2025-07-25T11:22:08.545389",
+    "parameters": {
+      "min_cluster_size": 5,
+      "min_samples": 3,
+      "cluster_selection_epsilon": 0.1
+    }
+  }
+}
