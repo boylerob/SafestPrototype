@@ -46,9 +46,6 @@ const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
         const data = await clusteringService.getClusteringData();
         setClusteringData(data);
         
-        console.log('Clustering data loaded:', data);
-        console.log('Number of clusters:', data.clusters.length);
-        
         // Add cluster markers
         if (data.clusters.length > 0) {
           data.clusters.forEach((cluster) => {
