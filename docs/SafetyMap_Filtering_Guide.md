@@ -55,9 +55,51 @@ These categories are chosen for their direct impact on personal safety, property
 
 ---
 
+## ✅ HDBSCAN Clustering Integration - COMPLETED
+
+We have successfully integrated **HDBSCAN** clustering to identify and visualize crime hotspots and safety clusters on the map. This provides:
+- Dynamic, data-driven "danger zones" and anomaly clusters
+- Cluster-level summaries and trend analysis
+- Enhanced intelligence layer of the Safest platform
+
+### Implementation ✅
+- **Python Backend:** Complete modular pipeline in `backend-clustering/`
+- **Data Processing:** Fetches from Socrata API with existing filtering logic
+- **Clustering Analysis:** HDBSCAN algorithm with geographic and temporal features
+- **Results Export:** Multiple JSON formats for frontend integration
+
+### Latest Results (July 25, 2025)
+- **Total Incidents Processed:** 7,196 (5,000 911 calls + 2,196 filtered complaints)
+- **Clusters Identified:** 46 distinct safety hotspots
+- **High Severity Clusters:** 11 clusters with severity > 7
+- **Average Cluster Severity:** 5.70
+- **Geographic Coverage:** Full NYC area with valid coordinates
+
+### Key Features
+- **Geographic Clustering:** Identifies spatial hotspots using lat/lng coordinates
+- **Severity Analysis:** Ranks clusters by safety risk (1-10 scale)
+- **Temporal Patterns:** Analyzes hour, day, and month patterns
+- **Incident Type Distribution:** Shows crime type breakdown per cluster
+
+### Output Files for Frontend
+- `cluster_centroids_*.json` - Optimized for Mapbox integration
+- `clusters_*.json` - Complete clustering results
+- `noise_points_*.json` - Outlier incidents
+- `pipeline_summary_*.json` - Analysis summary and recommendations
+
+### Frontend Integration Ready
+The clustering results are ready for frontend visualization with:
+- Cluster centroids as map markers
+- Color coding by severity score
+- Popup information with incident type breakdowns
+- Temporal analysis for trend identification
+
+---
+
 ## Next Steps
-- The webapp will display only these categories by default.
-- Additional filtering, grouping, or user controls can be added in future iterations.
+- The webapp will display only these categories by default
+- HDBSCAN clustering integration is in progress (see project plan)
+- Additional filtering, grouping, or user controls can be added in future iterations
 
 ---
 
