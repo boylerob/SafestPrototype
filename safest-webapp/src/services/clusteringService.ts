@@ -45,26 +45,13 @@ class ClusteringService {
       return this.clusteringData;
     }
 
-    try {
-      // For now, we'll use a sample clustering result
-      // In production, this would be served from an API endpoint
-      const response = await fetch('/api/clustering-data');
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      this.clusteringData = data;
-      this.lastFetch = now;
-      
-      return data;
-    } catch (error) {
-      console.error('Error fetching clustering data:', error);
-      
-      // Fallback to sample data for development
-      return this.getSampleClusteringData();
-    }
+    // For now, use sample clustering data directly
+    // In production, this would be served from an API endpoint
+    const data = this.getSampleClusteringData();
+    this.clusteringData = data;
+    this.lastFetch = now;
+    
+    return data;
   }
 
   private getSampleClusteringData(): ClusteringData {
@@ -73,11 +60,13 @@ class ClusteringService {
       clusters: [
         {
           cluster_id: 0,
-          centroid: [40.60327190437086, -74.06747042069114],
-          size: 5,
-          severity_score: 8.0,
+          centroid: [40.7589, -73.9851], // Times Square area
+          size: 150,
+          severity_score: 8.5,
           incident_types: {
-            "FELONY ASSAULT": 5
+            "FELONY ASSAULT": 80,
+            "ROBBERY": 45,
+            "DANGEROUS WEAPONS": 25
           },
           date_range: {
             start: "2024-08-11",
@@ -86,12 +75,13 @@ class ClusteringService {
         },
         {
           cluster_id: 1,
-          centroid: [40.58309908066666, -74.161089972],
-          size: 45,
-          severity_score: 6.0,
+          centroid: [40.7505, -73.9934], // Penn Station area
+          size: 120,
+          severity_score: 7.2,
           incident_types: {
-            "ASSAULT 3 & RELATED OFFENSES": 37,
-            "BURGLARY": 8
+            "ASSAULT 3 & RELATED OFFENSES": 60,
+            "BURGLARY": 35,
+            "GRAND LARCENY": 25
           },
           date_range: {
             start: "2025-06-01",
@@ -100,12 +90,13 @@ class ClusteringService {
         },
         {
           cluster_id: 2,
-          centroid: [40.576177983164555, -74.16058986848103],
-          size: 79,
-          severity_score: 3.0,
+          centroid: [40.7128, -74.0060], // Lower Manhattan
+          size: 95,
+          severity_score: 6.8,
           incident_types: {
-            "HARRASSMENT 2": 65,
-            "CRIMINAL TRESPASS": 14
+            "ROBBERY": 50,
+            "FELONY ASSAULT": 30,
+            "DANGEROUS WEAPONS": 15
           },
           date_range: {
             start: "2025-06-01",
@@ -114,12 +105,13 @@ class ClusteringService {
         },
         {
           cluster_id: 3,
-          centroid: [40.668139745, -74.04453011160714],
-          size: 56,
-          severity_score: 7.0,
+          centroid: [40.7484, -73.9857], // Midtown West
+          size: 85,
+          severity_score: 7.5,
           incident_types: {
-            "ROBBERY": 29,
-            "DANGEROUS WEAPONS": 27
+            "SEX CRIMES": 40,
+            "FELONY ASSAULT": 25,
+            "RAPE": 20
           },
           date_range: {
             start: "2025-06-01",
@@ -128,13 +120,28 @@ class ClusteringService {
         },
         {
           cluster_id: 4,
-          centroid: [40.6416717811015, -74.08292536893208],
-          size: 65,
-          severity_score: 8.06,
+          centroid: [40.7549, -73.9840], // Bryant Park area
+          size: 110,
+          severity_score: 6.2,
           incident_types: {
-            "FELONY ASSAULT": 39,
-            "SEX CRIMES": 22,
-            "RAPE": 4
+            "GRAND LARCENY": 60,
+            "BURGLARY": 30,
+            "HARRASSMENT 2": 20
+          },
+          date_range: {
+            start: "2025-06-01",
+            end: "2025-06-30"
+          }
+        },
+        {
+          cluster_id: 5,
+          centroid: [40.7614, -73.9776], // Grand Central area
+          size: 75,
+          severity_score: 8.1,
+          incident_types: {
+            "FELONY ASSAULT": 45,
+            "ROBBERY": 20,
+            "DANGEROUS WEAPONS": 10
           },
           date_range: {
             start: "2025-06-01",
@@ -144,7 +151,7 @@ class ClusteringService {
       ],
       metadata: {
         total_incidents: 7196,
-        total_clusters: 46,
+        total_clusters: 6,
         noise_points: 17,
         generated_at: "2025-07-25T11:22:08.548083",
         parameters: {
