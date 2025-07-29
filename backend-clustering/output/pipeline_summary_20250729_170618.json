@@ -1,0 +1,79 @@
+{
+  "pipeline_run_time": "2025-07-29T17:06:18.736485",
+  "data_summary": {
+    "total_incidents": 7196,
+    "total_clusters": 45,
+    "noise_points": 16,
+    "clustering_ratio": 0.0062534741523068375
+  },
+  "cluster_analysis": {
+    "largest_cluster_size": 5000,
+    "smallest_cluster_size": 5,
+    "avg_cluster_size": 159.55555555555554,
+    "high_severity_clusters": 10
+  },
+  "output_files": {
+    "clusters_full": "/Users/robertboyle/Developer/Safest_Prototype/backend-clustering/output/clusters_20250729_170618.json",
+    "clusters_centroids": "/Users/robertboyle/Developer/Safest_Prototype/backend-clustering/output/cluster_centroids_20250729_170618.json",
+    "noise_points": "/Users/robertboyle/Developer/Safest_Prototype/backend-clustering/output/noise_points_20250729_170618.json"
+  },
+  "recommendations": {
+    "high_priority_areas": [
+      {
+        "cluster_id": 42,
+        "priority_score": 15000.0,
+        "location": [
+          40.11248885236858,
+          -77.5198543076146
+        ],
+        "severity": 3.0,
+        "size": 5000
+      },
+      {
+        "cluster_id": 24,
+        "priority_score": 632.0,
+        "location": [
+          40.11248861524315,
+          -77.51985483025113
+        ],
+        "severity": 8.0,
+        "size": 79
+      },
+      {
+        "cluster_id": 11,
+        "priority_score": 488.0,
+        "location": [
+          40.11248858526962,
+          -77.51985485220159
+        ],
+        "severity": 8.0,
+        "size": 61
+      },
+      {
+        "cluster_id": 6,
+        "priority_score": 484.0,
+        "location": [
+          40.112488622943964,
+          -77.51985480094277
+        ],
+        "severity": 8.066666666666666,
+        "size": 60
+      },
+      {
+        "cluster_id": 30,
+        "priority_score": 476.0,
+        "location": [
+          40.112488617117094,
+          -77.51985479295423
+        ],
+        "severity": 8.067796610169491,
+        "size": 59
+      }
+    ],
+    "safety_insights": [
+      "Average cluster severity: 5.65",
+      "Found 45 distinct safety hotspots"
+    ],
+    "data_quality_notes": []
+  }
+}

@@ -29,7 +29,8 @@ const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
       style: 'mapbox://styles/mapbox/light-v11',
       center: [-73.935242, 40.730610], // NYC center
       zoom: 10,
-      attributionControl: false
+      attributionControl: false,
+      projection: 'mercator' // Explicitly set projection to Web Mercator
     });
 
     // Add navigation controls

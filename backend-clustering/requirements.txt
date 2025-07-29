@@ -2,4 +2,5 @@ hdbscan
 scikit-learn
 pandas
 numpy
-requests 
+requests
+pyproj 
