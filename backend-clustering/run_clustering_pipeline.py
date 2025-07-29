@@ -228,9 +228,9 @@ def main():
     
     try:
         results = pipeline.run_full_pipeline(
-            min_cluster_size=5,
-            min_samples=3,
-            cluster_selection_epsilon=0.1
+            min_cluster_size=15,      # Increased from 5 to require larger clusters
+            min_samples=5,            # Increased from 3 to be more conservative
+            cluster_selection_epsilon=0.05  # Decreased from 0.1 for tighter cluster selection
         )
         
         print("\n" + "="*60)
