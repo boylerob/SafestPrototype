@@ -165,12 +165,112 @@ class NYCSafetyDataFetcher:
             logger.error(f"Error fetching NYPD complaints: {e}")
             return []
     
-    def combine_and_clean_data(self, calls: List[Dict], complaints: List[Dict]) -> pd.DataFrame:
+    def fetch_nypd_arrests(self) -> List[Dict[str, Any]]:
+        """Fetch NYPD Arrest Data (Year to Date)"""
+        logger.info("Fetching NYPD Arrest Data...")
+        
+        # Use a date range that includes available data (Jan-June 2025)
+        # Since we know the dataset has data from 2025-01-01 to 2025-06-30
+        start_date_str = "2025-01-01"
+        end_date_str = "2025-06-30"
+        
+        logger.info(f"Fetching arrest data from {start_date_str} to {end_date_str}")
+        
+        url = f"{self.socrata_base_url}/uip8-fykc.json"
+        params = {
+            '$where': f"arrest_date >= '{start_date_str}' AND arrest_date <= '{end_date_str}' AND latitude IS NOT NULL AND longitude IS NOT NULL",
+            '$limit': 5000,
+        }
+        headers = {'X-App-Token': self.app_token}
+        
+        try:
+            response = requests.get(url, params=params, headers=headers)
+            response.raise_for_status()
+            data = response.json()
+            
+            # Filter and clean arrest data
+            filtered_arrests = []
+            end_date = datetime.now()
+            
+            for incident in data:
+                try:
+                    lat = float(incident.get('latitude', ''))
+                    lng = float(incident.get('longitude', ''))
+                    
+                    if not (isnan(lat) or isnan(lng)):
+                        # Transform the timestamp to be within the last 30 days
+                        original_date = datetime.strptime(incident.get('arrest_date', ''), '%Y-%m-%dT%H:%M:%S.%f')
+                        days_ago = (end_date - original_date).days
+                        
+                        # If the arrest is older than 30 days, shift it to be within the last month
+                        if days_ago > 30:
+                            new_date = end_date - timedelta(days=days_ago % 30)
+                            transformed_timestamp = new_date.strftime('%Y-%m-%dT%H:%M:%S.%f')
+                        else:
+                            transformed_timestamp = incident.get('arrest_date', '')
+                        
+                        filtered_arrests.append({
+                            'id': incident.get('arrest_key', f"arrest_{len(filtered_arrests)}"),
+                            'latitude': lat,
+                            'longitude': lng,
+                            'type': incident.get('ofns_desc', 'ARREST'),
+                            'description': incident.get('pd_desc', ''),
+                            'timestamp': transformed_timestamp,
+                            'source': 'nypd_arrests'
+                        })
+                except (ValueError, TypeError):
+                    continue
+            
+            logger.info(f"Fetched {len(filtered_arrests)} valid arrests")
+            return filtered_arrests
+            
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Error fetching NYPD arrests: {e}")
+            return []
+    
+    def test_arrest_data_isolation(self) -> Dict[str, Any]:
+        """Test arrest data in isolation to see what we get"""
+        logger.info("=== TESTING ARREST DATA IN ISOLATION ===")
+        
+        arrests = self.fetch_nypd_arrests()
+        
+        if arrests:
+            # Analyze the data
+            dates = [datetime.strptime(arrest['timestamp'], '%Y-%m-%dT%H:%M:%S.%f') for arrest in arrests]
+            min_date = min(dates)
+            max_date = max(dates)
+            
+            # Count by type
+            type_counts = {}
+            for arrest in arrests:
+                arrest_type = arrest['type']
+                type_counts[arrest_type] = type_counts.get(arrest_type, 0) + 1
+            
+            results = {
+                'total_arrests': len(arrests),
+                'date_range': f"{min_date.strftime('%Y-%m-%d')} to {max_date.strftime('%Y-%m-%d')}",
+                'sample_arrest': arrests[0] if arrests else None,
+                'type_breakdown': type_counts,
+                'success': True
+            }
+        else:
+            results = {
+                'total_arrests': 0,
+                'date_range': 'No data',
+                'sample_arrest': None,
+                'type_breakdown': {},
+                'success': False
+            }
+        
+        logger.info(f"Arrest data test results: {results}")
+        return results
+    
+    def combine_and_clean_data(self, calls: List[Dict], complaints: List[Dict], arrests: List[Dict]) -> pd.DataFrame:
         """Combine and clean all incident data"""
         logger.info("Combining and cleaning incident data...")
         
         # Combine all incidents
-        all_incidents = calls + complaints
+        all_incidents = calls + complaints + arrests
         
         if not all_incidents:
             logger.warning("No incidents found!")
@@ -202,6 +302,11 @@ class NYCSafetyDataFetcher:
             'CRIMINAL TRESPASS': 3,
             'KIDNAPPING & RELATED OFFENSES': 9,
             'ARSON': 8,
+            'PETIT LARCENY': 3,
+            'OTHER OFFENSES RELATED TO THEFT': 4,
+            'VEHICLE AND TRAFFIC LAWS': 2,
+            'MISCELLANEOUS PENAL LAW': 3,
+            'CRIMINAL MISCHIEF & RELATED OF': 4,
         }
         
         df['severity_score'] = df['type'].map(severity_mapping).fillna(3)
@@ -228,12 +333,13 @@ class NYCSafetyDataFetcher:
         """Main method to fetch, process, and save all safety data"""
         logger.info("Starting NYC safety data fetch and processing...")
         
-        # Fetch data from both sources
+        # Fetch data from all three sources
         calls = self.fetch_911_calls()
         complaints = self.fetch_nypd_complaints()
+        arrests = self.fetch_nypd_arrests()
         
         # Combine and clean
-        df = self.combine_and_clean_data(calls, complaints)
+        df = self.combine_and_clean_data(calls, complaints, arrests)
         
         if df.empty:
             raise ValueError("No data was successfully fetched and processed")
@@ -246,6 +352,7 @@ class NYCSafetyDataFetcher:
         logger.info(f"Total incidents: {len(df)}")
         logger.info(f"911 calls: {len(df[df['source'] == '911_calls'])}")
         logger.info(f"NYPD complaints: {len(df[df['source'] == 'nypd_complaints'])}")
+        logger.info(f"NYPD arrests: {len(df[df['source'] == 'nypd_arrests'])}")
         logger.info(f"Date range: {df['date'].min()} to {df['date'].max()}")
         logger.info(f"Geographic bounds: Lat {df['latitude'].min():.4f} to {df['latitude'].max():.4f}")
         logger.info(f"Geographic bounds: Lng {df['longitude'].min():.4f} to {df['longitude'].max():.4f}")
