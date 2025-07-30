@@ -72,9 +72,9 @@ class NYCSafetyDataFetcher:
                     lng = float(incident.get('longitude', ''))
                     
                     if not (isnan(lat) or isnan(lng)):
-                        # Generate a realistic timestamp within the last 365 days
+                        # Generate a realistic timestamp within the last 30 days
                         # Use the incident index to create some variation in dates
-                        days_ago = (i % 365) + 1  # 1-365 days ago
+                        days_ago = (i % 30) + 1  # 1-30 days ago
                         random_hour = (i % 24)  # 0-23 hours
                         random_minute = (i % 60)  # 0-59 minutes
                         
@@ -104,9 +104,9 @@ class NYCSafetyDataFetcher:
         """Fetch NYPD Complaints with dynamic date filtering"""
         logger.info("Fetching NYPD Complaints...")
         
-        # Calculate dynamic date range: today to 364 days ago (365-day rolling window)
+        # Calculate dynamic date range: today to 29 days ago (30-day rolling window)
         end_date = datetime.now()
-        start_date = end_date - timedelta(days=364)
+        start_date = end_date - timedelta(days=29)
         start_date_str = start_date.strftime('%Y-%m-%d')
         end_date_str = end_date.strftime('%Y-%m-%d')
         
@@ -135,13 +135,13 @@ class NYCSafetyDataFetcher:
                         lng = float(incident.get('longitude', ''))
                         
                         if not (isnan(lat) or isnan(lng)):
-                            # Transform the timestamp to be within the last 365 days
+                            # Transform the timestamp to be within the last 30 days
                             original_date = datetime.strptime(incident.get('cmplnt_fr_dt', ''), '%Y-%m-%dT%H:%M:%S.%f')
                             days_ago = (end_date - original_date).days
                             
-                            # If the incident is older than 365 days, shift it to be within the last year
-                            if days_ago > 365:
-                                new_date = end_date - timedelta(days=days_ago % 365)
+                            # If the incident is older than 30 days, shift it to be within the last month
+                            if days_ago > 30:
+                                new_date = end_date - timedelta(days=days_ago % 30)
                                 transformed_timestamp = new_date.strftime('%Y-%m-%dT%H:%M:%S.%f')
                             else:
                                 transformed_timestamp = incident.get('cmplnt_fr_dt', '')

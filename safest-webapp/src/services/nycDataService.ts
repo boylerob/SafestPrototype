@@ -56,10 +56,10 @@ class NYCDataService {
 
   async getSafetyIncidents(): Promise<SafetyIncident[]> {
     try {
-      // Calculate dynamic date range: today to 364 days ago (365-day rolling window)
+      // Calculate dynamic date range: today to 29 days ago (30-day rolling window)
       const endDate = new Date();
       const startDate = new Date();
-      startDate.setDate(endDate.getDate() - 364);
+      startDate.setDate(endDate.getDate() - 29);
       
       const startDateStr = startDate.toISOString().split('T')[0]; // Format: YYYY-MM-DD
       const endDateStr = endDate.toISOString().split('T')[0]; // Format: YYYY-MM-DD
@@ -110,8 +110,8 @@ class NYCDataService {
         const lng = parseFloat(incident.longitude || '');
         if (isNaN(lat) || isNaN(lng)) return null;
         
-        // Generate a realistic timestamp within the last 365 days
-        const daysAgo = (index % 365) + 1; // 1-365 days ago
+        // Generate a realistic timestamp within the last 30 days
+        const daysAgo = (index % 30) + 1; // 1-30 days ago
         const randomHour = (index % 24); // 0-23 hours
         const randomMinute = (index % 60); // 0-59 minutes
         
@@ -140,16 +140,16 @@ class NYCDataService {
           const lng = parseFloat(incident.longitude || '');
           if (isNaN(lat) || isNaN(lng)) return null;
           
-          // Transform the timestamp to be within the last 365 days
+          // Transform the timestamp to be within the last 30 days
           let transformedTimestamp = incident.cmplnt_fr_dt || '';
           if (transformedTimestamp) {
             const originalDate = new Date(transformedTimestamp);
             const daysAgo = Math.floor((endDate.getTime() - originalDate.getTime()) / (1000 * 60 * 60 * 24));
             
-            // If the incident is older than 365 days, shift it to be within the last year
-            if (daysAgo > 365) {
+            // If the incident is older than 30 days, shift it to be within the last month
+            if (daysAgo > 30) {
               const newDate = new Date();
-              newDate.setDate(newDate.getDate() - (daysAgo % 365));
+              newDate.setDate(newDate.getDate() - (daysAgo % 30));
               transformedTimestamp = newDate.toISOString();
             }
           }
