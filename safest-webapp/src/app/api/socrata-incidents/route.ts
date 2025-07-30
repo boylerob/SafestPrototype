@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 
+interface IncidentData {
+  [key: string]: string | number
+}
+
 export async function GET() {
   try {
     // Read the latest CSV file from backend-clustering/data
@@ -36,7 +40,7 @@ export async function GET() {
     for (let i = 1; i < lines.length; i++) {
       if (lines[i].trim()) {
         const values = lines[i].split(',')
-        const incident: any = {}
+        const incident: IncidentData = {}
         
         headers.forEach((header, index) => {
           incident[header.trim()] = values[index]?.trim() || ''
@@ -44,11 +48,11 @@ export async function GET() {
         
         // Convert numeric fields
         if (incident.latitude && incident.longitude) {
-          incident.latitude = parseFloat(incident.latitude)
-          incident.longitude = parseFloat(incident.longitude)
+          incident.latitude = parseFloat(incident.latitude as string)
+          incident.longitude = parseFloat(incident.longitude as string)
         }
         if (incident.severity_score) {
-          incident.severity_score = parseInt(incident.severity_score)
+          incident.severity_score = parseInt(incident.severity_score as string)
         }
         
         incidents.push(incident)

@@ -44,6 +44,8 @@ const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
       loadIncidents()
     })
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     return () => {
       if (map.current) {
         map.current.remove()
