@@ -101,10 +101,10 @@ class NYCSafetyDataFetcher:
             return []
     
     def fetch_nypd_complaints(self) -> List[Dict[str, Any]]:
-        """Fetch NYPD Complaints with dynamic date filtering"""
+        """Fetch NYPD Complaint Data"""
         logger.info("Fetching NYPD Complaints...")
         
-        # Calculate dynamic date range: today to 29 days ago (30-day rolling window)
+        # Use 30-day rolling window for more current data
         end_date = datetime.now()
         start_date = end_date - timedelta(days=29)
         start_date_str = start_date.strftime('%Y-%m-%d')
@@ -114,7 +114,7 @@ class NYCSafetyDataFetcher:
         
         url = f"{self.socrata_base_url}/5uac-w243.json"
         params = {
-            '$where': f"cmplnt_fr_dt >= '{start_date_str}' AND cmplnt_fr_dt <= '{end_date_str}' AND latitude IS NOT NULL AND longitude IS NOT NULL",
+            '$where': f"cmplnt_fr_dt >= '{start_date_str}' AND cmplnt_fr_dt <= '{end_date_str}' AND latitude IS NOT NULL AND longitude IS NOT NULL AND latitude != 0 AND longitude != 0",
             '$limit': 5000,
         }
         headers = {'X-App-Token': self.app_token}
@@ -124,37 +124,39 @@ class NYCSafetyDataFetcher:
             response.raise_for_status()
             data = response.json()
             
-            # Filter by key categories and clean data
+            # Filter and clean complaint data
             filtered_complaints = []
             for incident in data:
                 try:
-                    # Check if incident is in key categories
-                    offense_desc = incident.get('ofns_desc', '')
-                    if offense_desc in self.key_categories:
-                        lat = float(incident.get('latitude', ''))
-                        lng = float(incident.get('longitude', ''))
+                    lat = float(incident.get('latitude', ''))
+                    lng = float(incident.get('longitude', ''))
+                    
+                    # Exclude invalid coordinates
+                    if (not (isnan(lat) or isnan(lng)) and 
+                        lat != 0 and lng != 0 and
+                        lat > 40.4 and lat < 41.0 and
+                        lng > -74.3 and lng < -73.7):
                         
-                        if not (isnan(lat) or isnan(lng)):
-                            # Transform the timestamp to be within the last 30 days
-                            original_date = datetime.strptime(incident.get('cmplnt_fr_dt', ''), '%Y-%m-%dT%H:%M:%S.%f')
-                            days_ago = (end_date - original_date).days
-                            
-                            # If the incident is older than 30 days, shift it to be within the last month
-                            if days_ago > 30:
-                                new_date = end_date - timedelta(days=days_ago % 30)
-                                transformed_timestamp = new_date.strftime('%Y-%m-%dT%H:%M:%S.%f')
-                            else:
-                                transformed_timestamp = incident.get('cmplnt_fr_dt', '')
-                            
-                            filtered_complaints.append({
-                                'id': incident.get('cmplnt_num', f"complaint_{len(filtered_complaints)}"),
-                                'latitude': lat,
-                                'longitude': lng,
-                                'type': offense_desc,
-                                'description': incident.get('pd_desc', ''),
-                                'timestamp': transformed_timestamp,
-                                'source': 'nypd_complaints'
-                            })
+                        # Transform the timestamp to be within the last 30 days
+                        original_date = datetime.strptime(incident.get('cmplnt_fr_dt', ''), '%Y-%m-%dT%H:%M:%S.%f')
+                        days_ago = (end_date - original_date).days
+                        
+                        # If the complaint is older than 30 days, shift it to be within the last month
+                        if days_ago > 30:
+                            new_date = end_date - timedelta(days=days_ago % 30)
+                            transformed_timestamp = new_date.strftime('%Y-%m-%dT%H:%M:%S.%f')
+                        else:
+                            transformed_timestamp = incident.get('cmplnt_fr_dt', '')
+                        
+                        filtered_complaints.append({
+                            'id': incident.get('cmplnt_num', f"complaint_{len(filtered_complaints)}"),
+                            'latitude': lat,
+                            'longitude': lng,
+                            'type': incident.get('ofns_desc', 'COMPLAINT'),
+                            'description': incident.get('cmplnt_fr_dt', ''),
+                            'timestamp': transformed_timestamp,
+                            'source': 'nypd_complaints'
+                        })
                 except (ValueError, TypeError):
                     continue
             
@@ -169,10 +171,11 @@ class NYCSafetyDataFetcher:
         """Fetch NYPD Arrest Data (Year to Date)"""
         logger.info("Fetching NYPD Arrest Data...")
         
-        # Use a date range that includes available data (Jan-June 2025)
-        # Since we know the dataset has data from 2025-01-01 to 2025-06-30
-        start_date_str = "2025-01-01"
-        end_date_str = "2025-06-30"
+        # Use 90-day rolling window since July 2025 has no data
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=89)
+        start_date_str = start_date.strftime('%Y-%m-%d')
+        end_date_str = end_date.strftime('%Y-%m-%d')
         
         logger.info(f"Fetching arrest data from {start_date_str} to {end_date_str}")
         
@@ -190,7 +193,6 @@ class NYCSafetyDataFetcher:
             
             # Filter and clean arrest data
             filtered_arrests = []
-            end_date = datetime.now()
             
             for incident in data:
                 try:
