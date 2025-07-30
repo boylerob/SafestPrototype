@@ -5,6 +5,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { config } from '../config/config';
 import ClusteringService, { ClusteringData } from '../services/clusteringService';
+import GeoJSONService, { GeoJSONClusteringData } from '../services/geojsonService';
 
 // Set Mapbox access token
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || config.mapbox.accessToken;
@@ -17,6 +18,7 @@ const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [clusteringData, setClusteringData] = useState<ClusteringData | null>(null);
+  const [geojsonData, setGeojsonData] = useState<GeoJSONClusteringData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,47 +46,84 @@ const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
       try {
         setLoading(true);
         const clusteringService = ClusteringService.getInstance();
+        const geojsonService = GeoJSONService.getInstance();
+        
         const data = await clusteringService.getClusteringData();
         setClusteringData(data);
         
-        // Add cluster markers
-        if (data.clusters.length > 0) {
-          data.clusters.forEach((cluster) => {
-            // Create marker element
-            const markerEl = document.createElement('div');
-            markerEl.className = 'cluster-marker';
-            markerEl.style.width = `${clusteringService.getClusterSize(cluster.size)}px`;
-            markerEl.style.height = `${clusteringService.getClusterSize(cluster.size)}px`;
-            markerEl.style.borderRadius = '50%';
-            markerEl.style.backgroundColor = clusteringService.getClusterColor(cluster.severity_score);
-            markerEl.style.border = '3px solid white';
-            markerEl.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
-            markerEl.style.cursor = 'pointer';
-            markerEl.style.opacity = '0.8';
+        // Convert to GeoJSON format
+        const geojsonData = geojsonService.convertClusteringDataToGeoJSON(data);
+        setGeojsonData(geojsonData);
+        
+        // Add GeoJSON source to map
+        if (geojsonData.features.length > 0) {
+          map.current!.addSource('clusters', {
+            type: 'geojson',
+            data: geojsonData
+          });
 
-            // Create popup content
-            const incidentTypesList = Object.entries(cluster.incident_types)
-              .map(([type, count]) => `${type}: ${count}`)
-              .join('<br>');
+          // Add cluster layer
+          map.current!.addLayer({
+            id: 'clusters',
+            type: 'circle',
+            source: 'clusters',
+            paint: {
+              'circle-radius': [
+                'interpolate',
+                ['linear'],
+                ['get', 'size'],
+                0, 10,
+                100, 30
+              ],
+              'circle-color': [
+                'case',
+                ['>=', ['get', 'severity_score'], 8], '#dc2626',
+                ['>=', ['get', 'severity_score'], 6], '#ea580c',
+                ['>=', ['get', 'severity_score'], 4], '#ca8a04',
+                ['>=', ['get', 'severity_score'], 2], '#16a34a',
+                '#0891b2'
+              ],
+              'circle-stroke-width': 2,
+              'circle-stroke-color': '#ffffff'
+            }
+          });
 
-            const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
-              <div class="p-4 max-w-sm">
-                <h3 class="font-bold text-lg mb-2">Safety Cluster #${cluster.cluster_id}</h3>
-                <div class="space-y-2 text-sm">
-                  <p><strong>Size:</strong> ${cluster.size} incidents</p>
-                  <p><strong>Severity:</strong> ${cluster.severity_score.toFixed(1)}/10</p>
-                  <p><strong>Incident Types:</strong></p>
-                  <div class="text-xs text-gray-600 ml-2">${incidentTypesList}</div>
-                  ${cluster.date_range.start ? `<p><strong>Date Range:</strong> ${cluster.date_range.start} to ${cluster.date_range.end}</p>` : ''}
-                </div>
-              </div>
-            `);
+          // Add click handler for clusters
+          map.current!.on('click', 'clusters', (e) => {
+            if (e.features && e.features[0]) {
+              const feature = e.features[0];
+              const properties = feature.properties;
+              
+              if (properties) {
+                const incidentTypesList = Object.entries(properties.incident_types)
+                  .map(([type, count]) => `${type}: ${count}`)
+                  .join('<br>');
 
-            // Add marker to map
-            new mapboxgl.Marker(markerEl)
-              .setLngLat([cluster.centroid[1], cluster.centroid[0]]) // Note: centroid is [lat, lng] but Mapbox expects [lng, lat]
-              .setPopup(popup)
-              .addTo(map.current!);
+                const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
+                  <div class="p-4 max-w-sm">
+                    <h3 class="font-bold text-lg mb-2">Safety Cluster #${properties.cluster_id}</h3>
+                    <div class="space-y-2 text-sm">
+                      <p><strong>Size:</strong> ${properties.size} incidents</p>
+                      <p><strong>Severity:</strong> ${properties.severity_score.toFixed(1)}/10</p>
+                      <p><strong>Incident Types:</strong></p>
+                      <div class="text-xs text-gray-600 ml-2">${incidentTypesList}</div>
+                      ${properties.date_range ? `<p><strong>Date Range:</strong> ${properties.date_range.start} to ${properties.date_range.end}</p>` : ''}
+                    </div>
+                  </div>
+                `);
+
+                popup.setLngLat(e.lngLat).addTo(map.current!);
+              }
+            }
+          });
+
+          // Change cursor on hover
+          map.current!.on('mouseenter', 'clusters', () => {
+            map.current!.getCanvas().style.cursor = 'pointer';
+          });
+
+          map.current!.on('mouseleave', 'clusters', () => {
+            map.current!.getCanvas().style.cursor = '';
           });
         }
 
