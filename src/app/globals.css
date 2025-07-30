@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mapbox GL CSS */
+@import 'mapbox-gl/dist/mapbox-gl.css';
+
+/* Custom styles for v2 */
+.mapboxgl-map {
+  font-family: inherit;
+}
+
+.cluster-marker {
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.data-toggle {
+  @apply bg-white rounded-lg shadow-lg p-4 border border-gray-200;
+}
+
+.toggle-button {
+  @apply px-4 py-2 rounded-md font-medium transition-colors duration-200;
+}
+
+.toggle-button.active {
+  @apply bg-blue-600 text-white;
+}
+
+.toggle-button.inactive {
+  @apply bg-gray-100 text-gray-700 hover:bg-gray-200;
+} 
