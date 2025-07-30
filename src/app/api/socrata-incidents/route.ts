@@ -5,7 +5,7 @@ import path from 'path'
 export async function GET() {
   try {
     // Read the latest CSV file from backend-clustering/data
-    const backendDataDir = path.join(process.cwd(), 'backend-clustering', 'data')
+    const backendDataDir = path.join(process.cwd(), '..', 'backend-clustering', 'data')
     
     console.log('Looking for data files in:', backendDataDir)
     
