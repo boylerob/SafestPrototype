@@ -54,7 +54,9 @@ export async function GET() {
           incident.longitude = parseFloat(incident.longitude)
         }
         if (incident.severity_score) {
-          incident.severity_score = parseInt(incident.severity_score)
+          incident.severity_score = parseFloat(incident.severity_score) || 3.0
+        } else {
+          incident.severity_score = 3.0  // Default severity score
         }
         
         incidents.push(incident)
