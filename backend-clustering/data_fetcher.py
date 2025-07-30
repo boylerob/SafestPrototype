@@ -178,7 +178,7 @@ class NYCSafetyDataFetcher:
         
         url = f"{self.socrata_base_url}/uip8-fykc.json"
         params = {
-            '$where': f"arrest_date >= '{start_date_str}' AND arrest_date <= '{end_date_str}' AND latitude IS NOT NULL AND longitude IS NOT NULL",
+            '$where': f"arrest_date >= '{start_date_str}' AND arrest_date <= '{end_date_str}' AND latitude IS NOT NULL AND longitude IS NOT NULL AND latitude != 0 AND longitude != 0",
             '$limit': 5000,
         }
         headers = {'X-App-Token': self.app_token}
@@ -197,7 +197,12 @@ class NYCSafetyDataFetcher:
                     lat = float(incident.get('latitude', ''))
                     lng = float(incident.get('longitude', ''))
                     
-                    if not (isnan(lat) or isnan(lng)):
+                    # Exclude invalid coordinates (0.0000, out of NYC bounds, etc.)
+                    if (not (isnan(lat) or isnan(lng)) and 
+                        lat != 0 and lng != 0 and
+                        lat > 40.4 and lat < 41.0 and  # NYC latitude bounds
+                        lng > -74.3 and lng < -73.7):   # NYC longitude bounds
+                        
                         # Transform the timestamp to be within the last 30 days
                         original_date = datetime.strptime(incident.get('arrest_date', ''), '%Y-%m-%dT%H:%M:%S.%f')
                         days_ago = (end_date - original_date).days
@@ -221,7 +226,7 @@ class NYCSafetyDataFetcher:
                 except (ValueError, TypeError):
                     continue
             
-            logger.info(f"Fetched {len(filtered_arrests)} valid arrests")
+            logger.info(f"Fetched {len(filtered_arrests)} valid arrests (filtered from {len(data)} total)")
             return filtered_arrests
             
         except requests.exceptions.RequestException as e:

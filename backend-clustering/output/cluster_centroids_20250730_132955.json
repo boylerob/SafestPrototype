@@ -1,0 +1,4254 @@
+{
+  "clusters": [
+    {
+      "cluster_id": 0,
+      "centroid": [
+        40.74471023968427,
+        -73.92647264578945
+      ],
+      "size": 38,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75M": 4,
+        "75D": 3,
+        "68Q1": 3,
+        "75S": 3,
+        "54E2": 2,
+        "10V2": 2,
+        "59R4": 2,
+        "75O": 1,
+        "39C2": 1,
+        "54E1": 1,
+        "10S4": 1,
+        "56S": 1,
+        "53H": 1,
+        "75T": 1,
+        "10P2": 1,
+        "54U1": 1,
+        "54S2": 1,
+        "75I": 1,
+        "54S1": 1,
+        "22Q2": 1,
+        "52D6": 1,
+        "75Z": 1,
+        "53I": 1,
+        "68Q9": 1,
+        "53I8": 1,
+        "10Y3": 1
+      },
+      "date_range": {
+        "start": "2025-06-30 05:29:00.000000",
+        "end": "2025-06-30 05:29:00.000000"
+      }
+    },
+    {
+      "cluster_id": 1,
+      "centroid": [
+        40.72225919689749,
+        -73.92205780720509
+      ],
+      "size": 39,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 4,
+        "75I": 4,
+        "10V2": 3,
+        "52D1": 3,
+        "68Q1": 3,
+        "75S": 2,
+        "11C4": 2,
+        "75H": 2,
+        "54S1": 2,
+        "75M": 2,
+        "54S2": 1,
+        "54E1": 1,
+        "39H9": 1,
+        "75O": 1,
+        "34Q1": 1,
+        "34K1": 1,
+        "10Y3": 1,
+        "50P2": 1,
+        "10S4": 1,
+        "53S": 1,
+        "52F1": 1,
+        "53X": 1
+      },
+      "date_range": {
+        "start": "2025-06-30 11:59:00.000000",
+        "end": "2025-06-30 11:59:00.000000"
+      }
+    },
+    {
+      "cluster_id": 2,
+      "centroid": [
+        40.758281708657954,
+        -73.92136681305259
+      ],
+      "size": 38,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 7,
+        "75S": 5,
+        "75D": 5,
+        "75T": 2,
+        "54C1": 2,
+        "68Q2": 2,
+        "75C": 2,
+        "10V2": 1,
+        "75O": 1,
+        "54S9": 1,
+        "75I": 1,
+        "54S2": 1,
+        "31R": 1,
+        "54E9": 1,
+        "54U2": 1,
+        "50P9": 1,
+        "39H1": 1,
+        "54S1": 1,
+        "34W6": 1,
+        "10Y3": 1
+      },
+      "date_range": {
+        "start": "2025-06-30 23:59:00.000000",
+        "end": "2025-06-30 23:59:00.000000"
+      }
+    },
+    {
+      "cluster_id": 3,
+      "centroid": [
+        40.72942914400006,
+        -73.9442674563333
+      ],
+      "size": 39,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 7,
+        "75S": 6,
+        "75D": 4,
+        "75T": 3,
+        "75M": 2,
+        "52D2": 2,
+        "54S1": 2,
+        "22Q1": 1,
+        "75O": 1,
+        "54S2": 1,
+        "68Q2": 1,
+        "50G2": 1,
+        "34Q9": 1,
+        "50P9": 1,
+        "52D6": 1,
+        "10H2": 1,
+        "20Q1": 1,
+        "54S9": 1,
+        "34Q6": 1,
+        "22Q2": 1
+      },
+      "date_range": {
+        "start": "2025-06-30 17:29:00.000000",
+        "end": "2025-06-30 17:29:00.000000"
+      }
+    },
+    {
+      "cluster_id": 4,
+      "centroid": [
+        40.61451840909091,
+        -74.11390677272726
+      ],
+      "size": 22,
+      "severity_score": 5.954545454545454,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 18,
+        "BURGLARY": 3,
+        "GRAND LARCENY": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 5,
+      "centroid": [
+        40.62598123955128,
+        -74.11010726025413
+      ],
+      "size": 19,
+      "severity_score": 2.0,
+      "incident_types": {
+        "VEHICLE AND TRAFFIC LAWS": 19
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 6,
+      "centroid": [
+        40.63293271223725,
+        -74.10371898005629
+      ],
+      "size": 25,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 14,
+        "CRIMINAL MISCHIEF & RELATED OF": 9,
+        "OTHER OFFENSES RELATED TO THEFT": 2
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-21 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 7,
+      "centroid": [
+        40.70095555221694,
+        -73.73439091891241
+      ],
+      "size": 19,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 12,
+        "SEX CRIMES": 6,
+        "ARSON": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 8,
+      "centroid": [
+        40.720998132994964,
+        -73.84000127029213
+      ],
+      "size": 27,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 18,
+        "GRAND LARCENY OF MOTOR VEHICLE": 9
+      },
+      "date_range": {
+        "start": "2025-07-04 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 9,
+      "centroid": [
+        40.71332552007251,
+        -73.82070903484465
+      ],
+      "size": 52,
+      "severity_score": 7.0,
+      "incident_types": {
+        "DANGEROUS WEAPONS": 30,
+        "ROBBERY": 22
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 10,
+      "centroid": [
+        40.83368610329465,
+        -73.90857945144313
+      ],
+      "size": 140,
+      "severity_score": 7.0,
+      "incident_types": {
+        "ROBBERY": 71,
+        "DANGEROUS WEAPONS": 69
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 11,
+      "centroid": [
+        40.62679150221983,
+        -73.95670055261813
+      ],
+      "size": 35,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 31,
+        "GRAND LARCENY OF MOTOR VEHICLE": 4
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 12,
+      "centroid": [
+        40.694451793577684,
+        -73.7746902858952
+      ],
+      "size": 85,
+      "severity_score": 2.0,
+      "incident_types": {
+        "VEHICLE AND TRAFFIC LAWS": 85
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 13,
+      "centroid": [
+        40.73410276745927,
+        -73.98870519514112
+      ],
+      "size": 59,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 58,
+        "GRAND LARCENY OF MOTOR VEHICLE": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 14,
+      "centroid": [
+        40.84044027396947,
+        -73.91447138324143
+      ],
+      "size": 42,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 35,
+        "GRAND LARCENY OF MOTOR VEHICLE": 7
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 15,
+      "centroid": [
+        40.830754292830086,
+        -73.91207630793859
+      ],
+      "size": 107,
+      "severity_score": 2.0,
+      "incident_types": {
+        "VEHICLE AND TRAFFIC LAWS": 107
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 16,
+      "centroid": [
+        40.58533470918343,
+        -73.9687078140239
+      ],
+      "size": 23,
+      "severity_score": 7.0,
+      "incident_types": {
+        "ROBBERY": 12,
+        "DANGEROUS WEAPONS": 11
+      },
+      "date_range": {
+        "start": "2025-07-03 13:29:54.081886",
+        "end": "2025-07-25 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 17,
+      "centroid": [
+        40.731550480421504,
+        -73.99240352008151
+      ],
+      "size": 27,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 22,
+        "SEX CRIMES": 5
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-29 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 18,
+      "centroid": [
+        40.75007507044998,
+        -73.87594469139653
+      ],
+      "size": 19,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 15,
+        "SEX CRIMES": 4
+      },
+      "date_range": {
+        "start": "2025-07-03 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 19,
+      "centroid": [
+        40.74503515525639,
+        -73.87509344622956
+      ],
+      "size": 20,
+      "severity_score": 4.0,
+      "incident_types": {
+        "CRIMINAL MISCHIEF & RELATED OF": 8,
+        "DANGEROUS DRUGS": 7,
+        "OTHER OFFENSES RELATED TO THEFT": 5
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-23 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 20,
+      "centroid": [
+        40.7055510488884,
+        -73.83913322346581
+      ],
+      "size": 20,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 11,
+        "SEX CRIMES": 9
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 21,
+      "centroid": [
+        40.706739229236405,
+        -73.79428137373795
+      ],
+      "size": 17,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 11,
+        "SEX CRIMES": 6
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 22,
+      "centroid": [
+        40.74734371507281,
+        -73.87216219216243
+      ],
+      "size": 35,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 30,
+        "BURGLARY": 5
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 23,
+      "centroid": [
+        40.594806844642484,
+        -73.97716437501904
+      ],
+      "size": 23,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 18,
+        "SEX CRIMES": 5
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 24,
+      "centroid": [
+        40.693144669592115,
+        -73.74615342445475
+      ],
+      "size": 32,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 32
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 25,
+      "centroid": [
+        40.702190092318595,
+        -73.8029985472282
+      ],
+      "size": 41,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 35,
+        "BURGLARY": 6
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 26,
+      "centroid": [
+        40.66991716813636,
+        -73.92705328227589
+      ],
+      "size": 56,
+      "severity_score": 2.0,
+      "incident_types": {
+        "VEHICLE AND TRAFFIC LAWS": 56
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 27,
+      "centroid": [
+        40.68599414235125,
+        -73.99488589485185
+      ],
+      "size": 17,
+      "severity_score": 2.0,
+      "incident_types": {
+        "VEHICLE AND TRAFFIC LAWS": 17
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-29 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 28,
+      "centroid": [
+        40.66878805660308,
+        -73.93846227659913
+      ],
+      "size": 58,
+      "severity_score": 7.0,
+      "incident_types": {
+        "DANGEROUS WEAPONS": 39,
+        "ROBBERY": 19
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 29,
+      "centroid": [
+        40.73760469520801,
+        -73.99209356686687
+      ],
+      "size": 29,
+      "severity_score": 7.0,
+      "incident_types": {
+        "ROBBERY": 20,
+        "DANGEROUS WEAPONS": 9
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 30,
+      "centroid": [
+        40.81183042664653,
+        -73.94741082499374
+      ],
+      "size": 34,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 24,
+        "SEX CRIMES": 10
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 31,
+      "centroid": [
+        40.643698351188604,
+        -74.00996728150217
+      ],
+      "size": 17,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 11,
+        "DANGEROUS DRUGS": 4,
+        "CRIMINAL MISCHIEF & RELATED OF": 2
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-29 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 32,
+      "centroid": [
+        40.646603001410455,
+        -73.94928635004754
+      ],
+      "size": 21,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 18,
+        "SEX CRIMES": 2,
+        "ARSON": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-26 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 33,
+      "centroid": [
+        40.67643198051648,
+        -73.91311435011067
+      ],
+      "size": 60,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 47,
+        "SEX CRIMES": 13
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 34,
+      "centroid": [
+        40.7008148925116,
+        -73.80559429372694
+      ],
+      "size": 43,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 26,
+        "DANGEROUS DRUGS": 14,
+        "CRIMINAL MISCHIEF & RELATED OF": 3
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-29 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 35,
+      "centroid": [
+        40.6935135261087,
+        -73.7927962759163
+      ],
+      "size": 15,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 15
+      },
+      "date_range": {
+        "start": "2025-07-04 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 36,
+      "centroid": [
+        40.594578163036516,
+        -73.95151298921225
+      ],
+      "size": 29,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 18,
+        "OTHER OFFENSES RELATED TO THEFT": 6,
+        "CRIMINAL MISCHIEF & RELATED OF": 5
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-28 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 37,
+      "centroid": [
+        40.57607196589878,
+        -73.98525520132013
+      ],
+      "size": 20,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 9,
+        "OTHER OFFENSES RELATED TO THEFT": 8,
+        "CRIMINAL MISCHIEF & RELATED OF": 3
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-29 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 38,
+      "centroid": [
+        40.68622025055556,
+        -73.98664743555555
+      ],
+      "size": 18,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 14,
+        "BURGLARY": 4
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-23 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 39,
+      "centroid": [
+        40.83192717235064,
+        -73.9115405677571
+      ],
+      "size": 262,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 222,
+        "BURGLARY": 40
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 40,
+      "centroid": [
+        40.733483055273986,
+        -74.0007752703593
+      ],
+      "size": 31,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 18,
+        "OTHER OFFENSES RELATED TO THEFT": 13
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-29 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 41,
+      "centroid": [
+        40.75424673238344,
+        -73.99084849164504
+      ],
+      "size": 34,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 18,
+        "DANGEROUS DRUGS": 12,
+        "CRIMINAL MISCHIEF & RELATED OF": 4
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 42,
+      "centroid": [
+        40.84452743164595,
+        -73.89564111111211
+      ],
+      "size": 41,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 35,
+        "SEX CRIMES": 6
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 43,
+      "centroid": [
+        40.825858681428926,
+        -73.90829287424492
+      ],
+      "size": 46,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 37,
+        "SEX CRIMES": 8,
+        "ARSON": 1
+      },
+      "date_range": {
+        "start": "2025-07-04 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 44,
+      "centroid": [
+        40.67545514015799,
+        -74.00346186189896
+      ],
+      "size": 17,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 14,
+        "OTHER OFFENSES RELATED TO THEFT": 2,
+        "CRIMINAL MISCHIEF & RELATED OF": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-29 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 45,
+      "centroid": [
+        40.59307572166773,
+        -73.97101882343924
+      ],
+      "size": 47,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 39,
+        "BURGLARY": 8
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 46,
+      "centroid": [
+        40.6735560865229,
+        -73.92222050102193
+      ],
+      "size": 111,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 102,
+        "BURGLARY": 9
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 47,
+      "centroid": [
+        40.71909587965465,
+        -73.98580662687738
+      ],
+      "size": 15,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 11,
+        "BURGLARY": 4
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-27 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 48,
+      "centroid": [
+        40.741123747946595,
+        -73.98856820860297
+      ],
+      "size": 53,
+      "severity_score": 6.0,
+      "incident_types": {
+        "BURGLARY": 28,
+        "ASSAULT 3 & RELATED OFFENSES": 25
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 49,
+      "centroid": [
+        40.84091255584381,
+        -73.87277473479894
+      ],
+      "size": 16,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 14,
+        "CRIMINAL MISCHIEF & RELATED OF": 1,
+        "DANGEROUS DRUGS": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 50,
+      "centroid": [
+        40.69673019189526,
+        -73.92975112489965
+      ],
+      "size": 75,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 31,
+        "OTHER OFFENSES RELATED TO THEFT": 23,
+        "CRIMINAL MISCHIEF & RELATED OF": 21
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 51,
+      "centroid": [
+        40.65294525018021,
+        -73.9511297557245
+      ],
+      "size": 24,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 10,
+        "OTHER OFFENSES RELATED TO THEFT": 8,
+        "CRIMINAL MISCHIEF & RELATED OF": 6
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 52,
+      "centroid": [
+        40.841829377844434,
+        -73.88543592252543
+      ],
+      "size": 34,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 16,
+        "DANGEROUS DRUGS": 10,
+        "CRIMINAL MISCHIEF & RELATED OF": 8
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 53,
+      "centroid": [
+        40.799367854023224,
+        -73.94959603327615
+      ],
+      "size": 25,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 21,
+        "OTHER OFFENSES RELATED TO THEFT": 4
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-28 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 54,
+      "centroid": [
+        40.67340345658191,
+        -73.93044298773974
+      ],
+      "size": 22,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 11,
+        "DANGEROUS DRUGS": 6,
+        "CRIMINAL MISCHIEF & RELATED OF": 5
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 55,
+      "centroid": [
+        40.668603536096114,
+        -73.90355455703528
+      ],
+      "size": 33,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 18,
+        "OTHER OFFENSES RELATED TO THEFT": 10,
+        "CRIMINAL MISCHIEF & RELATED OF": 5
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 56,
+      "centroid": [
+        40.820169723121616,
+        -73.89543998638035
+      ],
+      "size": 43,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 24,
+        "DANGEROUS DRUGS": 15,
+        "CRIMINAL MISCHIEF & RELATED OF": 4
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-29 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 57,
+      "centroid": [
+        40.818763413898935,
+        -73.91689880990941
+      ],
+      "size": 34,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 18,
+        "OTHER OFFENSES RELATED TO THEFT": 12,
+        "CRIMINAL MISCHIEF & RELATED OF": 4
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 58,
+      "centroid": [
+        40.84742269445362,
+        -73.90341515834356
+      ],
+      "size": 17,
+      "severity_score": 4.0,
+      "incident_types": {
+        "CRIMINAL MISCHIEF & RELATED OF": 8,
+        "DANGEROUS DRUGS": 5,
+        "OTHER OFFENSES RELATED TO THEFT": 4
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-20 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 59,
+      "centroid": [
+        40.859132031033205,
+        -73.89495835785102
+      ],
+      "size": 34,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 20,
+        "OTHER OFFENSES RELATED TO THEFT": 9,
+        "CRIMINAL MISCHIEF & RELATED OF": 5
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-29 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 60,
+      "centroid": [
+        40.82528921370489,
+        -73.94734296662716
+      ],
+      "size": 25,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 12,
+        "DANGEROUS DRUGS": 7,
+        "CRIMINAL MISCHIEF & RELATED OF": 6
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 61,
+      "centroid": [
+        40.81146937753195,
+        -73.94858846641922
+      ],
+      "size": 38,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 22,
+        "DANGEROUS DRUGS": 12,
+        "CRIMINAL MISCHIEF & RELATED OF": 4
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 62,
+      "centroid": [
+        40.59799657285293,
+        -73.77230698989788
+      ],
+      "size": 29,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 7,
+        "PETIT LARCENY": 4,
+        "68Q1": 3,
+        "OFFENSES AGAINST THE PERSON": 2,
+        "OFFENSES AGAINST PUBLIC ADMINI": 2,
+        "75S": 2,
+        "CRIMINAL TRESPASS": 2,
+        "10S4": 1,
+        "75Z": 1,
+        "10S2": 1,
+        "56S": 1,
+        "52D6": 1,
+        "75M": 1,
+        "FORGERY": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 63,
+      "centroid": [
+        40.60134594262506,
+        -73.75837192174995
+      ],
+      "size": 16,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 3,
+        "54E1": 2,
+        "68Q1": 2,
+        "54U1": 2,
+        "10S4": 1,
+        "10V2": 1,
+        "59R4": 1,
+        "75M": 1,
+        "50P2": 1,
+        "52D2": 1,
+        "10H1": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 08:56:00.000000",
+        "end": "2025-07-27 08:32:00.000000"
+      }
+    },
+    {
+      "cluster_id": 64,
+      "centroid": [
+        40.62598439543484,
+        -74.08533807547823
+      ],
+      "size": 23,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 7,
+        "75I": 3,
+        "10S4": 3,
+        "75D": 3,
+        "10P2": 1,
+        "11C4": 1,
+        "68Q2": 1,
+        "54C1": 1,
+        "10Y3": 1,
+        "54C3": 1,
+        "11R4": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 21:57:00.000000",
+        "end": "2025-07-28 19:31:00.000000"
+      }
+    },
+    {
+      "cluster_id": 65,
+      "centroid": [
+        40.618753369914735,
+        -74.11045901678798
+      ],
+      "size": 109,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 18,
+        "MISCELLANEOUS PENAL LAW": 11,
+        "68Q1": 6,
+        "75I": 6,
+        "OTHER STATE LAWS": 6,
+        "INTOXICATED & IMPAIRED DRIVING": 6,
+        "75D": 5,
+        "54E1": 4,
+        "OFFENSES AGAINST PUBLIC ADMINI": 4,
+        "53S": 3,
+        "OFFENSES INVOLVING FRAUD": 3,
+        "68Q2": 3,
+        "75Z": 2,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 2,
+        "CRIMINAL TRESPASS": 2,
+        "10S4": 2,
+        "11C4": 2,
+        "53X8": 2,
+        "10Y3": 1,
+        "34Q6": 1,
+        "10V2": 1,
+        "11R4": 1,
+        "68U2": 1,
+        "75T": 1,
+        "75H": 1,
+        "39T1": 1,
+        "34W1": 1,
+        "52D1": 1,
+        "10H1": 1,
+        "54S2": 1,
+        "75L": 1,
+        "53I8": 1,
+        "ADMINISTRATIVE CODE": 1,
+        "OFF. AGNST PUB ORD SENSBLTY &": 1,
+        "BURGLAR'S TOOLS": 1,
+        "FORGERY": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "OTHER TRAFFIC INFRACTION": 1,
+        "ALCOHOLIC BEVERAGE CONTROL LAW": 1,
+        "PROSTITUTION & RELATED OFFENSES": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 66,
+      "centroid": [
+        40.74807356787505,
+        -73.88383330074996
+      ],
+      "size": 40,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 5,
+        "75S": 3,
+        "10V2": 3,
+        "10H1": 3,
+        "75D": 2,
+        "54S2": 2,
+        "34Q2": 2,
+        "75Z": 2,
+        "34Q1": 2,
+        "52D6": 1,
+        "50G2": 1,
+        "10P2": 1,
+        "10P9": 1,
+        "54R2": 1,
+        "34Q6": 1,
+        "30Q2": 1,
+        "39H1": 1,
+        "22V2": 1,
+        "22Q1": 1,
+        "24Q1": 1,
+        "53S": 1,
+        "54U2": 1,
+        "10N9": 1,
+        "68Q2": 1,
+        "56S9": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 16:28:00.000000",
+        "end": "2025-07-29 18:30:00.000000"
+      }
+    },
+    {
+      "cluster_id": 67,
+      "centroid": [
+        40.70556891720694,
+        -73.7990072277241
+      ],
+      "size": 29,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 8,
+        "75D": 4,
+        "75M": 3,
+        "75Z": 2,
+        "10V2": 1,
+        "24Q1": 1,
+        "24K1": 1,
+        "75O": 1,
+        "75H": 1,
+        "39H2": 1,
+        "10Y9": 1,
+        "59C": 1,
+        "68Q2": 1,
+        "52D6": 1,
+        "22P1": 1,
+        "68Q1": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 04:28:00.000000",
+        "end": "2025-07-29 00:00:00.000000"
+      }
+    },
+    {
+      "cluster_id": 68,
+      "centroid": [
+        40.67383448506673,
+        -73.8697215429333
+      ],
+      "size": 15,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75I": 6,
+        "75M": 2,
+        "75D": 2,
+        "51": 1,
+        "68Q1": 1,
+        "24Q1": 1,
+        "50G2": 1,
+        "39V6": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 04:28:00.000000",
+        "end": "2025-07-27 02:02:00.000000"
+      }
+    },
+    {
+      "cluster_id": 69,
+      "centroid": [
+        40.7496270973044,
+        -73.87208196943475
+      ],
+      "size": 23,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 4,
+        "75S": 2,
+        "11C4": 2,
+        "10V2": 2,
+        "10P2": 2,
+        "10H1": 2,
+        "54S2": 1,
+        "68Q1": 1,
+        "34Q2": 1,
+        "50P1": 1,
+        "24Q2": 1,
+        "10H2": 1,
+        "34Q6": 1,
+        "52D6": 1,
+        "52D1": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 08:56:00.000000",
+        "end": "2025-07-28 07:31:00.000000"
+      }
+    },
+    {
+      "cluster_id": 70,
+      "centroid": [
+        40.587751803812544,
+        -73.97761513918746
+      ],
+      "size": 48,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 9,
+        "75M": 7,
+        "75S": 7,
+        "75D": 5,
+        "75I": 4,
+        "50P9": 3,
+        "75O": 3,
+        "10S2": 2,
+        "54S9": 2,
+        "75Z": 1,
+        "68Q2": 1,
+        "50G9": 1,
+        "10Y3": 1,
+        "11C4": 1,
+        "11B4": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 10:58:00.000000",
+        "end": "2025-07-29 06:30:00.000000"
+      }
+    },
+    {
+      "cluster_id": 71,
+      "centroid": [
+        40.63595214086672,
+        -74.01139029013329
+      ],
+      "size": 15,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q2": 3,
+        "75D": 2,
+        "68Q1": 2,
+        "10S2": 1,
+        "10S4": 1,
+        "52D2": 1,
+        "75O": 1,
+        "53I8": 1,
+        "10H1": 1,
+        "34Q1": 1,
+        "75S": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 22:58:00.000000",
+        "end": "2025-07-26 21:33:00.000000"
+      }
+    },
+    {
+      "cluster_id": 72,
+      "centroid": [
+        40.70495764613338,
+        -73.80238553186663
+      ],
+      "size": 15,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 5,
+        "75D": 2,
+        "22P9": 1,
+        "50P9": 1,
+        "52D6": 1,
+        "75H": 1,
+        "10Y3": 1,
+        "68U9": 1,
+        "75M": 1,
+        "75T": 1
+      },
+      "date_range": {
+        "start": "2025-07-07 10:22:00.000000",
+        "end": "2025-07-28 07:31:00.000000"
+      }
+    },
+    {
+      "cluster_id": 73,
+      "centroid": [
+        40.579858702733375,
+        -73.98133159626666
+      ],
+      "size": 15,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 4,
+        "75D": 3,
+        "75M": 2,
+        "52D6": 1,
+        "75I": 1,
+        "50P9": 1,
+        "24Q9": 1,
+        "75O": 1,
+        "68Q2": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 22:58:00.000000",
+        "end": "2025-07-26 21:33:00.000000"
+      }
+    },
+    {
+      "cluster_id": 74,
+      "centroid": [
+        40.70048011697227,
+        -73.80344210511106
+      ],
+      "size": 36,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 10,
+        "53X": 4,
+        "52D1": 3,
+        "75T": 3,
+        "75S": 2,
+        "54S9": 1,
+        "75M": 1,
+        "52D2": 1,
+        "54S2": 1,
+        "34Q2": 1,
+        "75H": 1,
+        "50G2": 1,
+        "54U1": 1,
+        "39Q9": 1,
+        "39H9": 1,
+        "54E9": 1,
+        "54C1": 1,
+        "10V2": 1,
+        "52D6": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 16:28:00.000000",
+        "end": "2025-07-29 18:30:00.000000"
+      }
+    },
+    {
+      "cluster_id": 75,
+      "centroid": [
+        40.65696523517653,
+        -73.95544888147055
+      ],
+      "size": 17,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 5,
+        "68Q1": 4,
+        "75D": 4,
+        "54E1": 2,
+        "75M": 1,
+        "52D1": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 16:28:00.000000",
+        "end": "2025-07-25 16:04:00.000000"
+      }
+    },
+    {
+      "cluster_id": 76,
+      "centroid": [
+        40.66846227947374,
+        -73.89652451799996
+      ],
+      "size": 19,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 7,
+        "75S": 3,
+        "75M": 2,
+        "75I": 2,
+        "54S9": 1,
+        "10S4": 1,
+        "50G2": 1,
+        "75O": 1,
+        "10Y3": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 03:27:00.000000",
+        "end": "2025-07-28 01:01:00.000000"
+      }
+    },
+    {
+      "cluster_id": 77,
+      "centroid": [
+        40.68826684726322,
+        -73.92792642015785
+      ],
+      "size": 38,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 9,
+        "75Z": 5,
+        "75D": 4,
+        "75S": 4,
+        "54E1": 2,
+        "54U2": 2,
+        "29H2": 1,
+        "54S1": 1,
+        "10P2": 1,
+        "10V2": 1,
+        "68Q2": 1,
+        "34K1": 1,
+        "52D9": 1,
+        "10Y3": 1,
+        "52D1": 1,
+        "11C4": 1,
+        "54C1": 1,
+        "54E9": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 10:58:00.000000",
+        "end": "2025-07-26 09:33:00.000000"
+      }
+    },
+    {
+      "cluster_id": 78,
+      "centroid": [
+        40.68150738580562,
+        -73.95351564213885
+      ],
+      "size": 36,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 7,
+        "68Q1": 5,
+        "75S": 4,
+        "75Z": 3,
+        "44H1": 2,
+        "11C4": 2,
+        "10Y3": 2,
+        "10H1": 1,
+        "54U2": 1,
+        "75M": 1,
+        "75T": 1,
+        "10H2": 1,
+        "75H": 1,
+        "39H2": 1,
+        "52D6": 1,
+        "54S9": 1,
+        "75I": 1,
+        "54C1": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 02:26:00.000000",
+        "end": "2025-07-28 01:01:00.000000"
+      }
+    },
+    {
+      "cluster_id": 79,
+      "centroid": [
+        40.68618001387505,
+        -73.96831927593746
+      ],
+      "size": 16,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 4,
+        "75O": 2,
+        "68Q1": 2,
+        "75S": 2,
+        "75T": 1,
+        "10H2": 1,
+        "75Z": 1,
+        "52D6": 1,
+        "75I": 1,
+        "54S9": 1
+      },
+      "date_range": {
+        "start": "2025-07-05 00:24:00.000000",
+        "end": "2025-07-29 00:00:00.000000"
+      }
+    },
+    {
+      "cluster_id": 80,
+      "centroid": [
+        40.83053498393945,
+        -73.9231839883333
+      ],
+      "size": 33,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 6,
+        "75S": 4,
+        "54E1": 3,
+        "10Y3": 2,
+        "68Q1": 2,
+        "75M": 2,
+        "52D1": 2,
+        "10V2": 1,
+        "54S9": 1,
+        "22Q2": 1,
+        "75T": 1,
+        "10H1": 1,
+        "54S1": 1,
+        "75O": 1,
+        "10P2": 1,
+        "54E9": 1,
+        "11C4": 1,
+        "56S": 1,
+        "24Q1": 1
+      },
+      "date_range": {
+        "start": "2025-07-05 00:24:00.000000",
+        "end": "2025-07-29 00:00:00.000000"
+      }
+    },
+    {
+      "cluster_id": 81,
+      "centroid": [
+        40.83699906344123,
+        -73.91555057594115
+      ],
+      "size": 34,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 5,
+        "75S": 4,
+        "75D": 3,
+        "54S2": 2,
+        "75M": 2,
+        "54S1": 2,
+        "34Q2": 1,
+        "68U1": 1,
+        "75O": 1,
+        "10N2": 1,
+        "10Y3": 1,
+        "10P2": 1,
+        "24Q1": 1,
+        "53H": 1,
+        "54E2": 1,
+        "13X": 1,
+        "52D1": 1,
+        "10H2": 1,
+        "39H2": 1,
+        "10H1": 1,
+        "52K2": 1,
+        "54C1": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 03:27:00.000000",
+        "end": "2025-07-26 03:03:00.000000"
+      }
+    },
+    {
+      "cluster_id": 82,
+      "centroid": [
+        40.83326779045167,
+        -73.91606086541933
+      ],
+      "size": 31,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 5,
+        "10V2": 3,
+        "11C4": 2,
+        "52D2": 2,
+        "68Q1": 2,
+        "75M": 2,
+        "10S4": 2,
+        "75S": 2,
+        "52D1": 2,
+        "54S2": 1,
+        "75I": 1,
+        "75T": 1,
+        "54E2": 1,
+        "75O": 1,
+        "59R4": 1,
+        "30Q2": 1,
+        "53D": 1,
+        "54S1": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 02:26:00.000000",
+        "end": "2025-07-27 02:02:00.000000"
+      }
+    },
+    {
+      "cluster_id": 83,
+      "centroid": [
+        40.830021058789534,
+        -73.92233337415784
+      ],
+      "size": 38,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 6,
+        "75M": 5,
+        "68Q1": 4,
+        "75D": 3,
+        "75O": 3,
+        "54C1": 2,
+        "10S4": 2,
+        "54E1": 2,
+        "54I2": 1,
+        "39P6": 1,
+        "52D6": 1,
+        "59R4": 1,
+        "50G2": 1,
+        "54U2": 1,
+        "34K1": 1,
+        "11C4": 1,
+        "52D1": 1,
+        "10H2": 1,
+        "39H1": 1
+      },
+      "date_range": {
+        "start": "2025-07-04 01:25:00.000000",
+        "end": "2025-07-28 01:01:00.000000"
+      }
+    },
+    {
+      "cluster_id": 84,
+      "centroid": [
+        40.68250686688641,
+        -73.96023577193178
+      ],
+      "size": 44,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 9,
+        "75D": 7,
+        "75S": 3,
+        "13X2": 3,
+        "10V2": 2,
+        "10Y3": 2,
+        "54E1": 2,
+        "39H1": 2,
+        "10S2": 1,
+        "50G2": 1,
+        "52K2": 1,
+        "75M": 1,
+        "68Q2": 1,
+        "54S1": 1,
+        "75H": 1,
+        "24Q2": 1,
+        "54S2": 1,
+        "75O": 1,
+        "44P9": 1,
+        "52D1": 1,
+        "29H1": 1,
+        "50P1": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 22:58:00.000000",
+        "end": "2025-07-27 20:32:00.000000"
+      }
+    },
+    {
+      "cluster_id": 85,
+      "centroid": [
+        40.822885225000064,
+        -73.94300250722218
+      ],
+      "size": 18,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 4,
+        "75D": 2,
+        "34Q2": 2,
+        "54E9": 1,
+        "11C4": 1,
+        "75M": 1,
+        "54S1": 1,
+        "50P9": 1,
+        "75S": 1,
+        "24Q9": 1,
+        "10H2": 1,
+        "54U1": 1,
+        "10H1": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 20:56:00.000000",
+        "end": "2025-07-27 20:32:00.000000"
+      }
+    },
+    {
+      "cluster_id": 86,
+      "centroid": [
+        40.83367154026928,
+        -73.91813037592304
+      ],
+      "size": 52,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 10,
+        "68Q1": 7,
+        "75D": 5,
+        "54S1": 3,
+        "10H2": 3,
+        "75M": 2,
+        "75O": 2,
+        "54S9": 2,
+        "75I": 2,
+        "53H": 2,
+        "39Q9": 1,
+        "39H1": 1,
+        "54E2": 1,
+        "10Y3": 1,
+        "34Q2": 1,
+        "53S": 1,
+        "59R4": 1,
+        "59V": 1,
+        "10F2": 1,
+        "52D6": 1,
+        "10H1": 1,
+        "52D1": 1,
+        "54U1": 1,
+        "39C1": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 21:57:00.000000",
+        "end": "2025-07-26 21:33:00.000000"
+      }
+    },
+    {
+      "cluster_id": 87,
+      "centroid": [
+        40.81880630416006,
+        -73.92613021431997
+      ],
+      "size": 25,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 5,
+        "75D": 3,
+        "68Q1": 2,
+        "10H1": 2,
+        "10Y3": 1,
+        "10V2": 1,
+        "52D6": 1,
+        "75Z": 1,
+        "54E1": 1,
+        "75O": 1,
+        "10P2": 1,
+        "75T": 1,
+        "54E9": 1,
+        "31R": 1,
+        "52D1": 1,
+        "34Q2": 1,
+        "50P1": 1
+      },
+      "date_range": {
+        "start": "2025-07-06 23:23:00.000000",
+        "end": "2025-07-24 23:35:00.000000"
+      }
+    },
+    {
+      "cluster_id": 88,
+      "centroid": [
+        40.822938381088285,
+        -73.93108091002938
+      ],
+      "size": 34,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 8,
+        "68Q1": 4,
+        "75S": 4,
+        "54S1": 3,
+        "10H1": 2,
+        "10V2": 2,
+        "54S2": 2,
+        "11C4": 1,
+        "68U9": 1,
+        "10Y3": 1,
+        "54S9": 1,
+        "39Q9": 1,
+        "39H1": 1,
+        "52D6": 1,
+        "24Q1": 1,
+        "52D1": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 22:58:00.000000",
+        "end": "2025-07-25 22:34:00.000000"
+      }
+    },
+    {
+      "cluster_id": 89,
+      "centroid": [
+        40.742242357709735,
+        -73.98646680703223
+      ],
+      "size": 31,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 4,
+        "54S9": 3,
+        "54S2": 2,
+        "75S": 2,
+        "39H1": 2,
+        "54U1": 2,
+        "10P2": 1,
+        "54E2": 1,
+        "54E1": 1,
+        "52D1": 1,
+        "59R4": 1,
+        "50P9": 1,
+        "50P1": 1,
+        "75T": 1,
+        "10H1": 1,
+        "54S1": 1,
+        "11C4": 1,
+        "56S9": 1,
+        "54U2": 1,
+        "75M": 1,
+        "75D": 1,
+        "54E9": 1
+      },
+      "date_range": {
+        "start": "2025-07-05 00:24:00.000000",
+        "end": "2025-07-29 00:00:00.000000"
+      }
+    },
+    {
+      "cluster_id": 90,
+      "centroid": [
+        40.75472843560006,
+        -73.98233853909996
+      ],
+      "size": 20,
+      "severity_score": 3.0,
+      "incident_types": {
+        "50P1": 3,
+        "75D": 3,
+        "75S": 2,
+        "10P2": 2,
+        "54S9": 1,
+        "68Q2": 1,
+        "50G2": 1,
+        "54U2": 1,
+        "50P2": 1,
+        "52D1": 1,
+        "53H": 1,
+        "54U1": 1,
+        "52D6": 1,
+        "11C4": 1
+      },
+      "date_range": {
+        "start": "2025-07-06 05:53:00.000000",
+        "end": "2025-07-24 05:05:00.000000"
+      }
+    },
+    {
+      "cluster_id": 91,
+      "centroid": [
+        40.682494930400054,
+        -73.9131381542333
+      ],
+      "size": 30,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75M": 4,
+        "75D": 4,
+        "75S": 4,
+        "68Q1": 3,
+        "53S": 2,
+        "10H1": 2,
+        "10V2": 1,
+        "68Q2": 1,
+        "59W": 1,
+        "54I1": 1,
+        "53X": 1,
+        "50G1": 1,
+        "53H": 1,
+        "54C3": 1,
+        "39H2": 1,
+        "54S1": 1,
+        "52K2": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 15:27:00.000000",
+        "end": "2025-07-27 14:02:00.000000"
+      }
+    },
+    {
+      "cluster_id": 92,
+      "centroid": [
+        40.80910546092005,
+        -73.94285392707997
+      ],
+      "size": 25,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 4,
+        "75D": 4,
+        "54E1": 2,
+        "52D1": 1,
+        "54E9": 1,
+        "75S": 1,
+        "39H2": 1,
+        "54S2": 1,
+        "10H1": 1,
+        "24Q6": 1,
+        "10P2": 1,
+        "10S4": 1,
+        "54C1": 1,
+        "50P2": 1,
+        "75T": 1,
+        "39H1": 1,
+        "54C2": 1,
+        "52D6": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 04:28:00.000000",
+        "end": "2025-07-25 04:04:00.000000"
+      }
+    },
+    {
+      "cluster_id": 93,
+      "centroid": [
+        40.75060923737148,
+        -73.98797224222854
+      ],
+      "size": 35,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 4,
+        "75M": 3,
+        "54S1": 3,
+        "68Q1": 3,
+        "75D": 3,
+        "22Q1": 2,
+        "52D1": 2,
+        "54S2": 1,
+        "10H1": 1,
+        "11C4": 1,
+        "54E1": 1,
+        "68Q9": 1,
+        "54I1": 1,
+        "34K2": 1,
+        "39T1": 1,
+        "24Q1": 1,
+        "13X": 1,
+        "75T": 1,
+        "52D2": 1,
+        "10Y3": 1,
+        "75Z": 1,
+        "39H1": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 04:28:00.000000",
+        "end": "2025-07-25 04:04:00.000000"
+      }
+    },
+    {
+      "cluster_id": 94,
+      "centroid": [
+        40.74614415925005,
+        -73.98582589312495
+      ],
+      "size": 32,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 5,
+        "10P2": 3,
+        "75T": 2,
+        "75D": 2,
+        "39H2": 1,
+        "54E2": 1,
+        "22Q9": 1,
+        "68Q2": 1,
+        "34Q1": 1,
+        "54S1": 1,
+        "54S9": 1,
+        "22Q1": 1,
+        "54U2": 1,
+        "54U9": 1,
+        "13X": 1,
+        "75S": 1,
+        "52D2": 1,
+        "54I2": 1,
+        "10K9": 1,
+        "34Q9": 1,
+        "10V2": 1,
+        "54E9": 1,
+        "10H2": 1,
+        "50P1": 1
+      },
+      "date_range": {
+        "start": "2025-07-04 01:25:00.000000",
+        "end": "2025-07-28 01:01:00.000000"
+      }
+    },
+    {
+      "cluster_id": 95,
+      "centroid": [
+        40.738675117187555,
+        -73.98833549606246
+      ],
+      "size": 16,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 4,
+        "75S": 3,
+        "75D": 2,
+        "10P2": 1,
+        "54S2": 1,
+        "56S": 1,
+        "75M": 1,
+        "52D1": 1,
+        "10V2": 1,
+        "10H1": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 02:26:00.000000",
+        "end": "2025-07-27 02:02:00.000000"
+      }
+    },
+    {
+      "cluster_id": 96,
+      "centroid": [
+        40.83415213653852,
+        -73.92537230553842
+      ],
+      "size": 26,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 3,
+        "11C4": 3,
+        "52D6": 2,
+        "54E1": 2,
+        "75M": 2,
+        "75D": 2,
+        "54S1": 1,
+        "52D2": 1,
+        "52D1": 1,
+        "68Q1": 1,
+        "75O": 1,
+        "10S4": 1,
+        "34Q1": 1,
+        "54U1": 1,
+        "10S2": 1,
+        "31R": 1,
+        "32Q9": 1,
+        "10Y3": 1
+      },
+      "date_range": {
+        "start": "2025-07-06 05:53:00.000000",
+        "end": "2025-07-24 05:05:00.000000"
+      }
+    },
+    {
+      "cluster_id": 97,
+      "centroid": [
+        40.74572085316006,
+        -73.98545513231996
+      ],
+      "size": 25,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 3,
+        "54U2": 2,
+        "68Q1": 2,
+        "75D": 2,
+        "54E2": 2,
+        "10H2": 1,
+        "13U2": 1,
+        "75I": 1,
+        "29Q1": 1,
+        "59R4": 1,
+        "56S9": 1,
+        "31R": 1,
+        "10P9": 1,
+        "54S1": 1,
+        "34K2": 1,
+        "75T": 1,
+        "32P9": 1,
+        "22Q1": 1,
+        "68Q2": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 21:57:00.000000",
+        "end": "2025-07-26 21:33:00.000000"
+      }
+    },
+    {
+      "cluster_id": 98,
+      "centroid": [
+        40.677221601444494,
+        -73.98652167444442
+      ],
+      "size": 18,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 4,
+        "75S": 4,
+        "54S9": 2,
+        "68Q1": 1,
+        "59R4": 1,
+        "75M": 1,
+        "75O": 1,
+        "75Z": 1,
+        "56S9": 1,
+        "75T": 1,
+        "50P1": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 04:28:00.000000",
+        "end": "2025-07-25 04:04:00.000000"
+      }
+    },
+    {
+      "cluster_id": 99,
+      "centroid": [
+        40.74341473988241,
+        -73.9884783843529
+      ],
+      "size": 17,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 2,
+        "75M": 1,
+        "54E1": 1,
+        "75D": 1,
+        "75O": 1,
+        "75T": 1,
+        "39Q1": 1,
+        "22Q1": 1,
+        "11C4": 1,
+        "54S2": 1,
+        "34Q2": 1,
+        "68Q1": 1,
+        "56S9": 1,
+        "10P9": 1,
+        "11C3": 1,
+        "10H1": 1
+      },
+      "date_range": {
+        "start": "2025-07-06 23:23:00.000000",
+        "end": "2025-07-24 23:35:00.000000"
+      }
+    },
+    {
+      "cluster_id": 100,
+      "centroid": [
+        40.73077075384215,
+        -73.98357610734207
+      ],
+      "size": 38,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 6,
+        "75T": 5,
+        "75D": 4,
+        "75S": 4,
+        "75O": 3,
+        "10H2": 3,
+        "10P2": 2,
+        "54E2": 2,
+        "54C1": 1,
+        "68Q2": 1,
+        "13U2": 1,
+        "54U2": 1,
+        "54S1": 1,
+        "75I": 1,
+        "11C4": 1,
+        "39T1": 1,
+        "10H1": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 22:58:00.000000",
+        "end": "2025-07-25 22:34:00.000000"
+      }
+    },
+    {
+      "cluster_id": 101,
+      "centroid": [
+        40.68244338195657,
+        -73.91287371608692
+      ],
+      "size": 23,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 3,
+        "75M": 3,
+        "10V2": 2,
+        "75D": 2,
+        "68Q1": 1,
+        "56S": 1,
+        "75I": 1,
+        "75O": 1,
+        "11R4": 1,
+        "10H1": 1,
+        "75Z": 1,
+        "10P1": 1,
+        "52D6": 1,
+        "22V2": 1,
+        "11C4": 1,
+        "54U1": 1,
+        "22Q1": 1
+      },
+      "date_range": {
+        "start": "2025-07-04 19:55:00.000000",
+        "end": "2025-07-28 19:31:00.000000"
+      }
+    },
+    {
+      "cluster_id": 102,
+      "centroid": [
+        40.81568602938894,
+        -73.9404998234444
+      ],
+      "size": 18,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 4,
+        "75D": 2,
+        "52D6": 2,
+        "68U2": 1,
+        "54H1": 1,
+        "10Y3": 1,
+        "50P1": 1,
+        "54S2": 1,
+        "10S4": 1,
+        "10H1": 1,
+        "75M": 1,
+        "34Q7": 1,
+        "75S": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 09:57:00.000000",
+        "end": "2025-07-26 09:33:00.000000"
+      }
+    },
+    {
+      "cluster_id": 103,
+      "centroid": [
+        40.838344928909144,
+        -73.91189947402269
+      ],
+      "size": 44,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 11,
+        "68Q1": 6,
+        "75S": 3,
+        "75M": 3,
+        "75T": 3,
+        "53S": 2,
+        "75I": 2,
+        "10H1": 1,
+        "13X": 1,
+        "39C2": 1,
+        "34Q1": 1,
+        "52D2": 1,
+        "54S1": 1,
+        "54H1": 1,
+        "54E1": 1,
+        "39H1": 1,
+        "10Y3": 1,
+        "68Q9": 1,
+        "50P1": 1,
+        "68Q2": 1,
+        "53I8": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 10:58:00.000000",
+        "end": "2025-07-25 10:34:00.000000"
+      }
+    },
+    {
+      "cluster_id": 104,
+      "centroid": [
+        40.844858066300056,
+        -73.90762966294997
+      ],
+      "size": 40,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 6,
+        "75S": 6,
+        "75M": 4,
+        "52D6": 2,
+        "10H2": 2,
+        "54E1": 2,
+        "68Q1": 2,
+        "53S": 2,
+        "75I": 1,
+        "10P2": 1,
+        "52D1": 1,
+        "75Z": 1,
+        "10H1": 1,
+        "10V2": 1,
+        "54U2": 1,
+        "29C": 1,
+        "34Q6": 1,
+        "75T": 1,
+        "30R": 1,
+        "24Q1": 1,
+        "30Q2": 1,
+        "53H": 1
+      },
+      "date_range": {
+        "start": "2025-07-04 19:55:00.000000",
+        "end": "2025-07-29 18:30:00.000000"
+      }
+    },
+    {
+      "cluster_id": 105,
+      "centroid": [
+        40.845080336523864,
+        -73.91989368966662
+      ],
+      "size": 21,
+      "severity_score": 3.0,
+      "incident_types": {
+        "54S1": 3,
+        "68Q1": 3,
+        "75S": 3,
+        "10H1": 2,
+        "59R4": 1,
+        "10S4": 1,
+        "10P2": 1,
+        "75Z": 1,
+        "10P9": 1,
+        "10V2": 1,
+        "10Y3": 1,
+        "54U2": 1,
+        "50G2": 1,
+        "54E1": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 16:28:00.000000",
+        "end": "2025-07-25 16:04:00.000000"
+      }
+    },
+    {
+      "cluster_id": 106,
+      "centroid": [
+        40.82004474770218,
+        -73.92500201757443
+      ],
+      "size": 47,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 5,
+        "75D": 5,
+        "75S": 5,
+        "75O": 4,
+        "75M": 3,
+        "10H2": 2,
+        "54E1": 2,
+        "52D1": 2,
+        "68U2": 1,
+        "69S": 1,
+        "54U1": 1,
+        "10H1": 1,
+        "21R": 1,
+        "39V6": 1,
+        "20Q1": 1,
+        "54U2": 1,
+        "10S4": 1,
+        "10Y3": 1,
+        "52D6": 1,
+        "22V1": 1,
+        "34W2": 1,
+        "11C4": 1,
+        "34Q2": 1,
+        "54Q1": 1,
+        "22Q2": 1,
+        "59R4": 1,
+        "22V2": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 15:27:00.000000",
+        "end": "2025-07-27 14:02:00.000000"
+      }
+    },
+    {
+      "cluster_id": 107,
+      "centroid": [
+        40.75915722147625,
+        -73.98737393519043
+      ],
+      "size": 21,
+      "severity_score": 3.0,
+      "incident_types": {
+        "54U1": 3,
+        "68Q1": 2,
+        "50G2": 1,
+        "53I": 1,
+        "10P2": 1,
+        "54S2": 1,
+        "75O": 1,
+        "52K2": 1,
+        "75D": 1,
+        "13X": 1,
+        "10H1": 1,
+        "75M": 1,
+        "34Q9": 1,
+        "10H2": 1,
+        "52D2": 1,
+        "39H9": 1,
+        "32Q1": 1,
+        "52D1": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 03:27:00.000000",
+        "end": "2025-07-26 03:03:00.000000"
+      }
+    },
+    {
+      "cluster_id": 108,
+      "centroid": [
+        40.701349757760056,
+        -73.98047142579996
+      ],
+      "size": 25,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 7,
+        "75D": 4,
+        "68Q1": 4,
+        "75O": 2,
+        "34Q2": 1,
+        "53S": 1,
+        "75C": 1,
+        "12Z2": 1,
+        "39H1": 1,
+        "56S9": 1,
+        "52D6": 1,
+        "54U1": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 03:27:00.000000",
+        "end": "2025-07-26 03:03:00.000000"
+      }
+    },
+    {
+      "cluster_id": 109,
+      "centroid": [
+        40.80630041668188,
+        -73.94458796340905
+      ],
+      "size": 22,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 6,
+        "75D": 5,
+        "10P2": 2,
+        "54U2": 1,
+        "13X1": 1,
+        "39H1": 1,
+        "75S": 1,
+        "54S9": 1,
+        "56S": 1,
+        "30Q1": 1,
+        "52D6": 1,
+        "54E1": 1
+      },
+      "date_range": {
+        "start": "2025-07-04 07:55:00.000000",
+        "end": "2025-07-28 07:31:00.000000"
+      }
+    },
+    {
+      "cluster_id": 110,
+      "centroid": [
+        40.73938235280651,
+        -73.988121901129
+      ],
+      "size": 31,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 4,
+        "75D": 4,
+        "68Q1": 4,
+        "54S2": 3,
+        "11C4": 3,
+        "22Q1": 2,
+        "10H1": 2,
+        "75T": 2,
+        "54C1": 1,
+        "54S9": 1,
+        "54I9": 1,
+        "54S1": 1,
+        "50P2": 1,
+        "54U2": 1,
+        "75C": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 20:56:00.000000",
+        "end": "2025-07-27 20:32:00.000000"
+      }
+    },
+    {
+      "cluster_id": 111,
+      "centroid": [
+        40.728698119810865,
+        -73.98838416748643
+      ],
+      "size": 37,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 6,
+        "75D": 4,
+        "10H2": 3,
+        "75M": 2,
+        "75T": 2,
+        "39H9": 2,
+        "56S9": 2,
+        "75S": 1,
+        "13U9": 1,
+        "54E2": 1,
+        "10Y3": 1,
+        "68Q9": 1,
+        "75I": 1,
+        "52D9": 1,
+        "10H1": 1,
+        "50P9": 1,
+        "68U2": 1,
+        "52D2": 1,
+        "39H2": 1,
+        "50G9": 1,
+        "52D1": 1,
+        "54E1": 1,
+        "54C1": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 16:28:00.000000",
+        "end": "2025-07-25 16:04:00.000000"
+      }
+    },
+    {
+      "cluster_id": 112,
+      "centroid": [
+        40.84779854141672,
+        -73.90059528162496
+      ],
+      "size": 24,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 5,
+        "52D6": 3,
+        "54E1": 2,
+        "75M": 2,
+        "75D": 2,
+        "10P2": 2,
+        "10H1": 1,
+        "53S": 1,
+        "11C4": 1,
+        "24Q1": 1,
+        "75T": 1,
+        "52D2": 1,
+        "10S4": 1,
+        "50G2": 1
+      },
+      "date_range": {
+        "start": "2025-07-04 07:55:00.000000",
+        "end": "2025-07-28 07:31:00.000000"
+      }
+    },
+    {
+      "cluster_id": 113,
+      "centroid": [
+        40.837186820718,
+        -73.91401827956408
+      ],
+      "size": 39,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 6,
+        "75S": 4,
+        "68Q1": 4,
+        "39H1": 3,
+        "39H2": 2,
+        "54E1": 2,
+        "75I": 2,
+        "54S9": 1,
+        "52D1": 1,
+        "34Q1": 1,
+        "10S4": 1,
+        "75T": 1,
+        "53S": 1,
+        "52F1": 1,
+        "10Y3": 1,
+        "39Q9": 1,
+        "75M": 1,
+        "11C4": 1,
+        "54U1": 1,
+        "53S8": 1,
+        "29H2": 1,
+        "54C2": 1,
+        "52D6": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 08:56:00.000000",
+        "end": "2025-07-27 08:32:00.000000"
+      }
+    },
+    {
+      "cluster_id": 114,
+      "centroid": [
+        40.7143674835585,
+        -73.96562736589605
+      ],
+      "size": 77,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 14,
+        "68Q1": 11,
+        "75D": 11,
+        "53S": 4,
+        "75O": 3,
+        "10V2": 3,
+        "54E1": 3,
+        "10P2": 2,
+        "10H1": 2,
+        "10H2": 2,
+        "68Q2": 2,
+        "50P1": 2,
+        "11C4": 2,
+        "10Y3": 2,
+        "34Q6": 2,
+        "75T": 1,
+        "13U9": 1,
+        "52K2": 1,
+        "54U2": 1,
+        "54S2": 1,
+        "54S9": 1,
+        "22P2": 1,
+        "34Q2": 1,
+        "75M": 1,
+        "10M1": 1,
+        "54S1": 1,
+        "39H1": 1
+      },
+      "date_range": {
+        "start": "2025-07-05 18:54:00.000000",
+        "end": "2025-07-29 18:30:00.000000"
+      }
+    },
+    {
+      "cluster_id": 115,
+      "centroid": [
+        40.75169871766672,
+        -73.98401301476187
+      ],
+      "size": 21,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 3,
+        "54U2": 3,
+        "75M": 3,
+        "10P2": 2,
+        "54U1": 2,
+        "75D": 2,
+        "54E2": 1,
+        "54S1": 1,
+        "34Q2": 1,
+        "54E1": 1,
+        "10H1": 1,
+        "24Q2": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 15:27:00.000000",
+        "end": "2025-07-26 15:03:00.000000"
+      }
+    },
+    {
+      "cluster_id": 116,
+      "centroid": [
+        40.71317413558542,
+        -73.97910772407312
+      ],
+      "size": 41,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 11,
+        "68Q1": 8,
+        "54U2": 2,
+        "75D": 2,
+        "54U1": 2,
+        "75M": 2,
+        "10V2": 2,
+        "54H2": 1,
+        "50P1": 1,
+        "75I": 1,
+        "75O": 1,
+        "54E1": 1,
+        "10P2": 1,
+        "54I2": 1,
+        "54C1": 1,
+        "10S4": 1,
+        "39T1": 1,
+        "75T": 1,
+        "22Q1": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 14:26:00.000000",
+        "end": "2025-07-27 14:02:00.000000"
+      }
+    },
+    {
+      "cluster_id": 117,
+      "centroid": [
+        40.74879849100005,
+        -73.98361823844441
+      ],
+      "size": 27,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 6,
+        "75S": 4,
+        "11C4": 2,
+        "54S1": 2,
+        "10H2": 2,
+        "24Q1": 2,
+        "10P2": 1,
+        "10V2": 1,
+        "10H1": 1,
+        "54S2": 1,
+        "10N9": 1,
+        "75T": 1,
+        "54U9": 1,
+        "54S9": 1,
+        "39T1": 1
+      },
+      "date_range": {
+        "start": "2025-07-04 19:55:00.000000",
+        "end": "2025-07-28 19:31:00.000000"
+      }
+    },
+    {
+      "cluster_id": 118,
+      "centroid": [
+        40.818494872756816,
+        -73.92817177221619
+      ],
+      "size": 37,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 11,
+        "75S": 3,
+        "75M": 2,
+        "10Y3": 2,
+        "10S4": 2,
+        "75D": 2,
+        "10S2": 1,
+        "54S1": 1,
+        "34Q1": 1,
+        "52D1": 1,
+        "75I": 1,
+        "54U2": 1,
+        "52K1": 1,
+        "54E8": 1,
+        "50P1": 1,
+        "10H1": 1,
+        "54S9": 1,
+        "56S": 1,
+        "30Q2": 1,
+        "53S": 1,
+        "39H1": 1
+      },
+      "date_range": {
+        "start": "2025-07-04 19:55:00.000000",
+        "end": "2025-07-28 19:31:00.000000"
+      }
+    },
+    {
+      "cluster_id": 119,
+      "centroid": [
+        40.76843277272732,
+        -73.97814547409087
+      ],
+      "size": 22,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 3,
+        "56S9": 2,
+        "54U2": 2,
+        "75I": 2,
+        "68Q1": 2,
+        "75M": 1,
+        "10Y3": 1,
+        "10H2": 1,
+        "75O": 1,
+        "75D": 1,
+        "54H2": 1,
+        "11C4": 1,
+        "10P2": 1,
+        "75T": 1,
+        "54U9": 1,
+        "50P1": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 08:56:00.000000",
+        "end": "2025-07-27 08:32:00.000000"
+      }
+    },
+    {
+      "cluster_id": 120,
+      "centroid": [
+        40.67925924360005,
+        -73.90442093673327
+      ],
+      "size": 15,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 6,
+        "68Q1": 1,
+        "54S9": 1,
+        "10P1": 1,
+        "75S": 1,
+        "53S": 1,
+        "68Q2": 1,
+        "21R": 1,
+        "54E2": 1,
+        "11C4": 1
+      },
+      "date_range": {
+        "start": "2025-07-05 06:54:00.000000",
+        "end": "2025-07-29 06:30:00.000000"
+      }
+    },
+    {
+      "cluster_id": 121,
+      "centroid": [
+        40.76715547100006,
+        -73.96712009122577
+      ],
+      "size": 31,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 6,
+        "54U1": 3,
+        "75S": 2,
+        "10H1": 2,
+        "10H2": 2,
+        "22Q1": 1,
+        "53S": 1,
+        "59R4": 1,
+        "39H1": 1,
+        "53H": 1,
+        "54H1": 1,
+        "52F6": 1,
+        "52D1": 1,
+        "75D": 1,
+        "75T": 1,
+        "56S9": 1,
+        "53I": 1,
+        "59W": 1,
+        "22Q2": 1,
+        "10Y8": 1,
+        "10N2": 1
+      },
+      "date_range": {
+        "start": "2025-07-05 06:54:00.000000",
+        "end": "2025-07-29 06:30:00.000000"
+      }
+    },
+    {
+      "cluster_id": 122,
+      "centroid": [
+        40.82576088585005,
+        -73.92548541694995
+      ],
+      "size": 20,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 6,
+        "75D": 2,
+        "68Q1": 2,
+        "10P2": 1,
+        "52D6": 1,
+        "10Y3": 1,
+        "75M": 1,
+        "53S8": 1,
+        "54U2": 1,
+        "10S4": 1,
+        "44H1": 1,
+        "29H1": 1,
+        "10H2": 1
+      },
+      "date_range": {
+        "start": "2025-07-05 06:54:00.000000",
+        "end": "2025-07-29 06:30:00.000000"
+      }
+    },
+    {
+      "cluster_id": 123,
+      "centroid": [
+        40.68299765518755,
+        -73.98324280474995
+      ],
+      "size": 16,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 3,
+        "75S": 3,
+        "10H1": 2,
+        "75D": 2,
+        "75O": 1,
+        "10V2": 1,
+        "54S9": 1,
+        "75T": 1,
+        "24S1": 1,
+        "75Z": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 08:56:00.000000",
+        "end": "2025-07-27 08:32:00.000000"
+      }
+    },
+    {
+      "cluster_id": 124,
+      "centroid": [
+        40.701573650272785,
+        -73.98390882354542
+      ],
+      "size": 33,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 7,
+        "68Q1": 7,
+        "75M": 4,
+        "68Q2": 2,
+        "52D1": 2,
+        "39H2": 1,
+        "54E2": 1,
+        "52D2": 1,
+        "75D": 1,
+        "10Y3": 1,
+        "10Y9": 1,
+        "34Q2": 1,
+        "10P2": 1,
+        "50P2": 1,
+        "53I": 1,
+        "10H1": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 10:58:00.000000",
+        "end": "2025-07-26 09:33:00.000000"
+      }
+    },
+    {
+      "cluster_id": 125,
+      "centroid": [
+        40.72076962443143,
+        -73.98037276666663
+      ],
+      "size": 51,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 9,
+        "68Q1": 9,
+        "75D": 7,
+        "54U1": 2,
+        "54S9": 2,
+        "54U2": 2,
+        "54E9": 1,
+        "68U1": 1,
+        "56S9": 1,
+        "75M": 1,
+        "10P2": 1,
+        "54S2": 1,
+        "52K6": 1,
+        "34K1": 1,
+        "13U2": 1,
+        "52D6": 1,
+        "54R1": 1,
+        "54I1": 1,
+        "54C1": 1,
+        "50P2": 1,
+        "39H1": 1,
+        "52D1": 1,
+        "39C2": 1,
+        "10Y3": 1,
+        "39Q2": 1,
+        "52D2": 1
+      },
+      "date_range": {
+        "start": "2025-07-05 12:24:00.000000",
+        "end": "2025-07-29 12:00:00.000000"
+      }
+    },
+    {
+      "cluster_id": 126,
+      "centroid": [
+        40.756472015500044,
+        -73.98727074916663
+      ],
+      "size": 24,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 4,
+        "75S": 2,
+        "39T1": 2,
+        "22Q9": 1,
+        "22Q1": 1,
+        "54S2": 1,
+        "24Q1": 1,
+        "75M": 1,
+        "34Q2": 1,
+        "10P9": 1,
+        "13U2": 1,
+        "54U9": 1,
+        "10H2": 1,
+        "22V2": 1,
+        "50P9": 1,
+        "11C4": 1,
+        "52D2": 1,
+        "52D6": 1,
+        "75T": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 10:58:00.000000",
+        "end": "2025-07-25 10:34:00.000000"
+      }
+    },
+    {
+      "cluster_id": 127,
+      "centroid": [
+        40.756422550925976,
+        -73.98172986070365
+      ],
+      "size": 27,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 4,
+        "75D": 3,
+        "10H2": 2,
+        "75S": 2,
+        "54S2": 2,
+        "34Q2": 2,
+        "54U2": 1,
+        "54U9": 1,
+        "39Q9": 1,
+        "54E1": 1,
+        "34Q1": 1,
+        "54S1": 1,
+        "56S9": 1,
+        "75T": 1,
+        "53S": 1,
+        "50P9": 1,
+        "75O": 1,
+        "54Q1": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 09:57:00.000000",
+        "end": "2025-07-26 09:33:00.000000"
+      }
+    },
+    {
+      "cluster_id": 128,
+      "centroid": [
+        40.685967361100055,
+        -73.91951259254996
+      ],
+      "size": 20,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75S": 4,
+        "68Q1": 3,
+        "54S2": 2,
+        "54S9": 1,
+        "75I": 1,
+        "10H2": 1,
+        "10S4": 1,
+        "75D": 1,
+        "75M": 1,
+        "52D6": 1,
+        "39T2": 1,
+        "52K1": 1,
+        "22V2": 1,
+        "54E2": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 08:56:00.000000",
+        "end": "2025-07-27 08:32:00.000000"
+      }
+    },
+    {
+      "cluster_id": 129,
+      "centroid": [
+        40.69260215764006,
+        -73.95938098111996
+      ],
+      "size": 25,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 5,
+        "75S": 4,
+        "75Z": 2,
+        "54U1": 2,
+        "54E2": 2,
+        "54U2": 1,
+        "54S1": 1,
+        "50P9": 1,
+        "39G": 1,
+        "75H": 1,
+        "10S4": 1,
+        "68Q2": 1,
+        "75T": 1,
+        "11C4": 1,
+        "75D": 1
+      },
+      "date_range": {
+        "start": "2025-07-04 07:55:00.000000",
+        "end": "2025-07-28 07:31:00.000000"
+      }
+    },
+    {
+      "cluster_id": 130,
+      "centroid": [
+        40.72387805383864,
+        -73.73674607623795
+      ],
+      "size": 36,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 12,
+        "OFFENSES INVOLVING FRAUD": 4,
+        "PETIT LARCENY": 4,
+        "INTOXICATED & IMPAIRED DRIVING": 3,
+        "OFF. AGNST PUB ORD SENSBLTY &": 2,
+        "54S1": 1,
+        "54E1": 1,
+        "10V2": 1,
+        "75H": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "68Q1": 1,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 1,
+        "OTHER STATE LAWS": 1,
+        "FRAUDS": 1,
+        "FOR OTHER AUTHORITIES": 1,
+        "ALCOHOLIC BEVERAGE CONTROL LAW": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 131,
+      "centroid": [
+        40.64217580791435,
+        -74.01049223140878
+      ],
+      "size": 51,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 11,
+        "MISCELLANEOUS PENAL LAW": 10,
+        "OFFENSES INVOLVING FRAUD": 6,
+        "OTHER STATE LAWS": 6,
+        "GAMBLING": 4,
+        "OFFENSES AGAINST PUBLIC SAFETY": 2,
+        "FORGERY": 2,
+        "68Q2": 1,
+        "75O": 1,
+        "75S": 1,
+        "10Y3": 1,
+        "68Q1": 1,
+        "OFF. AGNST PUB ORD SENSBLTY &": 1,
+        "OFFENSES AGAINST THE PERSON": 1,
+        "BURGLAR'S TOOLS": 1,
+        "OFFENSES AGAINST PUBLIC ADMINI": 1,
+        "OTHER TRAFFIC INFRACTION": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 132,
+      "centroid": [
+        40.75982251619458,
+        -73.83305110303621
+      ],
+      "size": 18,
+      "severity_score": 3.0,
+      "incident_types": {
+        "OFF. AGNST PUB ORD SENSBLTY &": 4,
+        "PETIT LARCENY": 4,
+        "MISCELLANEOUS PENAL LAW": 3,
+        "OFFENSES AGAINST THE PERSON": 2,
+        "75S": 1,
+        "FORGERY": 1,
+        "34Q1": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "OTHER STATE LAWS (NON PENAL LAW)": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 133,
+      "centroid": [
+        40.67011646527161,
+        -73.73696562566474
+      ],
+      "size": 19,
+      "severity_score": 3.0,
+      "incident_types": {
+        "OTHER STATE LAWS": 4,
+        "MISCELLANEOUS PENAL LAW": 3,
+        "OFFENSES AGAINST PUBLIC ADMINI": 3,
+        "PETIT LARCENY": 2,
+        "OFF. AGNST PUB ORD SENSBLTY &": 2,
+        "34Q2": 1,
+        "MOVING INFRACTIONS": 1,
+        "FORGERY": 1,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "CRIMINAL TRESPASS": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 134,
+      "centroid": [
+        40.74841051267371,
+        -73.87587404377561
+      ],
+      "size": 39,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PROSTITUTION & RELATED OFFENSES": 5,
+        "FORGERY": 5,
+        "PETIT LARCENY": 4,
+        "OFFENSES AGAINST PUBLIC ADMINI": 4,
+        "MISCELLANEOUS PENAL LAW": 3,
+        "OTHER STATE LAWS": 3,
+        "OFFENSES INVOLVING FRAUD": 2,
+        "OTHER TRAFFIC INFRACTION": 2,
+        "INTOXICATED & IMPAIRED DRIVING": 2,
+        "52D6": 1,
+        "32Q2": 1,
+        "34Q2": 1,
+        "54U1": 1,
+        "54S2": 1,
+        "JOSTLING": 1,
+        "ALCOHOLIC BEVERAGE CONTROL LAW": 1,
+        "FRAUDS": 1,
+        "CANNABIS RELATED OFFENSES": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 13:29:54.081886",
+        "end": "2025-07-28 13:01:00.000000"
+      }
+    },
+    {
+      "cluster_id": 135,
+      "centroid": [
+        40.72493406811935,
+        -73.85902392936505
+      ],
+      "size": 40,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 22,
+        "OFFENSES AGAINST PUBLIC ADMINI": 5,
+        "MISCELLANEOUS PENAL LAW": 3,
+        "OTHER TRAFFIC INFRACTION": 3,
+        "MOVING INFRACTIONS": 2,
+        "CRIMINAL TRESPASS": 1,
+        "PROSTITUTION & RELATED OFFENSES": 1,
+        "FRAUDS": 1,
+        "OFF. AGNST PUB ORD SENSBLTY &": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 136,
+      "centroid": [
+        40.66342596336888,
+        -73.78256667535383
+      ],
+      "size": 23,
+      "severity_score": 3.0,
+      "incident_types": {
+        "OTHER STATE LAWS": 5,
+        "POSSESSION OF STOLEN PROPERTY": 5,
+        "PETIT LARCENY": 4,
+        "OTHER TRAFFIC INFRACTION": 3,
+        "MISCELLANEOUS PENAL LAW": 2,
+        "10V2": 1,
+        "OFFENSES AGAINST PUBLIC ADMINI": 1,
+        "FRAUDS": 1,
+        "CANNABIS RELATED OFFENSES": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-28 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 137,
+      "centroid": [
+        40.71257565042318,
+        -73.8268297377816
+      ],
+      "size": 18,
+      "severity_score": 3.0,
+      "incident_types": {
+        "OFFENSES AGAINST PUBLIC ADMINI": 8,
+        "OTHER STATE LAWS": 3,
+        "MISCELLANEOUS PENAL LAW": 2,
+        "54S1": 1,
+        "PETIT LARCENY": 1,
+        "FOR OTHER AUTHORITIES": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "CRIMINAL TRESPASS": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-28 13:01:00.000000"
+      }
+    },
+    {
+      "cluster_id": 138,
+      "centroid": [
+        40.704450298146256,
+        -73.80104134445624
+      ],
+      "size": 74,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 16,
+        "PETIT LARCENY": 11,
+        "OTHER STATE LAWS": 10,
+        "OFFENSES AGAINST PUBLIC ADMINI": 8,
+        "FRAUDS": 5,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 3,
+        "OFF. AGNST PUB ORD SENSBLTY &": 3,
+        "OTHER TRAFFIC INFRACTION": 3,
+        "FORGERY": 3,
+        "OFFENSES INVOLVING FRAUD": 2,
+        "POSSESSION OF STOLEN PROPERTY": 2,
+        "OTHER STATE LAWS (NON PENAL LAW)": 2,
+        "CRIMINAL TRESPASS": 2,
+        "54S9": 1,
+        "75M": 1,
+        "54S2": 1,
+        "BURGLAR'S TOOLS": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 139,
+      "centroid": [
+        40.600999951229284,
+        -73.96701553239303
+      ],
+      "size": 24,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 9,
+        "MISCELLANEOUS PENAL LAW": 3,
+        "POSSESSION OF STOLEN PROPERTY": 3,
+        "INTOXICATED & IMPAIRED DRIVING": 3,
+        "PROSTITUTION & RELATED OFFENSES": 2,
+        "CRIMINAL TRESPASS": 2,
+        "68Q1": 1,
+        "OTHER STATE LAWS": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 140,
+      "centroid": [
+        40.57706978591041,
+        -73.98524021643465
+      ],
+      "size": 32,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 9,
+        "OFFENSES AGAINST PUBLIC ADMINI": 5,
+        "PETIT LARCENY": 5,
+        "POSSESSION OF STOLEN PROPERTY": 2,
+        "OFFENSES AGAINST THE PERSON": 2,
+        "OFF. AGNST PUB ORD SENSBLTY &": 2,
+        "68Q1": 1,
+        "50G9": 1,
+        "50G2": 1,
+        "75I": 1,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "OTHER STATE LAWS": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-28 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 141,
+      "centroid": [
+        40.679525899817946,
+        -74.00263824095522
+      ],
+      "size": 27,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 7,
+        "INTOXICATED & IMPAIRED DRIVING": 3,
+        "OFFENSES AGAINST PUBLIC ADMINI": 3,
+        "MISCELLANEOUS PENAL LAW": 3,
+        "OFFENSES INVOLVING FRAUD": 2,
+        "CRIMINAL TRESPASS": 2,
+        "OFF. AGNST PUB ORD SENSBLTY &": 1,
+        "OTHER STATE LAWS": 1,
+        "ADMINISTRATIVE CODE": 1,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 1,
+        "UNAUTHORIZED USE OF A VEHICLE": 1,
+        "FORGERY": 1,
+        "OTHER TRAFFIC INFRACTION": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 142,
+      "centroid": [
+        40.688450901151434,
+        -73.98360831150691
+      ],
+      "size": 30,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 7,
+        "MISCELLANEOUS PENAL LAW": 5,
+        "OFFENSES AGAINST PUBLIC ADMINI": 3,
+        "OTHER STATE LAWS": 3,
+        "68Q1": 2,
+        "75S": 2,
+        "75D": 2,
+        "75Z": 1,
+        "54E1": 1,
+        "75M": 1,
+        "54R1": 1,
+        "FRAUDS": 1,
+        "BURGLAR'S TOOLS": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-28 13:01:00.000000"
+      }
+    },
+    {
+      "cluster_id": 143,
+      "centroid": [
+        40.66076903123107,
+        -73.9016197549508
+      ],
+      "size": 46,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 10,
+        "OFF. AGNST PUB ORD SENSBLTY &": 10,
+        "75D": 4,
+        "OTHER STATE LAWS": 4,
+        "CRIMINAL TRESPASS": 3,
+        "OFFENSES AGAINST PUBLIC ADMINI": 3,
+        "75S": 2,
+        "OTHER TRAFFIC INFRACTION": 2,
+        "FORGERY": 2,
+        "75I": 1,
+        "10V2": 1,
+        "HARRASSMENT 2": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 1,
+        "PETIT LARCENY": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 144,
+      "centroid": [
+        40.73229463541745,
+        -74.00291325458836
+      ],
+      "size": 17,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 7,
+        "OFFENSES AGAINST PUBLIC ADMINI": 2,
+        "75S": 1,
+        "CRIMINAL TRESPASS": 1,
+        "FRAUDS": 1,
+        "OFFENSES AGAINST THE PERSON": 1,
+        "OTHER STATE LAWS": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "OFF. AGNST PUB ORD SENSBLTY &": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-24 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 145,
+      "centroid": [
+        40.63303159938672,
+        -73.94502725310905
+      ],
+      "size": 26,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 7,
+        "MISCELLANEOUS PENAL LAW": 5,
+        "FORGERY": 3,
+        "OFF. AGNST PUB ORD SENSBLTY &": 3,
+        "OTHER TRAFFIC INFRACTION": 2,
+        "10V2": 2,
+        "10H1": 1,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "OFFENSES AGAINST PUBLIC ADMINI": 1,
+        "OTHER STATE LAWS": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-28 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 146,
+      "centroid": [
+        40.66102546332329,
+        -73.94735175828424
+      ],
+      "size": 80,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 20,
+        "PETIT LARCENY": 9,
+        "POSSESSION OF STOLEN PROPERTY": 7,
+        "OTHER STATE LAWS": 7,
+        "CRIMINAL TRESPASS": 7,
+        "OFFENSES AGAINST PUBLIC ADMINI": 5,
+        "FORGERY": 5,
+        "75S": 3,
+        "OFFENSES INVOLVING FRAUD": 3,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 2,
+        "10V2": 2,
+        "10S1": 1,
+        "54S1": 1,
+        "10H2": 1,
+        "UNAUTHORIZED USE OF A VEHICLE": 1,
+        "75D": 1,
+        "54U2": 1,
+        "FRAUDS": 1,
+        "OFF. AGNST PUB ORD SENSBLTY &": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "DISORDERLY CONDUCT": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 147,
+      "centroid": [
+        40.720408305092924,
+        -73.98595812774843
+      ],
+      "size": 15,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 6,
+        "OFFENSES AGAINST PUBLIC ADMINI": 3,
+        "50P1": 1,
+        "10P2": 1,
+        "75D": 1,
+        "FRAUDS": 1,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 1,
+        "MISCELLANEOUS PENAL LAW": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 148,
+      "centroid": [
+        40.71668260231621,
+        -74.00495614309341
+      ],
+      "size": 81,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 40,
+        "FORGERY": 17,
+        "OTHER STATE LAWS": 8,
+        "OFF. AGNST PUB ORD SENSBLTY &": 4,
+        "OFFENSES AGAINST PUBLIC ADMINI": 2,
+        "FOR OTHER AUTHORITIES": 2,
+        "CRIMINAL TRESPASS": 2,
+        "68Q1": 1,
+        "75S": 1,
+        "50P1": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "JOSTLING": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-28 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 149,
+      "centroid": [
+        40.698230415013626,
+        -73.91760737449574
+      ],
+      "size": 50,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 17,
+        "POSSESSION OF STOLEN PROPERTY": 6,
+        "OFF. AGNST PUB ORD SENSBLTY &": 5,
+        "OFFENSES AGAINST PUBLIC ADMINI": 3,
+        "PETIT LARCENY": 3,
+        "75S": 2,
+        "OTHER STATE LAWS": 2,
+        "FORGERY": 2,
+        "68Q1": 1,
+        "52F1": 1,
+        "OTHER STATE LAWS (NON PENAL LAW)": 1,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "54C3": 1,
+        "MOVING INFRACTIONS": 1,
+        "OTHER TRAFFIC INFRACTION": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "CRIMINAL TRESPASS": 1,
+        "BURGLAR'S TOOLS": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 150,
+      "centroid": [
+        40.69383751229312,
+        -73.94076186363185
+      ],
+      "size": 55,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 11,
+        "PETIT LARCENY": 8,
+        "OTHER STATE LAWS": 8,
+        "CRIMINAL TRESPASS": 5,
+        "OFFENSES INVOLVING FRAUD": 4,
+        "OFF. AGNST PUB ORD SENSBLTY &": 3,
+        "OFFENSES AGAINST PUBLIC ADMINI": 3,
+        "FORGERY": 2,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 2,
+        "54S1": 1,
+        "10S2": 1,
+        "50G2": 1,
+        "54E1": 1,
+        "29C": 1,
+        "FRAUDS": 1,
+        "OFFENSES AGAINST THE PERSON": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1
+      },
+      "date_range": {
+        "start": "2025-07-03 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 151,
+      "centroid": [
+        40.8481337958001,
+        -73.93510722266693
+      ],
+      "size": 15,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 4,
+        "MISCELLANEOUS PENAL LAW": 3,
+        "ANTICIPATORY OFFENSES": 2,
+        "52F1": 1,
+        "68Q1": 1,
+        "54S2": 1,
+        "FOR OTHER AUTHORITIES": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "OFFENSES INVOLVING FRAUD": 1
+      },
+      "date_range": {
+        "start": "2025-07-04 13:25:00.000000",
+        "end": "2025-07-28 13:01:00.000000"
+      }
+    },
+    {
+      "cluster_id": 152,
+      "centroid": [
+        40.75618527585738,
+        -73.98765569232157
+      ],
+      "size": 78,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 29,
+        "FORGERY": 13,
+        "75S": 4,
+        "MISCELLANEOUS PENAL LAW": 3,
+        "CRIMINAL TRESPASS": 3,
+        "OFFENSES INVOLVING FRAUD": 3,
+        "OFFENSES AGAINST PUBLIC ADMINI": 3,
+        "OTHER STATE LAWS (NON PENAL LAW)": 3,
+        "FRAUDS": 2,
+        "POSSESSION OF STOLEN PROPERTY": 2,
+        "10H2": 2,
+        "10P2": 1,
+        "54H2": 1,
+        "22Q2": 1,
+        "68U1": 1,
+        "22V2": 1,
+        "68U2": 1,
+        "75M": 1,
+        "22Q1": 1,
+        "29H1": 1,
+        "BURGLAR'S TOOLS": 1,
+        "ADMINISTRATIVE CODE": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 153,
+      "centroid": [
+        40.73749025244172,
+        -73.98856031708692
+      ],
+      "size": 28,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 17,
+        "OTHER STATE LAWS": 2,
+        "FORGERY": 2,
+        "OFFENSES AGAINST PUBLIC ADMINI": 2,
+        "68Q1": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "HARRASSMENT 2": 1,
+        "CRIMINAL TRESPASS": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 154,
+      "centroid": [
+        40.82063033623322,
+        -73.92935915384896
+      ],
+      "size": 22,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 15,
+        "MISCELLANEOUS PENAL LAW": 3,
+        "68Q1": 1,
+        "FRAUDS": 1,
+        "CRIMINAL TRESPASS": 1,
+        "OFFENSES AGAINST PUBLIC ADMINI": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 155,
+      "centroid": [
+        40.81403577371171,
+        -73.95061858769039
+      ],
+      "size": 95,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 35,
+        "MISCELLANEOUS PENAL LAW": 15,
+        "OFFENSES INVOLVING FRAUD": 13,
+        "OFFENSES AGAINST PUBLIC ADMINI": 10,
+        "OFF. AGNST PUB ORD SENSBLTY &": 5,
+        "FORGERY": 3,
+        "OTHER STATE LAWS": 3,
+        "FRAUDS": 2,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "OTHER STATE LAWS (NON PENAL LAW)": 1,
+        "BURGLAR'S TOOLS": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 1,
+        "MOVING INFRACTIONS": 1,
+        "CRIMINAL TRESPASS": 1,
+        "THEFT-FRAUD": 1,
+        "OFFENSES AGAINST THE PERSON": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 156,
+      "centroid": [
+        40.79431076294605,
+        -73.94365283152662
+      ],
+      "size": 25,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 8,
+        "OFFENSES AGAINST PUBLIC ADMINI": 5,
+        "OFFENSES INVOLVING FRAUD": 5,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 2,
+        "OFF. AGNST PUB ORD SENSBLTY &": 2,
+        "OTHER STATE LAWS": 1,
+        "CRIMINAL TRESPASS": 1,
+        "PETIT LARCENY": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 157,
+      "centroid": [
+        40.879461059669204,
+        -73.90348723502944
+      ],
+      "size": 23,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 7,
+        "MISCELLANEOUS PENAL LAW": 5,
+        "OFF. AGNST PUB ORD SENSBLTY &": 3,
+        "OTHER STATE LAWS": 2,
+        "OFFENSES INVOLVING FRAUD": 2,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "CRIMINAL TRESPASS": 1,
+        "OFFENSES AGAINST PUBLIC ADMINI": 1,
+        "OTHER TRAFFIC INFRACTION": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 158,
+      "centroid": [
+        40.86517969559797,
+        -73.88616096577591
+      ],
+      "size": 28,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 8,
+        "MISCELLANEOUS PENAL LAW": 6,
+        "OTHER TRAFFIC INFRACTION": 2,
+        "OFF. AGNST PUB ORD SENSBLTY &": 2,
+        "ANTICIPATORY OFFENSES": 2,
+        "54S1": 1,
+        "75S": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "OFFENSES AGAINST THE PERSON": 1,
+        "OTHER STATE LAWS": 1,
+        "OFFENSES AGAINST PUBLIC ADMINI": 1,
+        "INTOXICATED/IMPAIRED DRIVING": 1
+      },
+      "date_range": {
+        "start": "2025-07-02 13:29:54.081886",
+        "end": "2025-07-27 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 159,
+      "centroid": [
+        40.83657083179756,
+        -73.9184815666964
+      ],
+      "size": 44,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 12,
+        "CRIMINAL TRESPASS": 4,
+        "OTHER STATE LAWS": 4,
+        "OFFENSES AGAINST PUBLIC ADMINI": 4,
+        "PETIT LARCENY": 4,
+        "OFFENSES AGAINST THE PERSON": 3,
+        "OFF. AGNST PUB ORD SENSBLTY &": 3,
+        "75S": 1,
+        "INTOXICATED/IMPAIRED DRIVING": 1,
+        "ANTICIPATORY OFFENSES": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "OTHER TRAFFIC INFRACTION": 1,
+        "FRAUDS": 1,
+        "BURGLAR'S TOOLS": 1,
+        "CANNABIS RELATED OFFENSES": 1,
+        "(null)": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 160,
+      "centroid": [
+        40.819953598075706,
+        -73.91138725595728
+      ],
+      "size": 51,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 9,
+        "OFFENSES AGAINST PUBLIC ADMINI": 6,
+        "OTHER STATE LAWS": 6,
+        "PETIT LARCENY": 6,
+        "OFF. AGNST PUB ORD SENSBLTY &": 4,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 4,
+        "POSSESSION OF STOLEN PROPERTY": 3,
+        "OFFENSES AGAINST THE PERSON": 3,
+        "FORGERY": 2,
+        "OFFENSES INVOLVING FRAUD": 2,
+        "CRIMINAL TRESPASS": 2,
+        "54S9": 1,
+        "75S": 1,
+        "FRAUDS": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-29 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 161,
+      "centroid": [
+        40.84573937183721,
+        -73.89875158247352
+      ],
+      "size": 52,
+      "severity_score": 3.0,
+      "incident_types": {
+        "OFF. AGNST PUB ORD SENSBLTY &": 12,
+        "OFFENSES AGAINST PUBLIC ADMINI": 9,
+        "PETIT LARCENY": 8,
+        "MISCELLANEOUS PENAL LAW": 6,
+        "OTHER STATE LAWS": 3,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 2,
+        "FORGERY": 2,
+        "10V2": 1,
+        "39H2": 1,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "10H2": 1,
+        "ALCOHOLIC BEVERAGE CONTROL LAW": 1,
+        "ANTICIPATORY OFFENSES": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "CANNABIS RELATED OFFENSES": 1,
+        "FRAUDS": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-28 13:29:54.081886"
+      }
+    },
+    {
+      "cluster_id": 162,
+      "centroid": [
+        40.84089857310991,
+        -73.87789646774334
+      ],
+      "size": 22,
+      "severity_score": 3.0,
+      "incident_types": {
+        "OFFENSES AGAINST PUBLIC ADMINI": 6,
+        "POSSESSION OF STOLEN PROPERTY": 4,
+        "FOR OTHER AUTHORITIES": 2,
+        "MISCELLANEOUS PENAL LAW": 2,
+        "PETIT LARCENY": 2,
+        "75T": 1,
+        "75D": 1,
+        "54S9": 1,
+        "FRAUDS": 1,
+        "OTHER STATE LAWS": 1,
+        "CRIMINAL TRESPASS": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 13:29:54.081886",
+        "end": "2025-07-30 13:29:54.081886"
+      }
+    }
+  ],
+  "metadata": {
+    "total_incidents": 10000,
+    "total_clusters": 163,
+    "noise_points": 4139,
+    "generated_at": "2025-07-30T13:29:56.078063",
+    "parameters": {
+      "min_cluster_size": 15,
+      "min_samples": 5,
+      "cluster_selection_epsilon": 0.05
+    }
+  }
+}
