@@ -64,7 +64,8 @@ export async function GET() {
     console.log('Loaded incidents:', incidents.length)
     console.log('Sample incident:', incidents[0])
     
-    return NextResponse.json({
+    // Create response with cache-busting headers
+    const response = NextResponse.json({
       incidents,
       total: incidents.length,
       metadata: {
@@ -73,6 +74,14 @@ export async function GET() {
         file: latestFile
       }
     })
+    
+    // Add cache-busting headers
+    response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate')
+    response.headers.set('Pragma', 'no-cache')
+    response.headers.set('Expires', '0')
+    response.headers.set('Last-Modified', new Date().toUTCString())
+    
+    return response
     
   } catch (error) {
     console.error('Error reading incident data:', error)

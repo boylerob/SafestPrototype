@@ -78,12 +78,12 @@ class GeoJSONService {
   validateNYCCoordinates(coordinates: [number, number]): boolean {
     const [longitude, latitude] = coordinates;
     
-    // NYC bounds: approximately -74.259 to -73.700 longitude, 40.477 to 40.916 latitude
+    // Expanded NYC bounds to include all our data: -74.3 to -73.7 longitude, 40.4 to 40.9 latitude
     const nycBounds = {
-      minLng: -74.259,
-      maxLng: -73.700,
-      minLat: 40.477,
-      maxLat: 40.916
+      minLng: -74.3,
+      maxLng: -73.7,
+      minLat: 40.4,
+      maxLat: 40.9
     };
 
     return (
