@@ -5,11 +5,15 @@ import path from 'path'
 export async function GET() {
   try {
     // Read the latest CSV file from backend-clustering/data
-    const backendDataDir = path.join(process.cwd(), '..', 'backend-clustering', 'data')
+    const backendDataDir = path.join(process.cwd(), 'backend-clustering', 'data')
+    
+    console.log('Looking for data files in:', backendDataDir)
     
     // Find the most recent CSV file
     const files = fs.readdirSync(backendDataDir)
     const csvFiles = files.filter(file => file.endsWith('.csv') && file.includes('nyc_safety_incidents'))
+    
+    console.log('Found CSV files:', csvFiles)
     
     if (csvFiles.length === 0) {
       return NextResponse.json({ 
@@ -24,6 +28,8 @@ export async function GET() {
         mtime: fs.statSync(path.join(backendDataDir, file)).mtime
       }))
       .sort((a, b) => b.mtime.getTime() - a.mtime.getTime())[0].name
+    
+    console.log('Selected file:', latestFile)
     
     const filePath = path.join(backendDataDir, latestFile)
     const fileContent = fs.readFileSync(filePath, 'utf-8')
@@ -54,6 +60,9 @@ export async function GET() {
         incidents.push(incident)
       }
     }
+    
+    console.log('Loaded incidents:', incidents.length)
+    console.log('Sample incident:', incidents[0])
     
     return NextResponse.json({
       incidents,
