@@ -11,6 +11,8 @@ from datetime import datetime, timedelta
 import os
 from typing import List, Dict, Any, Optional
 import logging
+from math import isnan
+import random
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -46,6 +48,12 @@ class NYCSafetyDataFetcher:
         self.data_dir = os.path.join(os.path.dirname(__file__), 'data')
         os.makedirs(self.data_dir, exist_ok=True)
         
+    def add_geographic_jitter(self, lat: float, lng: float, max_offset: float = 0.001) -> tuple:
+        """Add small random offset to coordinates to reduce clustering"""
+        lat_offset = random.uniform(-max_offset, max_offset)
+        lng_offset = random.uniform(-max_offset, max_offset)
+        return (lat + lat_offset, lng + lng_offset)
+    
     def fetch_911_calls(self) -> List[Dict[str, Any]]:
         """Fetch NYPD Calls for Service (911 calls)"""
         logger.info("Fetching NYPD Calls for Service...")
@@ -205,21 +213,16 @@ class NYCSafetyDataFetcher:
                         lat > 40.4 and lat < 41.0 and  # NYC latitude bounds
                         lng > -74.3 and lng < -73.7):   # NYC longitude bounds
                         
-                        # Transform the timestamp to be within the last 30 days
-                        original_date = datetime.strptime(incident.get('arrest_date', ''), '%Y-%m-%dT%H:%M:%S.%f')
-                        days_ago = (end_date - original_date).days
+                        # Use original arrest date without transformation to prevent clustering
+                        transformed_timestamp = incident.get('arrest_date', '')
                         
-                        # If the arrest is older than 30 days, shift it to be within the last month
-                        if days_ago > 30:
-                            new_date = end_date - timedelta(days=days_ago % 30)
-                            transformed_timestamp = new_date.strftime('%Y-%m-%dT%H:%M:%S.%f')
-                        else:
-                            transformed_timestamp = incident.get('arrest_date', '')
+                        # Add small geographic jitter to reduce clustering
+                        jittered_lat, jittered_lng = self.add_geographic_jitter(lat, lng)
                         
                         filtered_arrests.append({
                             'id': incident.get('arrest_key', f"arrest_{len(filtered_arrests)}"),
-                            'latitude': lat,
-                            'longitude': lng,
+                            'latitude': jittered_lat,
+                            'longitude': jittered_lng,
                             'type': incident.get('ofns_desc', 'ARREST'),
                             'description': incident.get('pd_desc', ''),
                             'timestamp': transformed_timestamp,
@@ -365,13 +368,6 @@ class NYCSafetyDataFetcher:
         logger.info(f"Geographic bounds: Lng {df['longitude'].min():.4f} to {df['longitude'].max():.4f}")
         
         return filepath
-
-def isnan(value):
-    """Check if value is NaN"""
-    try:
-        return pd.isna(value)
-    except:
-        return False
 
 if __name__ == "__main__":
     # Example usage

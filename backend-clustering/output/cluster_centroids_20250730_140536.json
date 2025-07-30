@@ -1,0 +1,1884 @@
+{
+  "clusters": [
+    {
+      "cluster_id": 0,
+      "centroid": [
+        40.59862958993512,
+        -73.78563032109088
+      ],
+      "size": 77,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75D": 12,
+        "68Q1": 10,
+        "75S": 10,
+        "75M": 7,
+        "10S4": 3,
+        "54C3": 2,
+        "75O": 2,
+        "59R4": 2,
+        "75T": 2,
+        "54I1": 2,
+        "54U1": 2,
+        "54E2": 2,
+        "54E1": 2,
+        "10V2": 1,
+        "50G2": 1,
+        "39V6": 1,
+        "54S9": 1,
+        "68Q2": 1,
+        "75Z": 1,
+        "75C": 1,
+        "10S2": 1,
+        "53S": 1,
+        "39H2": 1,
+        "56S": 1,
+        "50P2": 1,
+        "10H2": 1,
+        "50P1": 1,
+        "39V1": 1,
+        "54S1": 1,
+        "52D2": 1,
+        "52D6": 1,
+        "10H1": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 16:28:00",
+        "end": "2025-07-29 12:00:00"
+      }
+    },
+    {
+      "cluster_id": 1,
+      "centroid": [
+        40.748485346676524,
+        -73.93267865005879
+      ],
+      "size": 34,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75M": 4,
+        "75S": 3,
+        "68Q1": 3,
+        "10V2": 2,
+        "75D": 2,
+        "59R4": 2,
+        "54E1": 1,
+        "75O": 1,
+        "54U1": 1,
+        "75I": 1,
+        "56S": 1,
+        "75T": 1,
+        "39C2": 1,
+        "54S2": 1,
+        "54S1": 1,
+        "10P2": 1,
+        "22Q2": 1,
+        "52D6": 1,
+        "75Z": 1,
+        "53I": 1,
+        "68Q9": 1,
+        "53I8": 1,
+        "54E2": 1,
+        "10Y3": 1
+      },
+      "date_range": {
+        "start": "2025-06-30 05:29:00",
+        "end": "2025-06-30 05:29:00"
+      }
+    },
+    {
+      "cluster_id": 2,
+      "centroid": [
+        40.76963298680651,
+        -73.92337025593547
+      ],
+      "size": 31,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 6,
+        "75D": 5,
+        "75S": 3,
+        "75T": 2,
+        "54C1": 2,
+        "75C": 2,
+        "54S2": 1,
+        "75I": 1,
+        "10V2": 1,
+        "54S9": 1,
+        "75O": 1,
+        "54E9": 1,
+        "31R": 1,
+        "54U2": 1,
+        "50P9": 1,
+        "54S1": 1,
+        "10Y3": 1
+      },
+      "date_range": {
+        "start": "2025-06-30 23:59:00",
+        "end": "2025-06-30 23:59:00"
+      }
+    },
+    {
+      "cluster_id": 3,
+      "centroid": [
+        40.71841433637936,
+        -73.9420271659655
+      ],
+      "size": 29,
+      "severity_score": 3.0,
+      "incident_types": {
+        "75I": 3,
+        "75D": 3,
+        "52D1": 3,
+        "54S1": 2,
+        "75H": 2,
+        "68Q1": 2,
+        "75S": 2,
+        "11C4": 2,
+        "54E1": 1,
+        "75O": 1,
+        "39H9": 1,
+        "75M": 1,
+        "54S2": 1,
+        "34K1": 1,
+        "10Y3": 1,
+        "53S": 1,
+        "52F1": 1,
+        "53X": 1
+      },
+      "date_range": {
+        "start": "2025-06-30 11:59:00",
+        "end": "2025-06-30 11:59:00"
+      }
+    },
+    {
+      "cluster_id": 4,
+      "centroid": [
+        40.73315024389194,
+        -73.94462169678373
+      ],
+      "size": 37,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 7,
+        "75S": 6,
+        "75D": 4,
+        "75T": 3,
+        "75M": 2,
+        "52D2": 2,
+        "54S1": 2,
+        "22Q1": 1,
+        "75O": 1,
+        "54S2": 1,
+        "50G2": 1,
+        "34Q9": 1,
+        "52D6": 1,
+        "10H2": 1,
+        "20Q1": 1,
+        "54S9": 1,
+        "34Q6": 1,
+        "22Q2": 1
+      },
+      "date_range": {
+        "start": "2025-06-30 17:29:00",
+        "end": "2025-06-30 17:29:00"
+      }
+    },
+    {
+      "cluster_id": 5,
+      "centroid": [
+        40.74277713164381,
+        -73.91144537186234
+      ],
+      "size": 516,
+      "severity_score": 8.0,
+      "incident_types": {
+        "FELONY ASSAULT": 398,
+        "SEX CRIMES": 115,
+        "ARSON": 3
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 6,
+      "centroid": [
+        40.629276521846414,
+        -74.09295584295006
+      ],
+      "size": 52,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 28,
+        "OTHER OFFENSES RELATED TO THEFT": 12,
+        "CRIMINAL MISCHIEF & RELATED OF": 12
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 7,
+      "centroid": [
+        40.613079497160406,
+        -74.09186410438124
+      ],
+      "size": 27,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 25,
+        "BURGLARY": 2
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 8,
+      "centroid": [
+        40.74795679698577,
+        -73.90915397328921
+      ],
+      "size": 762,
+      "severity_score": 6.0,
+      "incident_types": {
+        "ASSAULT 3 & RELATED OFFENSES": 647,
+        "BURGLARY": 115
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 9,
+      "centroid": [
+        40.72615792665938,
+        -73.73481536690323
+      ],
+      "size": 52,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 51,
+        "GRAND LARCENY OF MOTOR VEHICLE": 1
+      },
+      "date_range": {
+        "start": "2025-05-07",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 10,
+      "centroid": [
+        40.74748051327131,
+        -73.86601144137266
+      ],
+      "size": 22,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 10,
+        "OTHER OFFENSES RELATED TO THEFT": 8,
+        "CRIMINAL MISCHIEF & RELATED OF": 4
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 11,
+      "centroid": [
+        40.60886084939102,
+        -74.11974740583608
+      ],
+      "size": 74,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 21,
+        "MISCELLANEOUS PENAL LAW": 14,
+        "OFFENSES AGAINST PUBLIC ADMINI": 13,
+        "INTOXICATED & IMPAIRED DRIVING": 8,
+        "OFF. AGNST PUB ORD SENSBLTY &": 6,
+        "OFFENSES INVOLVING FRAUD": 3,
+        "OTHER TRAFFIC INFRACTION": 2,
+        "OTHER STATE LAWS": 2,
+        "CRIMINAL TRESPASS": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "FRAUDS": 1,
+        "FORGERY": 1,
+        "CANNABIS RELATED OFFENSES": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 12,
+      "centroid": [
+        40.756078844755166,
+        -73.84954259925622
+      ],
+      "size": 22,
+      "severity_score": 7.0,
+      "incident_types": {
+        "ROBBERY": 19,
+        "DANGEROUS WEAPONS": 3
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 13,
+      "centroid": [
+        40.726016991823364,
+        -73.84214843209136
+      ],
+      "size": 26,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 20,
+        "GRAND LARCENY OF MOTOR VEHICLE": 6
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 14,
+      "centroid": [
+        40.69668838269278,
+        -73.80389103703445
+      ],
+      "size": 16,
+      "severity_score": 7.0,
+      "incident_types": {
+        "ROBBERY": 10,
+        "DANGEROUS WEAPONS": 6
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 15,
+      "centroid": [
+        40.54901201355561,
+        -74.16935009938885
+      ],
+      "size": 18,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 3,
+        "10Y3": 2,
+        "75D": 2,
+        "54U2": 2,
+        "54E1": 2,
+        "22Q1": 2,
+        "68Q2": 1,
+        "52K6": 1,
+        "34W1": 1,
+        "10F2": 1,
+        "39H2": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 04:28:00",
+        "end": "2025-07-29 06:30:00"
+      }
+    },
+    {
+      "cluster_id": 16,
+      "centroid": [
+        40.69643034387614,
+        -73.80004134397551
+      ],
+      "size": 69,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 32,
+        "OTHER OFFENSES RELATED TO THEFT": 23,
+        "CRIMINAL MISCHIEF & RELATED OF": 14
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 17,
+      "centroid": [
+        40.83819903940549,
+        -73.89669750165548
+      ],
+      "size": 46,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 36,
+        "GRAND LARCENY OF MOTOR VEHICLE": 10
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 18,
+      "centroid": [
+        40.6388934681347,
+        -74.01588029562328
+      ],
+      "size": 15,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 9,
+        "OTHER OFFENSES RELATED TO THEFT": 3,
+        "CRIMINAL MISCHIEF & RELATED OF": 3
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 19,
+      "centroid": [
+        40.580558955966175,
+        -73.97673515079674
+      ],
+      "size": 37,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 18,
+        "CRIMINAL MISCHIEF & RELATED OF": 10,
+        "DANGEROUS DRUGS": 9
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 20,
+      "centroid": [
+        40.65043481244526,
+        -73.98569175601887
+      ],
+      "size": 37,
+      "severity_score": 2.0,
+      "incident_types": {
+        "VEHICLE AND TRAFFIC LAWS": 37
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 21,
+      "centroid": [
+        40.83799805580174,
+        -73.89908433296729
+      ],
+      "size": 79,
+      "severity_score": 2.0,
+      "incident_types": {
+        "VEHICLE AND TRAFFIC LAWS": 79
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 22,
+      "centroid": [
+        40.69086012877864,
+        -73.78117789441875
+      ],
+      "size": 36,
+      "severity_score": 2.0,
+      "incident_types": {
+        "VEHICLE AND TRAFFIC LAWS": 36
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 23,
+      "centroid": [
+        40.6649871224999,
+        -73.88924936407012
+      ],
+      "size": 23,
+      "severity_score": 2.0,
+      "incident_types": {
+        "VEHICLE AND TRAFFIC LAWS": 23
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 24,
+      "centroid": [
+        40.65217076656347,
+        -73.93260362439614
+      ],
+      "size": 18,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 16,
+        "GRAND LARCENY OF MOTOR VEHICLE": 2
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 25,
+      "centroid": [
+        40.7201621075151,
+        -73.98648690791846
+      ],
+      "size": 89,
+      "severity_score": 5.0,
+      "incident_types": {
+        "GRAND LARCENY": 86,
+        "GRAND LARCENY OF MOTOR VEHICLE": 3
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 26,
+      "centroid": [
+        40.66835772474576,
+        -73.91957160995898
+      ],
+      "size": 66,
+      "severity_score": 7.0,
+      "incident_types": {
+        "ROBBERY": 38,
+        "DANGEROUS WEAPONS": 28
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 27,
+      "centroid": [
+        40.76805929707497,
+        -73.9124947406381
+      ],
+      "size": 15,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 5,
+        "MISCELLANEOUS PENAL LAW": 3,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 2,
+        "OTHER STATE LAWS (NON PENAL LAW)": 2,
+        "OFF. AGNST PUB ORD SENSBLTY &": 2,
+        "OFFENSES INVOLVING FRAUD": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 28,
+      "centroid": [
+        40.746207263242255,
+        -73.87647599153726
+      ],
+      "size": 75,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 17,
+        "PROSTITUTION & RELATED OFFENSES": 15,
+        "INTOXICATED & IMPAIRED DRIVING": 6,
+        "OTHER STATE LAWS": 5,
+        "OFFENSES AGAINST PUBLIC ADMINI": 5,
+        "CRIMINAL TRESPASS": 4,
+        "MISCELLANEOUS PENAL LAW": 4,
+        "FRAUDS": 3,
+        "FORGERY": 3,
+        "OFF. AGNST PUB ORD SENSBLTY &": 3,
+        "OFFENSES AGAINST THE PERSON": 2,
+        "BURGLAR'S TOOLS": 2,
+        "POSSESSION OF STOLEN PROPERTY": 2,
+        "ADMINISTRATIVE CODE": 1,
+        "OTHER TRAFFIC INFRACTION": 1,
+        "MOVING INFRACTIONS": 1,
+        "CHILD ABANDONMENT/NON SUPPORT 1": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 29,
+      "centroid": [
+        40.83668172816208,
+        -73.91047318914136
+      ],
+      "size": 128,
+      "severity_score": 7.0,
+      "incident_types": {
+        "ROBBERY": 67,
+        "DANGEROUS WEAPONS": 61
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 30,
+      "centroid": [
+        40.736790374483924,
+        -73.98787192800727
+      ],
+      "size": 66,
+      "severity_score": 7.0,
+      "incident_types": {
+        "ROBBERY": 47,
+        "DANGEROUS WEAPONS": 19
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 31,
+      "centroid": [
+        40.757813943915714,
+        -73.82966601803201
+      ],
+      "size": 44,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 21,
+        "MISCELLANEOUS PENAL LAW": 9,
+        "BURGLAR'S TOOLS": 3,
+        "INTOXICATED & IMPAIRED DRIVING": 2,
+        "OFF. AGNST PUB ORD SENSBLTY &": 2,
+        "FORGERY": 2,
+        "OFFENSES AGAINST PUBLIC ADMINI": 2,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "OTHER STATE LAWS (NON PENAL LAW)": 1,
+        "GAMBLING": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 32,
+      "centroid": [
+        40.884190608009334,
+        -73.86317826170432
+      ],
+      "size": 16,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 10,
+        "CRIMINAL MISCHIEF & RELATED OF": 3,
+        "DANGEROUS DRUGS": 3
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 33,
+      "centroid": [
+        40.72407706611457,
+        -73.7366425632165
+      ],
+      "size": 85,
+      "severity_score": 3.0,
+      "incident_types": {
+        "POSSESSION OF STOLEN PROPERTY": 43,
+        "FOR OTHER AUTHORITIES": 23,
+        "MISCELLANEOUS PENAL LAW": 6,
+        "OFF. AGNST PUB ORD SENSBLTY &": 3,
+        "PETIT LARCENY": 2,
+        "GAMBLING": 2,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "OTHER TRAFFIC INFRACTION": 1,
+        "OFFENSES AGAINST PUBLIC ADMINI": 1,
+        "CANNABIS RELATED OFFENSES": 1,
+        "FORGERY": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 34,
+      "centroid": [
+        40.62541924169898,
+        -74.10537359758061
+      ],
+      "size": 93,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 18,
+        "75I": 14,
+        "75D": 11,
+        "68Q2": 6,
+        "10S4": 5,
+        "54E1": 5,
+        "53S": 3,
+        "75Z": 3,
+        "54C3": 2,
+        "10H1": 2,
+        "11C4": 2,
+        "11R4": 2,
+        "10S2": 1,
+        "10P2": 1,
+        "34Q6": 1,
+        "52K6": 1,
+        "68U2": 1,
+        "54C1": 1,
+        "75T": 1,
+        "10V2": 1,
+        "10Y3": 1,
+        "53I8": 1,
+        "54S2": 1,
+        "75L": 1,
+        "54U2": 1,
+        "39H2": 1,
+        "52D1": 1,
+        "34W1": 1,
+        "52D6": 1,
+        "39T1": 1,
+        "39H1": 1,
+        "75H": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 04:28:00",
+        "end": "2025-07-29 06:30:00"
+      }
+    },
+    {
+      "cluster_id": 35,
+      "centroid": [
+        40.736914945056526,
+        -73.92772745847802
+      ],
+      "size": 4533,
+      "severity_score": 3.0,
+      "incident_types": {
+        "68Q1": 636,
+        "75D": 556,
+        "75S": 458,
+        "75M": 167,
+        "10V2": 120,
+        "11C4": 118,
+        "10Y3": 110,
+        "10H1": 107,
+        "54E1": 93,
+        "54S1": 93,
+        "75T": 93,
+        "75I": 91,
+        "52D6": 89,
+        "75O": 81,
+        "68Q2": 75,
+        "10H2": 71,
+        "10P2": 70,
+        "52D1": 66,
+        "53S": 60,
+        "54U1": 57,
+        "54U2": 57,
+        "54S2": 54,
+        "54S9": 53,
+        "75Z": 52,
+        "10S4": 49,
+        "39H1": 45,
+        "52D2": 35,
+        "34Q2": 34,
+        "75H": 33,
+        "50P1": 33,
+        "50G2": 30,
+        "54E2": 29,
+        "50P9": 26,
+        "54C1": 26,
+        "34Q6": 25,
+        "56S9": 25,
+        "34Q1": 25,
+        "24Q1": 23,
+        "22Q1": 20,
+        "39H2": 20,
+        "59R4": 19,
+        "53X": 17,
+        "56S": 16,
+        "10S2": 16,
+        "53I": 15,
+        "39T1": 13,
+        "53H": 13,
+        "54E9": 13,
+        "22V2": 12,
+        "53I8": 12,
+        "39Q9": 12,
+        "11R4": 12,
+        "50P2": 12,
+        "22Q2": 11,
+        "10P9": 10,
+        "24Q2": 10,
+        "53S8": 10,
+        "54C3": 10,
+        "13U2": 10,
+        "68Q9": 9,
+        "54H1": 9,
+        "68U2": 8,
+        "31R": 8,
+        "50G9": 8,
+        "34K1": 8,
+        "54U9": 8,
+        "67S8": 7,
+        "44H1": 7,
+        "29H1": 7,
+        "29C": 7,
+        "13X": 7,
+        "53D": 7,
+        "39C2": 6,
+        "59W": 6,
+        "13X2": 6,
+        "21R": 6,
+        "54R1": 6,
+        "68U1": 6,
+        "39H9": 6,
+        "29H2": 6,
+        "52K2": 6,
+        "10N9": 5,
+        "54C2": 5,
+        "24K1": 5,
+        "30Q2": 5,
+        "10P1": 5,
+        "34Q9": 5,
+        "50G1": 5,
+        "54E8": 5,
+        "10Y9": 5,
+        "75C": 4,
+        "22Q9": 4,
+        "54H2": 4,
+        "20Q1": 4,
+        "39Q1": 4,
+        "30Q1": 4,
+        "54I1": 4,
+        "34K2": 4,
+        "52K1": 4,
+        "10S1": 3,
+        "54I2": 3,
+        "39Q2": 3,
+        "54Q1": 3,
+        "39T2": 3,
+        "39V6": 3,
+        "10Y8": 3,
+        "59R3": 3,
+        "59C": 3,
+        "13U8": 3,
+        "52D9": 3,
+        "68U9": 3,
+        "52F1": 3,
+        "10V8": 3,
+        "60I": 3,
+        "24Q6": 3,
+        "75L": 3,
+        "34W1": 3,
+        "32Q1": 3,
+        "11C3": 3,
+        "22V1": 3,
+        "34W6": 3,
+        "24W1": 3,
+        "52K6": 3,
+        "34S2": 3,
+        "13U9": 2,
+        "54R2": 2,
+        "10Y7": 2,
+        "10F1": 2,
+        "52F6": 2,
+        "39C1": 2,
+        "59V": 2,
+        "10N2": 2,
+        "20Q2": 2,
+        "13X1": 2,
+        "53D8": 2,
+        "54R9": 2,
+        "11A9": 2,
+        "34W2": 2,
+        "44P9": 2,
+        "32Q2": 2,
+        "34Q7": 2,
+        "24Q9": 2,
+        "39P6": 1,
+        "51": 1,
+        "69S": 1,
+        "22P9": 1,
+        "11R3": 1,
+        "54Q9": 1,
+        "22P2": 1,
+        "52V6": 1,
+        "54Q2": 1,
+        "10M2": 1,
+        "39G": 1,
+        "29Q1": 1,
+        "10H9": 1,
+        "54I9": 1,
+        "11A2": 1,
+        "10K9": 1,
+        "22P1": 1,
+        "67S": 1,
+        "31Q": 1,
+        "59Q1": 1,
+        "34K9": 1,
+        "34K6": 1,
+        "32V1": 1,
+        "10M1": 1,
+        "10F2": 1,
+        "39G9": 1,
+        "24W2": 1,
+        "12Z2": 1,
+        "24W6": 1,
+        "32Q9": 1,
+        "32V2": 1,
+        "32P9": 1,
+        "40V": 1,
+        "30R": 1,
+        "24S1": 1,
+        "60H8": 1,
+        "11B4": 1,
+        "65S": 1,
+        "75F": 1
+      },
+      "date_range": {
+        "start": "2025-07-01 04:28:00",
+        "end": "2025-07-29 18:30:00"
+      }
+    },
+    {
+      "cluster_id": 36,
+      "centroid": [
+        40.68122161025766,
+        -73.77518607870681
+      ],
+      "size": 15,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 7,
+        "MISCELLANEOUS PENAL LAW": 2,
+        "THEFT-FRAUD": 1,
+        "OTHER STATE LAWS": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "OFF. AGNST PUB ORD SENSBLTY &": 1,
+        "OFFENSES AGAINST THE PERSON": 1,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-06"
+      }
+    },
+    {
+      "cluster_id": 37,
+      "centroid": [
+        40.707747654837185,
+        -73.8127233709129
+      ],
+      "size": 88,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 22,
+        "PETIT LARCENY": 21,
+        "OTHER STATE LAWS": 13,
+        "OFFENSES AGAINST PUBLIC ADMINI": 10,
+        "OFF. AGNST PUB ORD SENSBLTY &": 4,
+        "OTHER TRAFFIC INFRACTION": 4,
+        "FRAUDS": 2,
+        "INTOXICATED & IMPAIRED DRIVING": 2,
+        "CRIMINAL TRESPASS": 2,
+        "ADMINISTRATIVE CODE": 2,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 2,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "MOVING INFRACTIONS": 1,
+        "THEFT-FRAUD": 1,
+        "FOR OTHER AUTHORITIES": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 38,
+      "centroid": [
+        40.684102189748735,
+        -73.83696835250987
+      ],
+      "size": 23,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 8,
+        "PETIT LARCENY": 4,
+        "OFFENSES AGAINST PUBLIC ADMINI": 2,
+        "OTHER TRAFFIC INFRACTION": 2,
+        "INTOXICATED & IMPAIRED DRIVING": 2,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 2,
+        "FORGERY": 1,
+        "HARRASSMENT 2": 1,
+        "OFF. AGNST PUB ORD SENSBLTY &": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 39,
+      "centroid": [
+        40.757539504322516,
+        -73.98862256545755
+      ],
+      "size": 74,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 33,
+        "OTHER OFFENSES RELATED TO THEFT": 33,
+        "CRIMINAL MISCHIEF & RELATED OF": 8
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 40,
+      "centroid": [
+        40.819500297264995,
+        -73.94431013404319
+      ],
+      "size": 80,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 47,
+        "OTHER OFFENSES RELATED TO THEFT": 22,
+        "CRIMINAL MISCHIEF & RELATED OF": 11
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 41,
+      "centroid": [
+        40.71852390662007,
+        -73.98871962710899
+      ],
+      "size": 22,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 15,
+        "DANGEROUS DRUGS": 4,
+        "CRIMINAL MISCHIEF & RELATED OF": 3
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 42,
+      "centroid": [
+        40.57657196985063,
+        -73.97983503567794
+      ],
+      "size": 30,
+      "severity_score": 3.0,
+      "incident_types": {
+        "OTHER STATE LAWS": 15,
+        "MISCELLANEOUS PENAL LAW": 7,
+        "OFFENSES AGAINST PUBLIC ADMINI": 3,
+        "PETIT LARCENY": 2,
+        "CRIMINAL TRESPASS": 1,
+        "OTHER TRAFFIC INFRACTION": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 43,
+      "centroid": [
+        40.71363621316312,
+        -74.00672710761499
+      ],
+      "size": 28,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 14,
+        "DANGEROUS DRUGS": 8,
+        "CRIMINAL MISCHIEF & RELATED OF": 6
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 44,
+      "centroid": [
+        40.73272258238777,
+        -74.00158698462216
+      ],
+      "size": 27,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 14,
+        "OTHER OFFENSES RELATED TO THEFT": 11,
+        "CRIMINAL MISCHIEF & RELATED OF": 2
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 45,
+      "centroid": [
+        40.70211985263368,
+        -73.9198582802273
+      ],
+      "size": 17,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 9,
+        "OTHER OFFENSES RELATED TO THEFT": 5,
+        "CRIMINAL MISCHIEF & RELATED OF": 3
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 46,
+      "centroid": [
+        40.68828989678031,
+        -73.98252799560531
+      ],
+      "size": 22,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 11,
+        "DANGEROUS DRUGS": 8,
+        "CRIMINAL MISCHIEF & RELATED OF": 3
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 47,
+      "centroid": [
+        40.66845182248222,
+        -73.9015380609911
+      ],
+      "size": 46,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 21,
+        "OTHER OFFENSES RELATED TO THEFT": 15,
+        "CRIMINAL MISCHIEF & RELATED OF": 10
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 48,
+      "centroid": [
+        40.82225095024186,
+        -73.89362520236304
+      ],
+      "size": 30,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 14,
+        "OTHER OFFENSES RELATED TO THEFT": 10,
+        "CRIMINAL MISCHIEF & RELATED OF": 6
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 49,
+      "centroid": [
+        40.682345508478484,
+        -73.9489619453444
+      ],
+      "size": 22,
+      "severity_score": 4.0,
+      "incident_types": {
+        "CRIMINAL MISCHIEF & RELATED OF": 8,
+        "DANGEROUS DRUGS": 8,
+        "OTHER OFFENSES RELATED TO THEFT": 6
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 50,
+      "centroid": [
+        40.67479105285936,
+        -73.93027727601414
+      ],
+      "size": 18,
+      "severity_score": 4.0,
+      "incident_types": {
+        "OTHER OFFENSES RELATED TO THEFT": 13,
+        "DANGEROUS DRUGS": 3,
+        "CRIMINAL MISCHIEF & RELATED OF": 2
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 51,
+      "centroid": [
+        40.6117778972182,
+        -73.92288801788311
+      ],
+      "size": 18,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 16,
+        "BURGLAR'S TOOLS": 1,
+        "FORGERY": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 52,
+      "centroid": [
+        40.60139993310289,
+        -73.98917265916306
+      ],
+      "size": 30,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 12,
+        "POSSESSION OF STOLEN PROPERTY": 5,
+        "MISCELLANEOUS PENAL LAW": 4,
+        "FORGERY": 2,
+        "OFFENSES AGAINST PUBLIC ADMINI": 2,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "BURGLAR'S TOOLS": 1,
+        "ADMINISTRATIVE CODE": 1,
+        "CRIMINAL TRESPASS": 1,
+        "OTHER STATE LAWS": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 53,
+      "centroid": [
+        40.81770251671585,
+        -73.91643540532586
+      ],
+      "size": 57,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 26,
+        "OTHER OFFENSES RELATED TO THEFT": 21,
+        "CRIMINAL MISCHIEF & RELATED OF": 10
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 54,
+      "centroid": [
+        40.85273068904908,
+        -73.90207258035234
+      ],
+      "size": 45,
+      "severity_score": 4.0,
+      "incident_types": {
+        "DANGEROUS DRUGS": 23,
+        "OTHER OFFENSES RELATED TO THEFT": 12,
+        "CRIMINAL MISCHIEF & RELATED OF": 10
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 55,
+      "centroid": [
+        40.620036786475445,
+        -74.02616964216055
+      ],
+      "size": 17,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 6,
+        "INTOXICATED & IMPAIRED DRIVING": 2,
+        "OTHER TRAFFIC INFRACTION": 2,
+        "OFFENSES AGAINST PUBLIC ADMINI": 2,
+        "OFFENSES AGAINST THE PERSON": 2,
+        "MISCELLANEOUS PENAL LAW": 1,
+        "FORGERY": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 56,
+      "centroid": [
+        40.64565474062966,
+        -74.01198319294907
+      ],
+      "size": 44,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 9,
+        "GAMBLING": 7,
+        "PETIT LARCENY": 7,
+        "INTOXICATED & IMPAIRED DRIVING": 4,
+        "CRIMINAL TRESPASS": 3,
+        "POSSESSION OF STOLEN PROPERTY": 3,
+        "ALCOHOLIC BEVERAGE CONTROL LAW": 3,
+        "OFFENSES AGAINST PUBLIC ADMINI": 3,
+        "OTHER STATE LAWS": 2,
+        "OFFENSES AGAINST THE PERSON": 1,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "OFF. AGNST PUB ORD SENSBLTY &": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 57,
+      "centroid": [
+        40.75802005818719,
+        -73.98665336527198
+      ],
+      "size": 122,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 51,
+        "OFFENSES AGAINST PUBLIC ADMINI": 16,
+        "FORGERY": 13,
+        "OTHER STATE LAWS": 10,
+        "OFFENSES INVOLVING FRAUD": 7,
+        "MISCELLANEOUS PENAL LAW": 6,
+        "JOSTLING": 2,
+        "OFF. AGNST PUB ORD SENSBLTY &": 2,
+        "POSSESSION OF STOLEN PROPERTY": 2,
+        "CRIMINAL TRESPASS": 2,
+        "THEFT-FRAUD": 2,
+        "FRAUDS": 2,
+        "OTHER TRAFFIC INFRACTION": 2,
+        "DISORDERLY CONDUCT": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "BURGLAR'S TOOLS": 1,
+        "FOR OTHER AUTHORITIES": 1,
+        "OTHER STATE LAWS (NON PENAL LAW)": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 58,
+      "centroid": [
+        40.69045498182316,
+        -73.98407212389144
+      ],
+      "size": 15,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 9,
+        "OTHER STATE LAWS": 2,
+        "OFFENSES AGAINST PUBLIC ADMINI": 2,
+        "MISCELLANEOUS PENAL LAW": 1,
+        "CRIMINAL TRESPASS": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 59,
+      "centroid": [
+        40.68405388630265,
+        -73.97765281394449
+      ],
+      "size": 19,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 9,
+        "OTHER STATE LAWS": 5,
+        "OFFENSES AGAINST PUBLIC ADMINI": 2,
+        "MISCELLANEOUS PENAL LAW": 2,
+        "POSSESSION OF STOLEN PROPERTY": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 60,
+      "centroid": [
+        40.84444218747633,
+        -73.93674189731217
+      ],
+      "size": 37,
+      "severity_score": 3.0,
+      "incident_types": {
+        "THEFT-FRAUD": 7,
+        "PETIT LARCENY": 7,
+        "OFFENSES AGAINST PUBLIC ADMINI": 7,
+        "FOR OTHER AUTHORITIES": 3,
+        "POSSESSION OF STOLEN PROPERTY": 2,
+        "ANTICIPATORY OFFENSES": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "FRAUDS": 1,
+        "OTHER TRAFFIC INFRACTION": 1,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 1,
+        "INTOXICATED/IMPAIRED DRIVING": 1,
+        "OTHER STATE LAWS (NON PENAL LAW)": 1,
+        "MISCELLANEOUS PENAL LAW": 1,
+        "FORGERY": 1,
+        "OTHER STATE LAWS": 1,
+        "GAMBLING": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 61,
+      "centroid": [
+        40.86435216495803,
+        -73.92002791436849
+      ],
+      "size": 16,
+      "severity_score": 3.0,
+      "incident_types": {
+        "OFFENSES AGAINST PUBLIC ADMINI": 3,
+        "THEFT-FRAUD": 2,
+        "MISCELLANEOUS PENAL LAW": 2,
+        "OTHER TRAFFIC INFRACTION": 2,
+        "OTHER STATE LAWS": 2,
+        "OFFENSES AGAINST THE PERSON": 1,
+        "FRAUDS": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "MOVING INFRACTIONS": 1,
+        "OFFENSES INVOLVING FRAUD": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 62,
+      "centroid": [
+        40.73795883640211,
+        -73.99741162356119
+      ],
+      "size": 41,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 18,
+        "OTHER STATE LAWS": 5,
+        "FOR OTHER AUTHORITIES": 4,
+        "OFFENSES AGAINST PUBLIC ADMINI": 4,
+        "CRIMINAL TRESPASS": 3,
+        "MISCELLANEOUS PENAL LAW": 3,
+        "DISORDERLY CONDUCT": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "BURGLAR'S TOOLS": 1,
+        "FRAUDS": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 63,
+      "centroid": [
+        40.71670251394698,
+        -74.00469013880239
+      ],
+      "size": 68,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 33,
+        "OTHER STATE LAWS": 10,
+        "FORGERY": 9,
+        "FOR OTHER AUTHORITIES": 7,
+        "OFFENSES AGAINST PUBLIC ADMINI": 4,
+        "CRIMINAL TRESPASS": 3,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 64,
+      "centroid": [
+        40.654252558809326,
+        -73.95099486229324
+      ],
+      "size": 47,
+      "severity_score": 3.0,
+      "incident_types": {
+        "OTHER STATE LAWS": 10,
+        "PETIT LARCENY": 10,
+        "MISCELLANEOUS PENAL LAW": 8,
+        "OFFENSES AGAINST PUBLIC ADMINI": 7,
+        "OFF. AGNST PUB ORD SENSBLTY &": 5,
+        "DISORDERLY CONDUCT": 1,
+        "FRAUDS": 1,
+        "OTHER STATE LAWS (NON PENAL LAW)": 1,
+        "OTHER TRAFFIC INFRACTION": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "OFFENSES INVOLVING FRAUD": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 65,
+      "centroid": [
+        40.67378337868056,
+        -73.87024817001918
+      ],
+      "size": 39,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 23,
+        "ALCOHOLIC BEVERAGE CONTROL LAW": 7,
+        "OFFENSES AGAINST PUBLIC ADMINI": 3,
+        "OTHER STATE LAWS": 1,
+        "OFF. AGNST PUB ORD SENSBLTY &": 1,
+        "MISCELLANEOUS PENAL LAW": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "FORGERY": 1,
+        "CRIMINAL TRESPASS": 1
+      },
+      "date_range": {
+        "start": "2025-05-03 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 66,
+      "centroid": [
+        40.68960966720809,
+        -73.94466402098696
+      ],
+      "size": 43,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 13,
+        "PETIT LARCENY": 6,
+        "OTHER STATE LAWS": 5,
+        "GAMBLING": 4,
+        "OFFENSES AGAINST PUBLIC ADMINI": 4,
+        "OFF. AGNST PUB ORD SENSBLTY &": 3,
+        "THEFT-FRAUD": 3,
+        "CRIMINAL TRESPASS": 2,
+        "FORGERY": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 67,
+      "centroid": [
+        40.69126819475347,
+        -73.91986283476031
+      ],
+      "size": 36,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 9,
+        "OFF. AGNST PUB ORD SENSBLTY &": 5,
+        "OFFENSES AGAINST PUBLIC ADMINI": 4,
+        "OTHER TRAFFIC INFRACTION": 4,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 4,
+        "OFFENSES AGAINST THE PERSON": 2,
+        "PETIT LARCENY": 2,
+        "CRIMINAL TRESPASS": 2,
+        "ALCOHOLIC BEVERAGE CONTROL LAW": 1,
+        "FORGERY": 1,
+        "OTHER STATE LAWS": 1,
+        "FRAUDS": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 68,
+      "centroid": [
+        40.668721385795536,
+        -73.88235257800538
+      ],
+      "size": 15,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 5,
+        "OTHER STATE LAWS": 3,
+        "MISCELLANEOUS PENAL LAW": 2,
+        "OFFENSES AGAINST PUBLIC ADMINI": 1,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "OFF. AGNST PUB ORD SENSBLTY &": 1,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 1,
+        "OTHER TRAFFIC INFRACTION": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 69,
+      "centroid": [
+        40.669284969543554,
+        -73.90833296750372
+      ],
+      "size": 45,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 9,
+        "OFFENSES AGAINST PUBLIC ADMINI": 9,
+        "OTHER STATE LAWS": 5,
+        "OFF. AGNST PUB ORD SENSBLTY &": 4,
+        "CRIMINAL TRESPASS": 3,
+        "FORGERY": 3,
+        "POSSESSION OF STOLEN PROPERTY": 3,
+        "PETIT LARCENY": 3,
+        "OFFENSES AGAINST THE PERSON": 1,
+        "INTOXICATED/IMPAIRED DRIVING": 1,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 1,
+        "BURGLAR'S TOOLS": 1,
+        "FOR OTHER AUTHORITIES": 1,
+        "OTHER TRAFFIC INFRACTION": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 70,
+      "centroid": [
+        40.8059325680582,
+        -73.96333197081022
+      ],
+      "size": 81,
+      "severity_score": 3.0,
+      "incident_types": {
+        "CRIMINAL TRESPASS": 76,
+        "PETIT LARCENY": 2,
+        "OTHER TRAFFIC INFRACTION": 1,
+        "FRAUDS": 1,
+        "HARRASSMENT 2": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-07"
+      }
+    },
+    {
+      "cluster_id": 71,
+      "centroid": [
+        40.811406235534655,
+        -73.94883347564966
+      ],
+      "size": 48,
+      "severity_score": 3.0,
+      "incident_types": {
+        "PETIT LARCENY": 21,
+        "MISCELLANEOUS PENAL LAW": 12,
+        "OFFENSES AGAINST PUBLIC ADMINI": 4,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 3,
+        "OFF. AGNST PUB ORD SENSBLTY &": 2,
+        "POSSESSION OF STOLEN PROPERTY": 1,
+        "OFFENSES AGAINST THE PERSON": 1,
+        "OTHER STATE LAWS (NON PENAL LAW)": 1,
+        "INTOXICATED & IMPAIRED DRIVING": 1,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "FORGERY": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 72,
+      "centroid": [
+        40.83954694647221,
+        -73.88561418677598
+      ],
+      "size": 18,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 6,
+        "PETIT LARCENY": 3,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 3,
+        "INTOXICATED & IMPAIRED DRIVING": 2,
+        "OFF. AGNST PUB ORD SENSBLTY &": 2,
+        "OFFENSES INVOLVING FRAUD": 1,
+        "ANTICIPATORY OFFENSES": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 73,
+      "centroid": [
+        40.82052565197364,
+        -73.89432224323448
+      ],
+      "size": 20,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 7,
+        "FRAUDS": 2,
+        "OFF. AGNST PUB ORD SENSBLTY &": 2,
+        "CRIMINAL TRESPASS": 2,
+        "OFFENSES AGAINST PUBLIC ADMINI": 2,
+        "OTHER STATE LAWS": 1,
+        "PETIT LARCENY": 1,
+        "UNAUTHORIZED USE OF A VEHICLE": 1,
+        "ANTICIPATORY OFFENSES": 1,
+        "FORGERY": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    },
+    {
+      "cluster_id": 74,
+      "centroid": [
+        40.840408887389074,
+        -73.90983848452356
+      ],
+      "size": 146,
+      "severity_score": 3.0,
+      "incident_types": {
+        "MISCELLANEOUS PENAL LAW": 25,
+        "OFFENSES AGAINST PUBLIC ADMINI": 20,
+        "PETIT LARCENY": 19,
+        "OFFENSES AGAINST THE PERSON": 13,
+        "OFF. AGNST PUB ORD SENSBLTY &": 11,
+        "POSSESSION OF STOLEN PROPERTY": 10,
+        "OTHER STATE LAWS": 8,
+        "FORGERY": 6,
+        "FRAUDS": 6,
+        "MURDER & NON-NEGL. MANSLAUGHTE": 6,
+        "OFFENSES INVOLVING FRAUD": 6,
+        "OTHER TRAFFIC INFRACTION": 4,
+        "CRIMINAL TRESPASS": 2,
+        "INTOXICATED & IMPAIRED DRIVING": 2,
+        "CANNABIS RELATED OFFENSES": 1,
+        "FOR OTHER AUTHORITIES": 1,
+        "GAMBLING": 1,
+        "HARRASSMENT 2": 1,
+        "MOVING INFRACTIONS": 1,
+        "CHILD ABANDONMENT/NON SUPPORT 1": 1,
+        "ANTICIPATORY OFFENSES": 1,
+        "UNAUTHORIZED USE OF A VEHICLE": 1
+      },
+      "date_range": {
+        "start": "2025-05-02 00:00:00",
+        "end": "2025-05-08"
+      }
+    }
+  ],
+  "metadata": {
+    "total_incidents": 10000,
+    "total_clusters": 75,
+    "noise_points": 1026,
+    "generated_at": "2025-07-30T14:05:36.973054",
+    "parameters": {
+      "min_cluster_size": 15,
+      "min_samples": 5,
+      "cluster_selection_epsilon": 0.05
+    }
+  }
+}
