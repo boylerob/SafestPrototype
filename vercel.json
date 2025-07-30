@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd safest-webapp-v2 && npm install && npm run build",
+  "outputDirectory": "safest-webapp-v2/.next",
+  "framework": "nextjs",
+  "installCommand": "cd safest-webapp-v2 && npm install"
+} 
