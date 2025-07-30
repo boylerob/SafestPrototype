@@ -1,147 +1,157 @@
-'use client';
+'use client'
 
-import React, { useEffect, useRef, useState } from 'react';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import { config } from '../config/config';
-import ClusteringService, { ClusteringData } from '../services/clusteringService';
-import GeoJSONService, { GeoJSONClusteringData } from '../services/geojsonService';
-
-// Set Mapbox access token
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || config.mapbox.accessToken;
+import React, { useEffect, useRef, useState } from 'react'
+import mapboxgl from 'mapbox-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
+import { config } from '../config/config'
 
 interface SafetyMapProps {
   className?: string;
 }
 
+interface SocrataIncident {
+  id: string
+  latitude: number
+  longitude: number
+  type: string
+  description: string
+  timestamp: string
+  source: '911_calls' | 'nypd_complaints'
+  severity_score: number
+}
+
 const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-  const [clusteringData, setClusteringData] = useState<ClusteringData | null>(null);
-  const [geojsonData, setGeojsonData] = useState<GeoJSONClusteringData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const mapContainer = useRef<HTMLDivElement>(null)
+  const map = useRef<mapboxgl.Map | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [incidents, setIncidents] = useState<SocrataIncident[]>([])
 
   useEffect(() => {
-    if (!mapContainer.current) return;
+    if (!mapContainer.current) return
 
     // Initialize map
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/light-v11',
-      center: [-73.935242, 40.730610], // NYC center
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [-74.006, 40.7128], // NYC coordinates
       zoom: 10,
-      attributionControl: false,
-      projection: 'mercator' // Explicitly set projection to Web Mercator
-    });
+      accessToken: config.mapbox.accessToken
+    })
 
-    // Add navigation controls
-    map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
+    map.current.on('load', () => {
+      setLoading(false)
+      loadIncidents()
+    })
 
-    // Add fullscreen control
-    map.current.addControl(new mapboxgl.FullscreenControl(), 'top-right');
-
-    // Load clustering data when map is ready
-    map.current.on('load', async () => {
-      try {
-        setLoading(true);
-        const clusteringService = ClusteringService.getInstance();
-        const geojsonService = GeoJSONService.getInstance();
-        
-        const data = await clusteringService.getClusteringData();
-        setClusteringData(data);
-        
-        // Convert to GeoJSON format
-        const geojsonData = geojsonService.convertClusteringDataToGeoJSON(data);
-        setGeojsonData(geojsonData);
-        
-        // Add GeoJSON source to map
-        if (geojsonData.features.length > 0) {
-          map.current!.addSource('clusters', {
-            type: 'geojson',
-            data: geojsonData
-          });
-
-          // Add cluster layer
-          map.current!.addLayer({
-            id: 'clusters',
-            type: 'circle',
-            source: 'clusters',
-            paint: {
-              'circle-radius': [
-                'interpolate',
-                ['linear'],
-                ['get', 'size'],
-                0, 10,
-                100, 30
-              ],
-              'circle-color': [
-                'case',
-                ['>=', ['get', 'severity_score'], 8], '#dc2626',
-                ['>=', ['get', 'severity_score'], 6], '#ea580c',
-                ['>=', ['get', 'severity_score'], 4], '#ca8a04',
-                ['>=', ['get', 'severity_score'], 2], '#16a34a',
-                '#0891b2'
-              ],
-              'circle-stroke-width': 2,
-              'circle-stroke-color': '#ffffff'
-            }
-          });
-
-          // Add click handler for clusters
-          map.current!.on('click', 'clusters', (e) => {
-            if (e.features && e.features[0]) {
-              const feature = e.features[0];
-              const properties = feature.properties;
-              
-              if (properties) {
-                const incidentTypesList = Object.entries(properties.incident_types)
-                  .map(([type, count]) => `${type}: ${count}`)
-                  .join('<br>');
-
-                const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
-                  <div class="p-4 max-w-sm">
-                    <h3 class="font-bold text-lg mb-2">Safety Cluster #${properties.cluster_id}</h3>
-                    <div class="space-y-2 text-sm">
-                      <p><strong>Size:</strong> ${properties.size} incidents</p>
-                      <p><strong>Severity:</strong> ${properties.severity_score.toFixed(1)}/10</p>
-                      <p><strong>Incident Types:</strong></p>
-                      <div class="text-xs text-gray-600 ml-2">${incidentTypesList}</div>
-                      ${properties.date_range ? `<p><strong>Date Range:</strong> ${properties.date_range.start} to ${properties.date_range.end}</p>` : ''}
-                    </div>
-                  </div>
-                `);
-
-                popup.setLngLat(e.lngLat).addTo(map.current!);
-              }
-            }
-          });
-
-          // Change cursor on hover
-          map.current!.on('mouseenter', 'clusters', () => {
-            map.current!.getCanvas().style.cursor = 'pointer';
-          });
-
-          map.current!.on('mouseleave', 'clusters', () => {
-            map.current!.getCanvas().style.cursor = '';
-          });
-        }
-
-        setLoading(false);
-      } catch (err) {
-        console.error('Error loading clustering data:', err);
-        setError('Failed to load clustering data');
-        setLoading(false);
-      }
-    });
-
-    // Cleanup
     return () => {
       if (map.current) {
-        map.current.remove();
+        map.current.remove()
       }
-    };
-  }, []);
+    }
+  }, [])
+
+  const loadIncidents = async () => {
+    try {
+      const response = await fetch('/api/socrata-incidents')
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      const data = await response.json()
+      setIncidents(data.incidents)
+      addIncidentsToMap(data.incidents)
+    } catch (error) {
+      console.error('Error loading incidents:', error)
+      setError('Failed to load incident data')
+    }
+  }
+
+  const addIncidentsToMap = (incidents: SocrataIncident[]) => {
+    if (!map.current || incidents.length === 0) return
+
+    // Add incidents as GeoJSON source
+    map.current.addSource('incidents', {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: incidents.map(incident => ({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [incident.longitude, incident.latitude]
+          },
+          properties: {
+            id: incident.id,
+            type: incident.type,
+            description: incident.description,
+            severity_score: incident.severity_score,
+            source: incident.source,
+            timestamp: incident.timestamp
+          }
+        }))
+      }
+    })
+
+    // Add incidents layer
+    map.current.addLayer({
+      id: 'incidents',
+      type: 'circle',
+      source: 'incidents',
+      paint: {
+        'circle-radius': [
+          'interpolate',
+          ['linear'],
+          ['get', 'severity_score'],
+          1, 3,
+          10, 8
+        ],
+        'circle-color': [
+          'case',
+          ['>=', ['get', 'severity_score'], 8], '#ef4444',
+          ['>=', ['get', 'severity_score'], 6], '#f97316',
+          ['>=', ['get', 'severity_score'], 4], '#f59e0b',
+          '#6b7280'
+        ],
+        'circle-opacity': 0.7,
+        'circle-stroke-width': 1,
+        'circle-stroke-color': '#ffffff'
+      }
+    })
+
+    // Add click handler for incidents
+    map.current.on('click', 'incidents', (e) => {
+      if (e.features && e.features[0]) {
+        const feature = e.features[0]
+        const properties = feature.properties
+        
+        if (properties) {
+          const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
+            <div class="p-4 max-w-sm">
+              <h3 class="font-bold text-lg mb-2">Safety Incident</h3>
+              <div class="space-y-2 text-sm">
+                <p><strong>Type:</strong> ${properties.type}</p>
+                <p><strong>Severity:</strong> ${properties.severity_score}/10</p>
+                <p><strong>Source:</strong> ${properties.source}</p>
+                ${properties.description ? `<p><strong>Description:</strong> ${properties.description}</p>` : ''}
+                ${properties.timestamp ? `<p><strong>Date:</strong> ${properties.timestamp}</p>` : ''}
+              </div>
+            </div>
+          `)
+
+          popup.setLngLat(e.lngLat).addTo(map.current!)
+        }
+      }
+    })
+
+    // Change cursor on hover
+    map.current.on('mouseenter', 'incidents', () => {
+      map.current!.getCanvas().style.cursor = 'pointer'
+    })
+
+    map.current.on('mouseleave', 'incidents', () => {
+      map.current!.getCanvas().style.cursor = ''
+    })
+  }
 
   return (
     <div className={`relative ${className}`}>
@@ -149,7 +159,7 @@ const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
         <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-10">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2"></div>
-            <p className="text-sm text-gray-600">Loading safety clusters...</p>
+            <p className="text-sm text-gray-600">Loading safety incidents...</p>
           </div>
         </div>
       )}
@@ -161,9 +171,9 @@ const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
       )}
 
       <div className="absolute top-4 left-4 bg-white rounded-lg shadow-lg p-3 z-10">
-        <h3 className="font-semibold text-sm mb-2">Safety Clusters</h3>
+        <h3 className="font-semibold text-sm mb-2">Safety Incidents</h3>
         <p className="text-xs text-gray-600">
-          {clusteringData ? `${clusteringData.metadata.total_clusters} clusters from ${clusteringData.metadata.total_incidents} incidents` : 'Loading...'}
+          {incidents.length > 0 ? `${incidents.length} incidents loaded` : 'Loading incidents...'}
         </p>
         <div className="mt-2 space-y-1">
           <div className="flex items-center text-xs">
@@ -187,10 +197,10 @@ const SafetyMap: React.FC<SafetyMapProps> = ({ className = '' }) => {
 
       <div 
         ref={mapContainer} 
-        className="w-full h-full min-h-[600px]"
+        className="h-full w-full"
       />
     </div>
-  );
-};
+  )
+}
 
-export default SafetyMap; 
+export default SafetyMap 
